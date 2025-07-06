@@ -14,6 +14,9 @@ export default async function handler(req, res) {
 
   const { url, method } = req;
   
+  // Debug logging for Vercel
+  console.log(`[Vercel API] ${method} ${url}`);
+  
   try {
     // Prayer routes
     if (url.match(/\/api\/prayers\/[^\/]+$/) && method === 'GET') {
@@ -132,8 +135,9 @@ export default async function handler(req, res) {
     }
     
     // Email lookup route for username login - THIS IS THE MISSING ROUTE
-    if (url.match(/\/api\/auth\/email-by-username\/[^\/]+$/) && method === 'GET') {
-      const username = url.split('/').pop();
+    if (url.includes('/api/auth/email-by-username/') && method === 'GET') {
+      const urlParts = url.split('/');
+      const username = urlParts[urlParts.length - 1];
       console.log(`Looking up email for username: ${username}`);
       const profile = await storage.getUserProfileByUsername(username);
       console.log(`Profile found:`, profile ? 'yes' : 'no');
@@ -146,7 +150,8 @@ export default async function handler(req, res) {
     }
     
     // Default response for unmatched routes
-    return res.status(404).json({ message: 'Not Found' });
+    console.log(`[Vercel API] Route not found: ${method} ${url}`);
+    return res.status(404).json({ message: 'Not Found', url, method });
     
   } catch (error) {
     console.error('API Error:', error);
