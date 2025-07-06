@@ -313,19 +313,47 @@
     0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* Sacred Scroll Styling */
+/* Sacred Scroll Styling - Hidden scrollbars */
+.sacred-scroll {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
 .sacred-scroll::-webkit-scrollbar {
-  width: 8px;
+  display: none; /* Chrome, Safari, Opera */
 }
 
-.sacred-scroll::-webkit-scrollbar-track {
-  background: var(--ecclesiastical-alpha);
-  border-radius: 4px;
+/* Alternative sacred scroll with visible but minimal scrollbars for desktop */
+.sacred-scroll-visible::-webkit-scrollbar {
+  width: 4px;
 }
 
-.sacred-scroll::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, rgba(212, 175, 55, 0.6), rgba(212, 175, 55, 0.3));
-  border-radius: 4px;
+.sacred-scroll-visible::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sacred-scroll-visible::-webkit-scrollbar-thumb {
+  background: var(--ancient-gold-alpha);
+  border-radius: 2px;
+}
+
+.sacred-scroll-visible::-webkit-scrollbar-thumb:hover {
+  background: var(--ancient-gold-glow);
+}
+
+/* Ensure all modal content areas hide scrollbars */
+.sacred-modal textarea,
+.sacred-modal .overflow-y-auto,
+.sacred-modal .overflow-auto {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.sacred-modal textarea::-webkit-scrollbar,
+.sacred-modal .overflow-y-auto::-webkit-scrollbar,
+.sacred-modal .overflow-auto::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 /* Sacred Logo Styling */
@@ -1495,6 +1523,109 @@
 .modal-overlay {
   background: rgba(5, 5, 15, 0.9);
   backdrop-filter: blur(12px) saturate(180%);
+}
+
+/* Sacred Modal Responsive Styling */
+.sacred-modal {
+  background: linear-gradient(145deg, 
+    var(--cathedral-glass) 0%, 
+    var(--stone-gray-alpha) 100%);
+  backdrop-filter: blur(20px) saturate(130%);
+  border: 1px solid var(--ancient-gold-alpha-soft);
+  border-radius: var(--radius);
+  box-shadow: 
+    /* Enhanced depth for sacred feel */
+    0 20px 50px rgba(0, 0, 0, 0.6),
+    0 12px 32px rgba(0, 0, 0, 0.4),
+    0 8px 20px rgba(0, 0, 0, 0.3),
+    /* Sacred glow effect */
+    inset 0 1px 0 var(--ancient-gold-alpha-soft),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+    0 0 0 1px var(--ancient-gold-alpha);
+  
+  /* Hide scrollbars while maintaining scrollability */
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  
+  /* Responsive sizing with desktop limits */
+  max-width: min(95vw, 900px); /* Reduced from 1200px */
+  max-height: min(90vh, 700px); /* Reduced from 800px */
+  width: 100%;
+  
+  /* Responsive padding */
+  padding: clamp(1rem, 3vw, 2rem);
+  
+  /* Smooth transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: modal-fade-in 0.4s ease-out;
+}
+
+/* Hide scrollbar for webkit browsers */
+.sacred-modal::-webkit-scrollbar {
+  display: none;
+}
+
+/* Modal fade-in animation */
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive modal sizing for different screen sizes */
+@media (max-width: 640px) {
+  .sacred-modal {
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    padding: 1rem;
+    margin: 0;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .sacred-modal {
+    max-width: 95vw;
+    max-height: 95vh;
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .sacred-modal {
+    max-width: min(90vw, 800px); /* Desktop size limit */
+    max-height: min(90vh, 650px);
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .sacred-modal {
+    max-width: min(85vw, 900px); /* Desktop size limit */
+    max-height: min(85vh, 700px);
+    padding: 2.5rem;
+  }
+}
+
+/* Enhanced glass morphism effect for better readability */
+.glass-morphism {
+  background: linear-gradient(135deg, 
+    var(--cathedral-glass) 0%, 
+    var(--stone-gray-alpha) 100%);
+  backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid var(--ancient-gold-alpha-soft);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 var(--ancient-gold-alpha-soft);
 }
 
 /* Medieval Stone Content Cards */
