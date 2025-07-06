@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audio Test - Rosarium Virginis Mariae</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #0a0a0a;
+            color: #d4a574;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #d4a574;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+        }
+        .error { color: #ff6b6b; }
+        .success { color: #51cf66; }
+        .loading { color: #ffd43b; }
+        button {
+            background: #d4a574;
+            color: #0a0a0a;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #e6b885;
+        }
+        button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        .file-info {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+        audio {
+            width: 100%;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎵 Teste de Áudio - Rosarium Virginis Mariae</h1>
+    <p>Esta página testa o carregamento dos arquivos de áudio para diagnosticar problemas.</p>
+
+    <div class="test-section">
+        <h3>Teste Rápido de Conectividade</h3>
+        <button onclick="testConnectivity()">Testar Conectividade</button>
+        <div id="connectivity-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Teste Individual de Arquivos</h3>
+        <div id="audio-tests"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Informações do Sistema</h3>
+        <div id="system-info"></div>
+    </div>
+
+    <script>
+        const songs = [
+            { id: 'adoro-te-devote', title: 'Adoro Te Devote' },
+            { id: 'anima-christi', title: 'Anima Christi' },
+            { id: 'benedictus', title: 'Benedictus' },
+            { id: 'credo', title: 'Credo' },
+            { id: 'crucem-sanctam-subiit', title: 'Crucem Sanctam Subiit' },
+            { id: 'gloria-in-excelsis-deo', title: 'Gloria in Excelsis Deo' },
+            { id: 'magnificat', title: 'Magnificat' },
+            { id: 'media-vita', title: 'Media Vita' },
+            { id: 'pange-lingua', title: 'Pange Lingua' },
+            { id: 'pater-noster', title: 'Pater Noster' },
+            { id: 'regina-caeli', title: 'Regina Caeli' },
+            { id: 'salve-regina', title: 'Salve Regina' },
+            { id: 'veni-creator-spiritus', title: 'Veni Creator Spiritus' }
+        ];
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        async function getFileSize(url) {
+            try {
+                const response = await fetch(url, { method: 'HEAD' });
+                const size = response.headers.get('content-length');
+                return size ? parseInt(size) : null;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function testConnectivity() {
+            const result = document.getElementById('connectivity-result');
+            result.innerHTML = '<span class="loading">Testando conectividade...</span>';
+            
+            const startTime = performance.now();
+            fetch('/audio/pater-noster.mp3', { method: 'HEAD' })
+                .then(response => {
+                    const loadTime = Math.round(performance.now() - startTime);
+                    if (response.ok) {
+                        result.innerHTML = `<span class="success">✅ Conectividade OK (${loadTime}ms)</span>`;
+                    } else {
+                        result.innerHTML = `<span class="error">❌ Erro HTTP: ${response.status}</span>`;
+                    }
+                })
+                .catch(error => {
+                    result.innerHTML = `<span class="error">❌ Erro de conectividade: ${error.message}</span>`;
+                });
+        }
+
+        async function testAudioFile(song) {
+            const testDiv = document.getElementById(`test-${song.id}`);
+            const audioPath = `/audio/${song.id}.mp3`;
+            
+            testDiv.innerHTML = `
+                <h4>${song.title}</h4>
+                <div class="loading">Carregando arquivo...</div>
+                <audio controls preload="metadata">
+                    <source src="${audioPath}" type="audio/mpeg">
+                </audio>
+                <div class="file-info">Arquivo: ${song.id}.mp3</div>
+            `;
+
+            const audio = testDiv.querySelector('audio');
+            const statusDiv = testDiv.querySelector('.loading');
+            
+            // Get file size
+            const fileSize = await getFileSize(audioPath);
+            if (fileSize) {
+                testDiv.querySelector('.file-info').innerHTML += ` | Tamanho: ${formatFileSize(fileSize)}`;
+            }
+
+            const startTime = performance.now();
+            
+            audio.addEventListener('loadedmetadata', () => {
+                const loadTime = Math.round(performance.now() - startTime);
+                statusDiv.innerHTML = `<span class="success">✅ Metadados carregados (${loadTime}ms) | Duração: ${formatTime(audio.duration)}</span>`;
+            });
+
+            audio.addEventListener('canplay', () => {
+                const loadTime = Math.round(performance.now() - startTime);
+                statusDiv.innerHTML = `<span class="success">✅ Pronto para reprodução (${loadTime}ms) | Duração: ${formatTime(audio.duration)}</span>`;
+            });
+
+            audio.addEventListener('error', (e) => {
+                const loadTime = Math.round(performance.now() - startTime);
+                let errorMsg = 'Erro desconhecido';
+                if (audio.error) {
+                    switch (audio.error.code) {
+                        case MediaError.MEDIA_ERR_ABORTED:
+                            errorMsg = 'Reprodução abortada';
+                            break;
+                        case MediaError.MEDIA_ERR_NETWORK:
+                            errorMsg = 'Erro de rede';
+                            break;
+                        case MediaError.MEDIA_ERR_DECODE:
+                            errorMsg = 'Erro de decodificação';
+                            break;
+                        case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+                            errorMsg = 'Formato não suportado';
+                            break;
+                    }
+                }
+                statusDiv.innerHTML = `<span class="error">❌ ${errorMsg} (${loadTime}ms)</span>`;
+            });
+
+            // Set timeout for loading
+            setTimeout(() => {
+                if (audio.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+                    statusDiv.innerHTML = `<span class="error">❌ Timeout de carregamento (30s)</span>`;
+                }
+            }, 30000);
+        }
+
+        function initializeTests() {
+            const testsContainer = document.getElementById('audio-tests');
+            testsContainer.innerHTML = songs.map(song => 
+                `<div id="test-${song.id}" class="test-section"></div>`
+            ).join('');
+
+            songs.forEach(song => {
+                testAudioFile(song);
+            });
+        }
+
+        function displaySystemInfo() {
+            const systemInfo = document.getElementById('system-info');
+            systemInfo.innerHTML = `
+                <p><strong>User Agent:</strong> ${navigator.userAgent}</p>
+                <p><strong>Conexão:</strong> ${navigator.onLine ? 'Online' : 'Offline'}</p>
+                <p><strong>Suporte a MP3:</strong> ${document.createElement('audio').canPlayType('audio/mpeg') || 'Não detectado'}</p>
+                <p><strong>Timestamp:</strong> ${new Date().toLocaleString()}</p>
+            `;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            displaySystemInfo();
+            testConnectivity();
+            initializeTests();
+        });
+    </script>
+</body>
+</html>

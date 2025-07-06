@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Audio Test</title>
+</head>
+<body>
+    <h1>Gregorian Chant Audio Test</h1>
+    <audio controls>
+        <source src="/audio/adoro-te-devote.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <br><br>
+    <button onclick="testAudio()">Test Audio Loading</button>
+    <div id="result"></div>
+
+    <script>
+        function testAudio() {
+            const audio = new Audio('/audio/adoro-te-devote.mp3');
+            const result = document.getElementById('result');
+            
+            audio.addEventListener('loadeddata', () => {
+                result.innerHTML = '<p style="color: green;">✅ Audio loaded successfully!</p>';
+            });
+            
+            audio.addEventListener('error', (e) => {
+                result.innerHTML = '<p style="color: red;">❌ Audio failed to load: ' + e.message + '</p>';
+            });
+            
+            audio.load();
+        }
+    </script>
+</body>
+</html>
