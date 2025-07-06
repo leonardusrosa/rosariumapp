@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Audio Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #111; color: #d4a574; padding: 20px; }
+        .test { margin: 20px 0; padding: 15px; border: 1px solid #d4a574; background: #222; }
+        audio { width: 100%; margin: 10px 0; }
+        .status { font-size: 12px; margin-top: 5px; }
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
+    </style>
+</head>
+<body>
+    <h1>Direct Audio Test</h1>
+    
+    <div class="test">
+        <h3>Adoro Te Devote - Web Optimized (1.9MB)</h3>
+        <audio controls preload="metadata">
+            <source src="/audio/adoro-te-devote-web.mp3" type="audio/mpeg">
+        </audio>
+        <div id="status1" class="status">Loading...</div>
+    </div>
+
+    <div class="test">
+        <h3>Anima Christi - Web Optimized (2.0MB)</h3>
+        <audio controls preload="metadata">
+            <source src="/audio/anima-christi-web.mp3" type="audio/mpeg">
+        </audio>
+        <div id="status2" class="status">Loading...</div>
+    </div>
+
+    <div class="test">
+        <h3>Pater Noster - Optimized (721KB)</h3>
+        <audio controls preload="metadata">
+            <source src="/audio/pater-noster-optimized.mp3" type="audio/mpeg">
+        </audio>
+        <div id="status3" class="status">Loading...</div>
+    </div>
+
+    <script>
+        const audios = document.querySelectorAll('audio');
+        
+        audios.forEach((audio, index) => {
+            const statusDiv = document.getElementById(`status${index + 1}`);
+            
+            audio.addEventListener('loadedmetadata', () => {
+                statusDiv.innerHTML = `<span class="success">✅ Loaded - Duration: ${Math.floor(audio.duration / 60)}:${Math.floor(audio.duration % 60).toString().padStart(2, '0')}</span>`;
+            });
+            
+            audio.addEventListener('error', (e) => {
+                statusDiv.innerHTML = `<span class="error">❌ Error: ${audio.error ? audio.error.code : 'Unknown'}</span>`;
+            });
+            
+            audio.addEventListener('canplay', () => {
+                statusDiv.innerHTML += ` <span class="success">Ready to play</span>`;
+            });
+        });
+    </script>
+</body>
+</html>

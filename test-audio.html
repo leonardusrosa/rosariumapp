@@ -1,33 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Audio Test</title>
+    <title>Direct Audio Test</title>
 </head>
 <body>
-    <h1>Gregorian Chant Audio Test</h1>
-    <audio controls>
+    <h1>Direct Gregorian Chant Test</h1>
+    <p>Testing direct HTML5 audio playback:</p>
+    
+    <audio controls style="width: 100%; margin: 10px 0;">
         <source src="/audio/adoro-te-devote.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-    <br><br>
-    <button onclick="testAudio()">Test Audio Loading</button>
-    <div id="result"></div>
+    
+    <audio controls style="width: 100%; margin: 10px 0;">
+        <source src="/audio/salve-regina.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <audio controls style="width: 100%; margin: 10px 0;">
+        <source src="/audio/veni-creator-spiritus.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-    <script>
-        function testAudio() {
-            const audio = new Audio('/audio/adoro-te-devote.mp3');
-            const result = document.getElementById('result');
-            
-            audio.addEventListener('loadeddata', () => {
-                result.innerHTML = '<p style="color: green;">✅ Audio loaded successfully!</p>';
-            });
-            
-            audio.addEventListener('error', (e) => {
-                result.innerHTML = '<p style="color: red;">❌ Audio failed to load: ' + e.message + '</p>';
-            });
-            
-            audio.load();
-        }
-    </script>
+    <p>If these work, the files are fine. If not, there's a server or file issue.</p>
 </body>
 </html>
