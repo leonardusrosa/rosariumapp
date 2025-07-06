@@ -44,11 +44,10 @@ export default function IntentionsModal({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sacred-modal animate-fade-in">
-        {/* Modal Header */}
-        <DialogHeader className="text-center border-b border-[var(--byzantine-gold-alpha)] pb-3 sm:pb-4 mb-4 sm:mb-6">
-          <DialogTitle className="font-cinzel text-lg sm:text-xl md:text-2xl font-semibold text-byzantine-gold illuminated-text">
+        <DialogHeader>
+          <DialogTitle className="font-cinzel text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-ancient-gold sacred-header-glow text-center">
             <svg 
-              className="inline-block w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" 
+              className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-ancient-gold mr-2 sm:mr-3 md:mr-4 inline-block" 
               viewBox="0 0 25.708 25.708" 
               fill="currentColor" 
               xmlns="http://www.w3.org/2000/svg"
@@ -75,9 +74,7 @@ export default function IntentionsModal({
             </svg>
             Intenções do Rosário
           </DialogTitle>
-          <DialogDescription className="text-sacred-ivory/80 font-cormorant italic mt-1 sm:mt-2 text-sm sm:text-base">
-            Intentiones Rosarii
-          </DialogDescription>
+          <div className="w-16 sm:w-20 md:w-24 lg:w-32 h-0.5 bg-gradient-to-r from-transparent via-[var(--ancient-gold)] to-transparent mx-auto rounded-full mt-4 sm:mt-6"></div>
         </DialogHeader>
 
         <div className="space-y-4 sm:space-y-6">
