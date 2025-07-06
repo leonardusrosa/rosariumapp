@@ -15,7 +15,6 @@ export default function MusicModal({
   open, 
   onOpenChange
 }: MusicModalProps) {
-  const [shuffleMode, setShuffleMode] = useState(false);
   const [repeatMode, setRepeatMode] = useState(false);
   
   // Use shared audio context
@@ -36,7 +35,7 @@ export default function MusicModal({
   };
 
   const handleNext = () => {
-    const nextSong = getNextSong(audioContext.currentSong || 'adoro-te-devote', shuffleMode);
+    const nextSong = getNextSong(audioContext.currentSong || 'adoro-te-devote', audioContext.shuffleMode);
     audioContext.loadSong(nextSong, true); // Always autoplay when clicking next
   };
 
@@ -46,15 +45,7 @@ export default function MusicModal({
   };
 
   const handleShuffle = () => {
-    const newShuffleMode = !shuffleMode;
-    setShuffleMode(newShuffleMode);
-    console.log('Shuffle mode:', newShuffleMode);
-    
-    // When turning shuffle ON, immediately play a random song with autoplay
-    if (newShuffleMode) {
-      const nextSong = getNextSong(audioContext.currentSong || 'adoro-te-devote', true);
-      audioContext.loadSong(nextSong, true);
-    }
+    audioContext.toggleShuffle();
   };
 
   const handleRepeat = () => {
@@ -75,7 +66,7 @@ export default function MusicModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sacred-modal">
+      <DialogContent className="sacred-modal !max-w-none !w-full">
         <DialogHeader>
           <DialogTitle className="font-cinzel text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-ancient-gold sacred-header-glow text-center">
             <i className="fas fa-music mr-2 sm:mr-3 md:mr-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl" />
@@ -90,8 +81,11 @@ export default function MusicModal({
             <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-cinzel text-ancient-gold font-medium">
               {currentSongData.title}
             </div>
-            <div className="text-sm sm:text-base md:text-lg text-cathedral-stone-light font-inter">
+            <div className="text-sm sm:text-base md:text-lg text-secondary font-inter">
               {currentSongData.latin}
+            </div>
+            <div className="text-xs sm:text-sm md:text-base text-muted font-inter italic mt-1 sm:mt-2">
+              {currentSongData.description}
             </div>
           </div>
 
@@ -100,7 +94,7 @@ export default function MusicModal({
             <Button 
               variant="ghost" 
               size="sm" 
-              className={`p-2 sm:p-3 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full glass-morphism hover:bg-[var(--ancient-gold-alpha)] transition-all duration-300 ${shuffleMode ? 'bg-[var(--ancient-gold-alpha)]' : ''}`}
+              className={`p-2 sm:p-3 w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full glass-morphism hover:bg-[var(--ancient-gold-alpha)] transition-all duration-300 ${audioContext.shuffleMode ? '!bg-[var(--ancient-gold-glow-intense)] ring-2 ring-[var(--ancient-gold)]' : ''}`}
               onClick={handleShuffle}
               title="Aleatório"
             >
@@ -193,14 +187,20 @@ export default function MusicModal({
                     key={song.id}
                     onClick={() => handleSongSelect(song.id)}
                     className={`w-full text-left p-2 sm:p-3 md:p-4 rounded-lg hover:bg-[var(--ancient-gold-alpha)] transition-all duration-200 ${
-                      audioContext.currentSong === song.id ? 'bg-[var(--ancient-gold-alpha)] text-ancient-gold' : 'text-cathedral-stone-light'
+                      audioContext.currentSong === song.id ? 'bg-[var(--ancient-gold-alpha)] text-ancient-gold' : 'text-secondary'
                     }`}
                   >
                     <div className="font-cinzel text-sm sm:text-base md:text-lg font-medium">
                       {song.title}
+                      <span className="text-xs sm:text-sm text-muted ml-2">
+                        {song.duration}
+                      </span>
                     </div>
-                    <div className="text-xs sm:text-sm md:text-base text-cathedral-stone-light font-inter mt-1">
+                    <div className="text-xs sm:text-sm md:text-base text-secondary font-inter mt-1">
                       {song.latin}
+                    </div>
+                    <div className="text-xs text-muted font-inter italic mt-1">
+                      {song.description}
                     </div>
                   </button>
                 ))}
