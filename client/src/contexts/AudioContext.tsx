@@ -9,6 +9,7 @@ interface AudioState {
   isLoading: boolean;
   error: string | null;
   currentSong: string | null;
+  shuffleMode: boolean;
 }
 
 interface AudioContextType extends AudioState {
@@ -21,6 +22,7 @@ interface AudioContextType extends AudioState {
   setCurrentSong: (songId: string) => void;
   playNext: (shuffleMode?: boolean) => void;
   playPrevious: (shuffleMode?: boolean) => void;
+  toggleShuffle: () => void;
 }
 
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
@@ -47,6 +49,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     isLoading: false,
     error: null,
     currentSong: 'adoro-te-devote',
+    shuffleMode: false,
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -250,10 +253,15 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
 
   const playPrevious = useCallback((shuffleMode: boolean = false) => {
     if (state.currentSong) {
-      const prevSong = getPreviousSong(state.currentSong, shuffleMode);
+      const prevSong = getPreviousSong(state.currentSong);
       loadSong(prevSong, true);
     }
   }, [state.currentSong, loadSong]);
+
+  const toggleShuffle = useCallback(() => {
+    setState(prev => ({ ...prev, shuffleMode: !prev.shuffleMode }));
+    console.log('Shuffle mode:', !state.shuffleMode);
+  }, [state.shuffleMode]);
 
   // Set up song end callback for auto-advance
   const setSongEndCallback = useCallback((callback: (songId: string) => void) => {
@@ -271,6 +279,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     setCurrentSong,
     playNext,
     playPrevious,
+    toggleShuffle,
   };
 
   return (
