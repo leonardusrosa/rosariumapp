@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import RosaryBeads from "./RosaryBeads";
-import prayingHandsImage from "@assets/—Pngtree—praying hands rosary beads golden_20795995 (1)_1751503637738.png";
+// Image now served from public/assets directory
+const prayingHandsImage = "/assets/praying-hands-rosary.png";
 
 interface RosarySidebarProps {
   currentSection: string;
