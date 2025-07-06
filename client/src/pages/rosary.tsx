@@ -21,7 +21,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { useAuth } from "@/hooks/useAuth";
 import { useIntentions } from "@/hooks/useIntentions";
 import { useIsMobile } from "@/hooks/use-mobile";
-import prayingHandsImage from "@assets/—Pngtree—praying hands rosary beads golden_20795995 (1)_1751503637738.png";
+// Image now served from public/assets directory
+const prayingHandsImage = "/assets/praying-hands-rosary.png";
 
 
 const sections = ['initium', 'gaudiosa', 'dolorosa', 'gloriosa', 'ultima'];
