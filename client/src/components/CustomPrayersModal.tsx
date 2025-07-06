@@ -186,7 +186,7 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
             <div className="flex gap-4">
               <Button 
                 type="submit" 
-                className="sacred-button flex-1 h-12 md:h-14 text-base md:text-lg"
+                className="sacred-button flex-1 h-12 md:h-14 md:text-lg text-[18px]"
                 disabled={isAddingCustomPrayer || isUpdatingCustomPrayer}
               >
                 {isEditing ? (
