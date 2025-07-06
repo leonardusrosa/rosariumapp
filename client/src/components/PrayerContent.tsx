@@ -413,10 +413,26 @@ export default function PrayerContent({
     }
   };
 
+  const handleSwipePrevious = () => {
+    // For swipe gestures, we want to go to previous section directly 
+    // without getting stuck in individual mysteries
+    onPrevious();
+    // Scroll to top when going back to previous section
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSwipeNext = () => {
+    // For swipe gestures, we want to go to next section directly 
+    // without getting stuck in individual mysteries
+    onNext();
+    // Scroll to top when going to next section
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Add swipe gesture support for mobile navigation
   useSwipeGesture(mainContentRef, {
-    onSwipeLeft: handleMysteryNext,
-    onSwipeRight: handleMysteryPrevious
+    onSwipeLeft: handleSwipeNext,
+    onSwipeRight: handleSwipePrevious
   }, {
     threshold: 50,
     preventDefault: false // Allow normal scrolling
