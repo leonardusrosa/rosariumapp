@@ -151,7 +151,7 @@ Preferred communication style: Simple, everyday language.
 
 ```
 Changelog:
-- July 06, 2025. Vercel Deployment Fixes - resolved image import issues by moving praying hands image to public directory, simplified vercel.json configuration to remove deprecated 'builds' warnings, added chunk size warning limit, improved build error handling, removed NODE_ENV=production requirement
+- July 06, 2025. Vercel Deployment Fixes - resolved image import issues by moving praying hands image to public directory, simplified vercel.json configuration to remove deprecated 'builds' warnings, fixed CSS Tailwind build errors by replacing @apply directives, simplified build process to use standard npm build command, removed NODE_ENV=production requirement
 - July 06, 2025. Custom Prayers Feature Complete - implemented full "Adicionar oração" functionality with enhanced UI, larger font sizes, proper spacing layout, Supabase database integration, support for both guest (localStorage) and authenticated users, custom prayers display correctly in Initium and Ultima sections
 - July 06, 2025. Complete Music System Enhancement - added close button back to music bar with proper styling and pause functionality, fixed autoplay triggers for shuffle/next/previous buttons in both MiniMusicPlayer and MusicModal, enhanced song selection autoplay, achieved fully synchronized audio controls across all components
 - July 06, 2025. Unified Audio System with Shared Context - implemented centralized AudioProvider to eliminate double playback conflicts between MiniMusicPlayer and MusicModal, both components now share single audio instance with synchronized state, progress tracking, and volume controls
