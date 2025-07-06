@@ -109,9 +109,9 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sacred-modal">
         <DialogHeader>
-          <DialogTitle className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-cinzel text-ancient-gold mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3 md:gap-4">
+          <DialogTitle className="font-cinzel text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-ancient-gold sacred-header-glow text-center">
             <svg 
-              className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-byzantine-gold" 
+              className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-ancient-gold mr-2 sm:mr-3 md:mr-4 inline-block" 
               viewBox="0 0 60 60" 
               fill="currentColor" 
               xmlns="http://www.w3.org/2000/svg"
@@ -120,6 +120,7 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
             </svg>
             Adicionar Oração
           </DialogTitle>
+          <div className="w-16 sm:w-20 md:w-24 lg:w-32 h-0.5 bg-gradient-to-r from-transparent via-[var(--ancient-gold)] to-transparent mx-auto rounded-full mt-4 sm:mt-6"></div>
         </DialogHeader>
 
         <div className="space-y-4 sm:space-y-6 lg:space-y-8 w-full overflow-hidden">
