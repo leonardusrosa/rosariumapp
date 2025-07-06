@@ -393,11 +393,12 @@ export default function PrayerContent({
       // Scroll to top when advancing to next mystery
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      // When moving to next section, scroll to top with a small delay to ensure state updates
+      // When moving to next section, add a small delay to ensure proper state updates
       setTimeout(() => {
+        onNext();
+        // Scroll to top when moving to next section
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 100);
-      onNext();
+      }, 50);
     }
   };
 
@@ -407,32 +408,19 @@ export default function PrayerContent({
       // Scroll to top when going back to previous mystery
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      onPrevious();
-      // Scroll to top when going back to previous section
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // When going to previous section, add a small delay to ensure proper state updates
+      setTimeout(() => {
+        onPrevious();
+        // Scroll to top when going back to previous section
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 50);
     }
-  };
-
-  const handleSwipePrevious = () => {
-    // For swipe gestures, we want to go to previous section directly 
-    // without getting stuck in individual mysteries
-    onPrevious();
-    // Scroll to top when going back to previous section
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleSwipeNext = () => {
-    // For swipe gestures, we want to go to next section directly 
-    // without getting stuck in individual mysteries
-    onNext();
-    // Scroll to top when going to next section
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Add swipe gesture support for mobile navigation
   useSwipeGesture(mainContentRef, {
-    onSwipeLeft: handleSwipeNext,
-    onSwipeRight: handleSwipePrevious
+    onSwipeLeft: handleMysteryNext,
+    onSwipeRight: handleMysteryPrevious
   }, {
     threshold: 50,
     preventDefault: false // Allow normal scrolling
