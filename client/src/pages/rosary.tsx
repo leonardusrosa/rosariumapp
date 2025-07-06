@@ -96,9 +96,6 @@ export default function RosaryPage() {
   return (
     <>
       <StarfieldBackground />
-
-
-
       {/* Main Content Area - Responsive Layout */}
       <div className={isMobile ? "pb-32 pt-4" : ""}>
         {/* Desktop Sidebar - Hidden on Mobile */}
@@ -148,17 +145,17 @@ export default function RosaryPage() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent 
                       align="start" 
-                      className="w-56 sacred-modal border-[var(--byzantine-gold-alpha)]"
+                      className="w-52 glass-morphism border-[var(--byzantine-gold-alpha)] bg-[var(--cathedral-shadow)] p-1"
                       sideOffset={8}
                     >
-                      <div className="px-3 py-2 border-b border-[var(--byzantine-gold-alpha)]">
+                      <div className="px-2 py-1.5 border-b border-[var(--byzantine-gold-alpha)]">
                         <p className="text-sm font-cinzel text-ancient-gold">{user.username}</p>
-                        <p className="text-xs text-cathedral-stone-light">{user.email}</p>
+                        <p className="text-xs text-secondary">{user.email}</p>
                       </div>
                       <DropdownMenuSeparator className="bg-[var(--byzantine-gold-alpha)]" />
                       <DropdownMenuItem 
                         onClick={() => setCustomPrayersModalOpen(true)}
-                        className="text-cathedral-stone-light hover:text-ancient-gold hover:bg-[var(--byzantine-gold-alpha)] transition-colors duration-200 cursor-pointer font-cinzel"
+                        className="text-secondary hover:text-ancient-gold hover:bg-[var(--byzantine-gold-alpha)] transition-colors duration-200 cursor-pointer font-cinzel py-1.5"
                       >
                         <svg 
                           className="w-4 h-4 mr-2 text-current" 
@@ -172,7 +169,7 @@ export default function RosaryPage() {
                       </DropdownMenuItem>
                       <DropdownMenuItem 
                         onClick={logout}
-                        className="text-cathedral-stone-light hover:text-ancient-gold hover:bg-[var(--byzantine-gold-alpha)] transition-colors duration-200 cursor-pointer font-cinzel"
+                        className="text-secondary hover:text-ancient-gold hover:bg-[var(--byzantine-gold-alpha)] transition-colors duration-200 cursor-pointer font-cinzel py-1.5"
                       >
                         <i className="fas fa-sign-out-alt mr-2" />
                         Sair
@@ -230,24 +227,24 @@ export default function RosaryPage() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent 
                     align="end" 
-                    className="w-56 sacred-modal border-[var(--byzantine-gold-alpha)]"
+                    className="w-52 glass-morphism border-[var(--byzantine-gold-alpha)] bg-[var(--cathedral-shadow)] p-1"
                     sideOffset={8}
                   >
-                    <div className="px-3 py-2 border-b border-[var(--byzantine-gold-alpha)]">
-                      <p className="text-sm font-cinzel text-ancient-gold">{user.username}</p>
-                      <p className="text-xs text-cathedral-stone-light">{user.email}</p>
+                    <div className="px-2 py-1.5 border-b border-[var(--byzantine-gold-alpha)]">
+                      <p className="text-sm font-cinzel text-ancient-gold font-semibold">{user.username}</p>
+                      <p className="text-xs text-secondary">{user.email}</p>
                     </div>
                     <DropdownMenuSeparator className="bg-[var(--byzantine-gold-alpha)]" />
                     <DropdownMenuItem 
                       onClick={() => setCustomPrayersModalOpen(true)}
-                      className="text-cathedral-stone-light hover:text-ancient-gold hover:bg-[var(--byzantine-gold-alpha)] transition-colors duration-200 cursor-pointer font-cinzel"
+                      className="text-secondary hover:text-ancient-gold hover:bg-[var(--byzantine-gold-alpha)] transition-colors duration-200 cursor-pointer font-cinzel py-1.5"
                     >
                       <i className="fas fa-cross mr-2" />
                       Adicionar Oração
                     </DropdownMenuItem>
                     <DropdownMenuItem 
                       onClick={logout}
-                      className="text-cathedral-stone-light hover:text-ancient-gold hover:bg-[var(--byzantine-gold-alpha)] transition-colors duration-200 cursor-pointer font-cinzel"
+                      className="text-secondary hover:text-ancient-gold hover:bg-[var(--byzantine-gold-alpha)] transition-colors duration-200 cursor-pointer font-cinzel py-1.5"
                     >
                       <i className="fas fa-sign-out-alt mr-2" />
                       Sair
@@ -304,36 +301,30 @@ export default function RosaryPage() {
           />
         )}
       </div>
-
-       <IntentionsModal 
-        open={intentionsModalOpen}
-        onOpenChange={setIntentionsModalOpen}
-        intentions={intentions}
-        onAddIntention={addIntention}
-        onRemoveIntention={removeIntention}
-        onSave={handleSaveIntentions}
-      />
-
+      <IntentionsModal 
+       open={intentionsModalOpen}
+       onOpenChange={setIntentionsModalOpen}
+       intentions={intentions}
+       onAddIntention={addIntention}
+       onRemoveIntention={removeIntention}
+       onSave={handleSaveIntentions}
+     />
       <CustomPrayersModal 
         isOpen={customPrayersModalOpen}
         onClose={() => setCustomPrayersModalOpen(false)}
       />
-
       <FontSizeModal 
         open={fontSizeModalOpen}
         onOpenChange={setFontSizeModalOpen}
       />
-
       <MusicModal
         open={musicModalOpen}
         onOpenChange={setMusicModalOpen}
       />
-
       <LoginDialog 
         open={loginDialogOpen}
         onOpenChange={setLoginDialogOpen}
       />
-
       <Toaster />
     </>
   );
