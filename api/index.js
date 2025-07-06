@@ -1,6 +1,34 @@
 // Vercel serverless function for all API routes
-import { storage } from '../dist/server/storage.js';
-import { insertPrayerSchema, insertIntentionSchema, insertUserProfileSchema, insertCustomPrayerSchema } from '../dist/shared/schema.js';
+import { storage } from './storage.js';
+import { z } from 'zod';
+
+// Define schemas directly for Vercel
+const insertPrayerSchema = z.object({
+  userId: z.string().uuid(),
+  section: z.string(),
+  completed: z.boolean().optional()
+});
+
+const insertIntentionSchema = z.object({
+  userId: z.string().uuid(),
+  text: z.string(),
+  isActive: z.boolean().optional()
+});
+
+const insertUserProfileSchema = z.object({
+  userId: z.string().uuid(),
+  username: z.string(),
+  email: z.string().email(),
+  displayName: z.string().optional()
+});
+
+const insertCustomPrayerSchema = z.object({
+  userId: z.string().uuid(),
+  title: z.string(),
+  content: z.string(),
+  section: z.string(),
+  isActive: z.boolean().optional()
+});
 
 export default async function handler(req, res) {
   // CORS headers
