@@ -11,7 +11,6 @@ interface MiniMusicPlayerProps {
 export default function MiniMusicPlayer({ 
   onOpenFullPlayer
 }: MiniMusicPlayerProps) {
-  const [shuffleMode, setShuffleMode] = useState(false);
   const [hasBeenPlaying, setHasBeenPlaying] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   
@@ -29,7 +28,7 @@ export default function MiniMusicPlayer({
   const currentSongData = getSongById(audioContext.currentSong || 'adoro-te-devote') || gregorianSongs[0];
 
   const handleNext = () => {
-    const nextSong = getNextSong(audioContext.currentSong || 'adoro-te-devote', shuffleMode);
+    const nextSong = getNextSong(audioContext.currentSong || 'adoro-te-devote', audioContext.shuffleMode);
     audioContext.loadSong(nextSong, true);
   };
 
@@ -39,15 +38,7 @@ export default function MiniMusicPlayer({
   };
 
   const handleShuffle = () => {
-    const newShuffleMode = !shuffleMode;
-    setShuffleMode(newShuffleMode);
-    console.log('Shuffle mode:', newShuffleMode);
-    
-    // When turning shuffle ON, immediately play a random song with autoplay
-    if (newShuffleMode) {
-      const nextSong = getNextSong(audioContext.currentSong || 'adoro-te-devote', true);
-      audioContext.loadSong(nextSong, true);
-    }
+    audioContext.toggleShuffle();
   };
 
   const handleVolumeChange = (value: number[]) => {
@@ -173,7 +164,7 @@ export default function MiniMusicPlayer({
                 <Button 
                   variant="ghost" 
                   size="sm" 
-                  className={`p-1 w-6 h-6 rounded-full hover:bg-[var(--ancient-gold-alpha)] transition-all duration-200 ${shuffleMode ? 'bg-[var(--ancient-gold-alpha)]' : ''}`}
+                  className={`p-1 w-6 h-6 rounded-full hover:bg-[var(--ancient-gold-alpha)] transition-all duration-200 ${audioContext.shuffleMode ? 'bg-[var(--ancient-gold-alpha)]' : ''}`}
                   onClick={handleShuffle}
                   title="Aleatório"
                 >
