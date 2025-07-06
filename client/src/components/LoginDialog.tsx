@@ -27,7 +27,7 @@ export default function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
       await login(loginData.emailOrUsername, loginData.password);
       toast({
         title: "Login realizado com sucesso",
-        description: "Bem-vindo de volta à sua jornada de oração."
+        description: "Rosarium tuum fructuosum et benedictum sit."
       });
       onOpenChange(false);
       setLoginData({ emailOrUsername: '', password: '' });
@@ -77,7 +77,7 @@ export default function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sacred-modal max-w-lg animate-fade-in">
+      <DialogContent className="sacred-modal animate-fade-in">
         <DialogHeader>
           <DialogTitle className="font-cinzel text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-ancient-gold sacred-header-glow text-center">
             <i className="fas fa-cross mr-2 sm:mr-3 md:mr-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl" />
