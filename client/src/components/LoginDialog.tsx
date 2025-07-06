@@ -77,16 +77,17 @@ export default function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="glass-morphism sacred-border max-w-lg animate-fade-in backdrop-blur-xl border-2">
-        {/* Sacred Header */}
-        <DialogHeader className="text-center border-b border-[var(--ancient-gold-alpha)] pb-6 mb-6">
-          <DialogTitle className="font-cinzel text-2xl font-semibold text-byzantine-gold illuminated-text mb-2">
-            <i className="fas fa-cross mr-3 text-lg" />
+      <DialogContent className="sacred-modal max-w-lg animate-fade-in">
+        <DialogHeader>
+          <DialogTitle className="font-cinzel text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-ancient-gold sacred-header-glow text-center">
+            <i className="fas fa-cross mr-2 sm:mr-3 md:mr-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl" />
             Authenticatio
           </DialogTitle>
+          <div className="w-16 sm:w-20 md:w-24 lg:w-32 h-0.5 bg-gradient-to-r from-transparent via-[var(--ancient-gold)] to-transparent mx-auto rounded-full mt-4 sm:mt-6"></div>
         </DialogHeader>
 
         {/* Sacred Tab Navigation */}
+        <div className="mt-4 sm:mt-6 lg:mt-8">
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-[var(--cathedral-shadow)]/50 border border-[var(--ancient-gold-alpha)] rounded-lg p-1 mb-6">
             <TabsTrigger 
@@ -246,6 +247,7 @@ export default function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
             </form>
           </TabsContent>
         </Tabs>
+        </div>
 
         {/* Sacred Footer */}
         <div className="text-center pt-4 border-t border-[var(--ancient-gold-alpha)] mt-6">
