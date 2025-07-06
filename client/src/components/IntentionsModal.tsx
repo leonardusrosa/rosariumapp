@@ -43,7 +43,7 @@ export default function IntentionsModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sacred-modal animate-fade-in">
+      <DialogContent className="sacred-modal !max-w-none !w-full animate-fade-in">
         <DialogHeader>
           <DialogTitle className="font-cinzel text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-ancient-gold sacred-header-glow text-center">
             <svg 
