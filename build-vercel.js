@@ -15,7 +15,18 @@ async function buildForVercel() {
     execSync('vite build --outDir dist/public --chunkSizeWarningLimit 1000', { stdio: 'inherit' });
     console.log('Frontend build completed successfully!');
   } catch (error) {
-    console.error('Build failed:', error);
+    console.error('Frontend build failed:', error);
+    process.exit(1);
+  }
+  
+  // Build server files for API functions
+  console.log('Building server files for API...');
+  try {
+    execSync('esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist/server', { stdio: 'inherit' });
+    execSync('esbuild shared/schema.ts --platform=node --packages=external --bundle --format=esm --outdir=dist/shared', { stdio: 'inherit' });
+    console.log('Server files build completed successfully!');
+  } catch (error) {
+    console.error('Server build failed:', error);
     process.exit(1);
   }
   
