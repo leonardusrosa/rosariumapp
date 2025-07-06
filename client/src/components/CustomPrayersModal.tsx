@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 import {
   Dialog,
   DialogContent,
@@ -107,7 +107,7 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sacred-modal">
+      <DialogContent className="sacred-modal !max-w-none !w-full">
         <DialogHeader>
           <DialogTitle className="font-cinzel text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-ancient-gold sacred-header-glow text-center">
             <svg 
@@ -167,25 +167,68 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
             </div>
 
             <div>
-              <Label htmlFor="prayer-section" className="text-byzantine-gold font-inter text-sm sm:text-base md:text-lg lg:text-xl mb-2 sm:mb-3 block">
+              <Label className="text-byzantine-gold font-inter text-sm sm:text-base md:text-lg lg:text-xl mb-2 sm:mb-3 block">
                 <i className="fas fa-map-marker-alt mr-2 sm:mr-3 text-xs sm:text-sm md:text-base" />
                 Seção
               </Label>
-              <Select value={newPrayerData.section} onValueChange={(value) => setNewPrayerData(prev => ({ ...prev, section: value }))}>
-                <SelectTrigger className="bg-[var(--gothic-stone)] border-[var(--ancient-gold-alpha)] text-parchment focus:border-[var(--byzantine-gold)] focus:ring-[var(--ancient-gold-glow)] rounded-lg h-10 sm:h-12 md:h-14 font-crimson text-sm sm:text-base md:text-lg">
-                  <SelectValue placeholder="Selecione a seção" />
-                </SelectTrigger>
-                <SelectContent className="sacred-modal border-[var(--byzantine-gold-alpha)]">
-                  <SelectItem value="initium" className="text-sm sm:text-base md:text-lg">Prima Oratio</SelectItem>
-                  <SelectItem value="ultima" className="text-sm sm:text-base md:text-lg">Ultima Oratio</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                <Button
+                  type="button"
+                  variant={newPrayerData.section === 'initium' ? 'default' : 'outline'}
+                  onClick={() => setNewPrayerData(prev => ({ ...prev, section: 'initium' }))}
+                  className={`h-10 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg font-crimson transition-all duration-200 ${
+                    newPrayerData.section === 'initium' 
+                      ? 'bg-[var(--ancient-gold)] text-[var(--cathedral-void)] border-[var(--ancient-gold)] hover:bg-[var(--ancient-gold-bright)] hover:border-[var(--ancient-gold-bright)]' 
+                      : 'bg-[var(--gothic-stone)] text-parchment border-[var(--ancient-gold-alpha)] hover:bg-[var(--ancient-gold-alpha)] hover:border-[var(--ancient-gold)] hover:text-[var(--ancient-gold)]'
+                  }`}
+                >
+                  <svg 
+                    className="w-4 h-4 mr-2 text-xs sm:text-sm md:text-base flex-shrink-0" 
+                    viewBox="0 0 512 512" 
+                    fill="currentColor" 
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g transform="translate(0,512) scale(0.1,-0.1)">
+                      <path d="M2369 4781 c-24 -19 -24 -23 -27 -220 l-3 -201 -255 0 c-241 0 -255 -1 -274 -20 -19 -19 -20 -33 -20 -199 l0 -180 26 -20 c25 -20 39 -21 275 -21 l249 0 2 -726 3 -726 24 -19 c21 -17 41 -19 196 -19 l174 0 20 26 c21 26 21 33 21 745 l0 719 249 0 c250 0 250 0 278 24 28 24 28 25 31 166 4 161 -1 203 -29 231 -18 18 -35 19 -274 19 l-255 0 0 194 c0 180 -1 195 -21 220 l-20 26 -174 0 c-155 0 -175 -2 -196 -19z m261 -325 c0 -176 2 -196 19 -217 19 -24 20 -24 280 -27 l261 -3 0 -69 0 -70 -259 0 -260 0 -20 -26 c-21 -26 -21 -33 -21 -745 l0 -719 -70 0 -70 0 0 723 0 724 -23 21 c-22 21 -32 22 -277 24 l-255 3 -3 67 -3 67 261 3 c261 3 262 3 281 27 17 21 19 41 19 217 l0 194 70 0 70 0 0 -194z"/>
+                      <path d="M1775 2346 c-108 -21 -186 -51 -360 -136 -251 -123 -412 -180 -564 -199 -50 -6 -80 -16 -93 -28 -12 -13 -28 -63 -46 -146 l-27 -127 -91 0 c-73 0 -96 -4 -113 -18 -19 -15 -41 -106 -156 -642 -74 -344 -135 -640 -135 -658 0 -46 30 -72 82 -72 24 0 205 9 403 20 198 11 446 24 550 30 105 6 307 17 450 25 143 8 409 22 590 31 l330 16 1111 -61 c612 -33 1128 -61 1148 -61 46 0 76 29 76 72 0 18 -61 314 -135 658 -115 536 -137 627 -156 642 -17 14 -40 18 -113 18 l-91 0 -27 127 c-18 83 -34 133 -46 146 -13 12 -43 22 -93 28 -152 19 -313 76 -564 199 -181 89 -277 123 -396 141 -222 32 -470 -41 -668 -197 l-81 -64 -83 65 c-97 77 -234 147 -344 176 -101 26 -265 33 -358 15z m287 -151 c136 -28 258 -92 364 -188 l64 -59 0 -389 c0 -214 -4 -389 -9 -389 -4 0 -41 15 -82 34 -150 69 -324 103 -461 92 -145 -12 -251 -44 -500 -150 -166 -71 -320 -116 -482 -141 -120 -19 -276 -33 -276 -25 0 8 180 843 186 862 3 10 17 21 32 24 207 44 329 89 600 218 156 75 235 104 322 119 56 10 179 6 242 -8z m1323 -10 c33 -9 140 -55 237 -101 271 -130 393 -174 600 -218 15 -3 29 -14 32 -24 5 -16 186 -852 186 -859 0 -8 -103 -2 -200 12 -236 33 -370 71 -590 165 -176 75 -274 107 -385 127 -164 28 -349 2 -519 -73 -45 -19 -87 -38 -93 -41 -10 -4 -13 78 -13 390 l0 395 59 54 c100 90 223 154 355 184 76 17 247 12 331 -11z m-2735 -629 c0 -2 -31 -149 -69 -327 -83 -387 -113 -549 -109 -591 2 -20 13 -38 30 -51 27 -20 33 -20 185 -9 344 25 548 72 839 192 252 105 317 122 464 124 161 1 273 -32 459 -135 49 -27 99 -49 110 -49 10 0 71 27 134 60 321 169 503 170 882 8 300 -129 489 -174 846 -200 165 -11 170 -11 197 9 17 13 28 31 30 51 4 42 -26 206 -108 590 -39 177 -70 325 -70 327 0 3 15 5 33 5 l32 0 113 -533 c62 -292 113 -538 112 -545 0 -9 -16 -11 -62 -7 -35 3 -187 12 -338 20 -151 8 -302 21 -335 29 -102 25 -234 75 -385 148 -193 92 -283 119 -432 125 -217 10 -422 -45 -609 -163 l-37 -23 -79 45 c-104 59 -217 102 -333 126 -77 16 -120 19 -225 15 -162 -6 -244 -29 -445 -125 -151 -73 -283 -123 -385 -148 -33 -8 -179 -21 -325 -29 -146 -8 -298 -17 -337 -19 -54 -4 -73 -3 -73 7 -1 6 50 252 112 544 l113 533 33 0 c17 0 32 -2 32 -4z m1483 -420 c94 -18 216 -66 315 -124 100 -58 124 -58 224 0 168 98 339 145 493 135 117 -8 229 -41 445 -132 189 -79 267 -105 411 -135 115 -24 313 -50 378 -50 26 0 54 -6 63 -12 16 -13 34 -98 21 -98 -5 0 -71 7 -148 15 -285 30 -426 66 -694 177 -289 119 -437 150 -614 128 -117 -14 -229 -50 -359 -115 l-108 -54 -107 54 c-201 99 -370 135 -546 116 -125 -14 -230 -46 -428 -129 -273 -116 -442 -156 -782 -187 l-67 -6 6 43 c8 54 26 68 85 68 67 0 265 27 379 51 138 30 263 72 448 150 143 61 258 98 342 112 57 10 173 6 243 -7z m-81 -486 c86 -10 255 -56 244 -67 -5 -6 -612 -42 -696 -42 l-45 0 55 29 c70 36 177 68 261 79 90 12 85 12 181 1z m1298 -21 c41 -11 107 -35 145 -53 l70 -34 -45 -1 c-77 -1 -691 36 -696 42 -10 10 157 58 230 66 91 11 201 4 296 -20z"/>
+                    </g>
+                  </svg>
+                  Prima Oratio
+                </Button>
+                <Button
+                  type="button"
+                  variant={newPrayerData.section === 'ultima' ? 'default' : 'outline'}
+                  onClick={() => setNewPrayerData(prev => ({ ...prev, section: 'ultima' }))}
+                  className={`h-10 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg font-crimson transition-all duration-200 ${
+                    newPrayerData.section === 'ultima' 
+                      ? 'bg-[var(--ancient-gold)] text-[var(--cathedral-void)] border-[var(--ancient-gold)] hover:bg-[var(--ancient-gold-bright)] hover:border-[var(--ancient-gold-bright)]' 
+                      : 'bg-[var(--gothic-stone)] text-parchment border-[var(--ancient-gold-alpha)] hover:bg-[var(--ancient-gold-alpha)] hover:border-[var(--ancient-gold)] hover:text-[var(--ancient-gold)]'
+                  }`}
+                >
+                  <svg 
+                    className="w-4 h-4 mr-2 text-xs sm:text-sm md:text-base flex-shrink-0" 
+                    viewBox="0 0 440 440" 
+                    fill="currentColor" 
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g transform="translate(0 -1020.36)">
+                      <path d="M64,1020.36c-4.418,0-7.998,3.582-8,8v424c0.002,4.418,3.582,8,8,8h264c30.834,0,56-25.166,56-56 c0-111.969,0-224.082,0-335.996c0-2.4-0.784-6.313-1.536-8.594c-7.666-23.444-28.674-39.406-54.469-39.406L64,1020.36z M72,1036.36 h256c22.187,0,40,17.813,40,40v280c0,22.188-17.813,40-40,40H72L72,1036.36z"/>
+                      <g>
+                        <path d="M362.763,1399.887c-6.834,12.189-19.707,20.469-34.75,20.469h-256v-8h256 C341.192,1412.356,353.178,1407.561,362.763,1399.887z"/>
+                        <path d="M362.763,1423.887c-6.834,12.189-19.707,20.469-34.75,20.469h-256v-8h256 C341.192,1436.356,353.178,1431.561,362.763,1423.887z"/>
+                      </g>
+                      <path d="M215.893,1095.887c-4.406,0.068-7.927,3.688-7.875,8.094v39.875h-39.875 c-4.418-0.063-8.051,3.469-8.113,7.887s3.469,8.051,7.887,8.113c0.075,0.002,0.151,0.002,0.226,0h39.875v87.906 c-0.063,4.418,3.468,8.051,7.886,8.113s8.051-3.467,8.114-7.887c0.001-0.074,0.001-0.15,0-0.227v-87.906h39.875 c4.418,0.063,8.051-3.469,8.113-7.887c0.062-4.418-3.469-8.051-7.887-8.113c-0.075-0.002-0.151-0.002-0.226,0h-39.875v-39.875 c0.052-4.418-3.488-8.043-7.906-8.094C216.038,1095.885,215.966,1095.885,215.893,1095.887L215.893,1095.887z"/>
+                    </g>
+                  </svg>
+                  Ultima Oratio
+                </Button>
+              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button 
                 type="submit" 
-                className="sacred-button flex-1 h-10 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg"
+                className="sacred-button flex-1 h-10 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg font-bold"
                 disabled={isAddingCustomPrayer || isUpdatingCustomPrayer}
               >
                 {isEditing ? (
