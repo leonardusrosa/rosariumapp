@@ -155,15 +155,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     try {
-      // Check if there's an active session before trying to sign out
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        const { error } = await supabase.auth.signOut();
-        if (error) throw error;
+      // Simply attempt to sign out - Supabase will handle gracefully if no session exists
+      const { error } = await supabase.auth.signOut();
+      if (error && error.message !== 'No session found') {
+        console.warn('Logout error:', error);
       }
     } catch (error) {
       // Silently handle logout errors to prevent UI crashes
       console.warn('Logout error:', error);
+    } finally {
+      // Always clear the user state regardless of Supabase response
+      setUser(null);
     }
   };
 
