@@ -394,6 +394,7 @@ export default function PrayerContent({
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       // When moving to next section, call immediately without delay
+      console.log('Swipe navigation: moving to next section from', section);
       onNext();
       // Scroll to top when moving to next section with a small delay to ensure DOM update
       setTimeout(() => {
@@ -409,6 +410,7 @@ export default function PrayerContent({
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       // When going to previous section, call immediately without delay
+      console.log('Swipe navigation: moving to previous section from', section);
       onPrevious();
       // Scroll to top when going back to previous section with a small delay to ensure DOM update
       setTimeout(() => {
