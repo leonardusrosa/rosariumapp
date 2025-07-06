@@ -71,7 +71,9 @@ export default function RosaryPage() {
   const handleNext = () => {
     const currentIndex = sections.indexOf(currentSection);
     if (currentIndex < sections.length - 1) {
-      setCurrentSection(sections[currentIndex + 1]);
+      const nextSection = sections[currentIndex + 1];
+      console.log('handleNext: moving from', currentSection, 'to', nextSection);
+      setCurrentSection(nextSection);
       // Scroll to top of page
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -80,7 +82,9 @@ export default function RosaryPage() {
   const handlePrevious = () => {
     const currentIndex = sections.indexOf(currentSection);
     if (currentIndex > 0) {
-      setCurrentSection(sections[currentIndex - 1]);
+      const prevSection = sections[currentIndex - 1];
+      console.log('handlePrevious: moving from', currentSection, 'to', prevSection);
+      setCurrentSection(prevSection);
       // Scroll to top of page
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -294,6 +298,7 @@ export default function RosaryPage() {
         {/* Mobile Bottom Navigation - Only visible on mobile */}
         {isMobile && (
           <MobileBottomNav
+            key={currentSection} // Force re-render when section changes
             currentSection={currentSection}
             onSectionChange={setCurrentSection}
             onOpenIntentions={() => setIntentionsModalOpen(true)}
