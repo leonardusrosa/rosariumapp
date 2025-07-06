@@ -393,12 +393,12 @@ export default function PrayerContent({
       // Scroll to top when advancing to next mystery
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      // When moving to next section, add a small delay to ensure proper state updates
+      // When moving to next section, call immediately without delay
+      onNext();
+      // Scroll to top when moving to next section with a small delay to ensure DOM update
       setTimeout(() => {
-        onNext();
-        // Scroll to top when moving to next section
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 50);
+      }, 100);
     }
   };
 
@@ -408,12 +408,12 @@ export default function PrayerContent({
       // Scroll to top when going back to previous mystery
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      // When going to previous section, add a small delay to ensure proper state updates
+      // When going to previous section, call immediately without delay
+      onPrevious();
+      // Scroll to top when going back to previous section with a small delay to ensure DOM update
       setTimeout(() => {
-        onPrevious();
-        // Scroll to top when going back to previous section
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 50);
+      }, 100);
     }
   };
 
