@@ -71,9 +71,7 @@ export default function RosaryPage() {
   const handleNext = () => {
     const currentIndex = sections.indexOf(currentSection);
     if (currentIndex < sections.length - 1) {
-      const nextSection = sections[currentIndex + 1];
-      console.log('handleNext: moving from', currentSection, 'to', nextSection);
-      setCurrentSection(nextSection);
+      setCurrentSection(sections[currentIndex + 1]);
       // Scroll to top of page
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -82,9 +80,7 @@ export default function RosaryPage() {
   const handlePrevious = () => {
     const currentIndex = sections.indexOf(currentSection);
     if (currentIndex > 0) {
-      const prevSection = sections[currentIndex - 1];
-      console.log('handlePrevious: moving from', currentSection, 'to', prevSection);
-      setCurrentSection(prevSection);
+      setCurrentSection(sections[currentIndex - 1]);
       // Scroll to top of page
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
