@@ -1,6 +1,5 @@
 import { execSync } from 'child_process';
-import { cpSync, existsSync, mkdirSync } from 'fs';
-import { dirname } from 'path';
+import { existsSync, mkdirSync } from 'fs';
 
 async function buildForVercel() {
   console.log('Building for Vercel...');
@@ -9,24 +8,14 @@ async function buildForVercel() {
   const outputDir = 'dist/public';
   mkdirSync(outputDir, { recursive: true });
   
-  // Build frontend with Vite (with chunk size limit adjusted)
-  console.log('Building frontend...');
+  // Build using the standard npm build command
+  console.log('Building application...');
   try {
-    execSync('vite build --outDir dist/public --chunkSizeWarningLimit 1000', { stdio: 'inherit' });
-    console.log('Frontend build completed successfully!');
+    // Use the standard build command which should handle everything properly
+    execSync('npm run build', { stdio: 'inherit' });
+    console.log('Build completed successfully!');
   } catch (error) {
-    console.error('Frontend build failed:', error);
-    process.exit(1);
-  }
-  
-  // Build server files for API functions
-  console.log('Building server files for API...');
-  try {
-    execSync('esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist/server', { stdio: 'inherit' });
-    execSync('esbuild shared/schema.ts --platform=node --packages=external --bundle --format=esm --outdir=dist/shared', { stdio: 'inherit' });
-    console.log('Server files build completed successfully!');
-  } catch (error) {
-    console.error('Server build failed:', error);
+    console.error('Build failed:', error);
     process.exit(1);
   }
   
