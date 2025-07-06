@@ -33,7 +33,7 @@ export default function FontSizeModal({ open, onOpenChange }: FontSizeModalProps
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sacred-modal">
+      <DialogContent className="sacred-modal !max-w-none !w-full">
         <DialogHeader>
           <DialogTitle className="font-cinzel text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium text-ancient-gold sacred-header-glow text-center">
             <i className="fas fa-font mr-2 sm:mr-3 md:mr-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl" />
