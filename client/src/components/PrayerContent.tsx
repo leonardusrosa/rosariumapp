@@ -5,8 +5,9 @@ import { useFontSize } from "@/hooks/useFontSize";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useAuth } from "@/hooks/useAuth";
 import { useCustomPrayers } from "@/hooks/useCustomPrayers";
+import { useSwipeGesture } from "@/hooks/useSwipeGesture";
 import RosaryBeads from "./RosaryBeads";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 interface PrayerContentProps {
   section: string;
@@ -69,6 +70,7 @@ export default function PrayerContent({
   const isMobile = useIsMobile();
   const { user } = useAuth();
   const { customPrayers } = useCustomPrayers(user?.id || null);
+  const mainContentRef = useRef<HTMLDivElement>(null);
 
   // Filter custom prayers by section
   const getCustomPrayersForSection = (sectionType: string) => {
@@ -411,10 +413,21 @@ export default function PrayerContent({
     }
   };
 
+  // Add swipe gesture support for mobile navigation
+  useSwipeGesture(mainContentRef, {
+    onSwipeLeft: handleMysteryNext,
+    onSwipeRight: handleMysteryPrevious
+  }, {
+    threshold: 50,
+    preventDefault: false // Allow normal scrolling
+  });
+
   return (
-    <main className={`animate-fade-in relative px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24 ${
-      !isMobile ? 'ml-96' : 'pt-2'
-    }`}>
+    <main 
+      ref={mainContentRef}
+      className={`animate-fade-in relative px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24 ${
+        !isMobile ? 'ml-96' : 'pt-2'
+      }`}>
       {/* Page Title - Centered above content */}
       <div className={`text-center ${isMobile ? 'mb-6 pt-2' : 'mb-12 pt-8'}`}>
         <h1 className={`font-cinzel font-semibold text-parchment sacred-header-glow ${
@@ -694,18 +707,6 @@ export default function PrayerContent({
 
         {/* Navigation Controls */}
         <div className="flex justify-between items-center mt-12 pt-8 border-t border-[var(--byzantine-gold-alpha)]">
-          <div className="flex space-x-2">
-            {['initium', 'gaudiosa', 'dolorosa', 'gloriosa', 'ultima'].map((sectionId, index) => (
-              <div
-                key={sectionId}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  section === sectionId 
-                    ? 'bg-[var(--byzantine-gold)]' 
-                    : 'bg-[var(--byzantine-gold-alpha)]'
-                }`}
-              />
-            ))}
-          </div>
         </div>
 
         {/* Mobile Mystery Navigation - Only show for mystery sections on mobile */}
