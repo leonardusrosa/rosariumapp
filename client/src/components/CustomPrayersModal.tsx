@@ -107,11 +107,11 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl w-[95vw] max-h-[90vh] overflow-y-auto sacred-modal">
+      <DialogContent className="max-w-4xl w-[95vw] max-h-[90vh] overflow-y-auto sacred-modal">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-cinzel text-ancient-gold mb-4 flex items-center gap-3">
+          <DialogTitle className="text-3xl md:text-4xl font-cinzel text-ancient-gold mb-6 flex items-center gap-4">
             <svg 
-              className="w-6 h-6 text-byzantine-gold" 
+              className="w-8 h-8 md:w-10 md:h-10 text-byzantine-gold" 
               viewBox="0 0 60 60" 
               fill="currentColor" 
               xmlns="http://www.w3.org/2000/svg"
@@ -122,12 +122,12 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6 w-full overflow-hidden">
+        <div className="space-y-8 w-full overflow-hidden">
           {/* Add/Edit Prayer Form */}
-          <form onSubmit={handleSubmit} className="space-y-4 w-full">
+          <form onSubmit={handleSubmit} className="space-y-6 w-full">
             <div>
-              <Label htmlFor="prayer-title" className="text-byzantine-gold font-inter text-base mb-2 block">
-                <i className="fas fa-cross mr-2 text-xs" />
+              <Label htmlFor="prayer-title" className="text-byzantine-gold font-inter text-lg md:text-xl mb-3 block">
+                <i className="fas fa-cross mr-3 text-sm md:text-base" />
                 Título da Oração
               </Label>
               <Input
@@ -135,14 +135,14 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
                 value={newPrayerData.title}
                 onChange={(e) => setNewPrayerData(prev => ({ ...prev, title: e.target.value }))}
                 placeholder="Digite o título da oração"
-                className="bg-[var(--gothic-stone)] border-[var(--ancient-gold-alpha)] text-parchment placeholder-parchment/60 focus:border-[var(--byzantine-gold)] focus:ring-[var(--ancient-gold-glow)] rounded-lg h-11 font-crimson"
+                className="bg-[var(--gothic-stone)] border-[var(--ancient-gold-alpha)] text-parchment placeholder-parchment/60 focus:border-[var(--byzantine-gold)] focus:ring-[var(--ancient-gold-glow)] rounded-lg h-12 md:h-14 font-crimson text-base md:text-lg"
                 required
               />
             </div>
 
             <div>
-              <Label htmlFor="prayer-content" className="text-byzantine-gold font-inter text-base mb-2 block">
-                <i className="fas fa-scroll mr-2 text-xs" />
+              <Label htmlFor="prayer-content" className="text-byzantine-gold font-inter text-lg md:text-xl mb-3 block">
+                <i className="fas fa-scroll mr-3 text-sm md:text-base" />
                 Conteúdo da Oração
               </Label>
               <Textarea
@@ -155,11 +155,11 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
                   setTimeout(adjustTextareaHeight, 0);
                 }}
                 placeholder="Digite o conteúdo da oração"
-                className="bg-[var(--gothic-stone)] border-[var(--ancient-gold-alpha)] text-parchment placeholder-parchment/60 focus:border-[var(--byzantine-gold)] focus:ring-[var(--ancient-gold-glow)] rounded-lg font-crimson min-h-[100px] w-full resize-none overflow-y-auto scrollbar-hide"
+                className="bg-[var(--gothic-stone)] border-[var(--ancient-gold-alpha)] text-parchment placeholder-parchment/60 focus:border-[var(--byzantine-gold)] focus:ring-[var(--ancient-gold-glow)] rounded-lg font-crimson min-h-[120px] md:min-h-[150px] w-full resize-none overflow-y-auto scrollbar-hide text-base md:text-lg leading-relaxed"
                 style={{ 
                   wordWrap: 'break-word', 
                   overflowWrap: 'break-word',
-                  maxHeight: '300px',
+                  maxHeight: '400px',
                   scrollbarWidth: 'none',
                   msOverflowStyle: 'none'
                 }}
@@ -168,35 +168,35 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
             </div>
 
             <div>
-              <Label htmlFor="prayer-section" className="text-byzantine-gold font-inter text-base mb-2 block">
-                <i className="fas fa-map-marker-alt mr-2 text-xs" />
+              <Label htmlFor="prayer-section" className="text-byzantine-gold font-inter text-lg md:text-xl mb-3 block">
+                <i className="fas fa-map-marker-alt mr-3 text-sm md:text-base" />
                 Seção
               </Label>
               <Select value={newPrayerData.section} onValueChange={(value) => setNewPrayerData(prev => ({ ...prev, section: value }))}>
-                <SelectTrigger className="bg-[var(--gothic-stone)] border-[var(--ancient-gold-alpha)] text-parchment focus:border-[var(--byzantine-gold)] focus:ring-[var(--ancient-gold-glow)] rounded-lg h-11 font-crimson">
+                <SelectTrigger className="bg-[var(--gothic-stone)] border-[var(--ancient-gold-alpha)] text-parchment focus:border-[var(--byzantine-gold)] focus:ring-[var(--ancient-gold-glow)] rounded-lg h-12 md:h-14 font-crimson text-base md:text-lg">
                   <SelectValue placeholder="Selecione a seção" />
                 </SelectTrigger>
                 <SelectContent className="sacred-modal border-[var(--byzantine-gold-alpha)]">
-                  <SelectItem value="initium">Prima Oratio</SelectItem>
-                  <SelectItem value="ultima">Ultima Oratio</SelectItem>
+                  <SelectItem value="initium" className="text-base md:text-lg">Prima Oratio</SelectItem>
+                  <SelectItem value="ultima" className="text-base md:text-lg">Ultima Oratio</SelectItem>
                 </SelectContent>
               </Select>
             </div>
 
-            <div className="flex gap-3">
+            <div className="flex gap-4">
               <Button 
                 type="submit" 
-                className="sacred-button flex-1"
+                className="sacred-button flex-1 h-12 md:h-14 text-base md:text-lg"
                 disabled={isAddingCustomPrayer || isUpdatingCustomPrayer}
               >
                 {isEditing ? (
                   <>
-                    <i className="fas fa-save mr-2 text-xs" />
+                    <i className="fas fa-save mr-3 text-sm md:text-base" />
                     {isUpdatingCustomPrayer ? "Atualizando..." : "Atualizar Oração"}
                   </>
                 ) : (
                   <>
-                    <i className="fas fa-plus mr-2 text-xs" />
+                    <i className="fas fa-plus mr-3 text-sm md:text-base" />
                     {isAddingCustomPrayer ? "Adicionando..." : "Adicionar Oração"}
                   </>
                 )}
@@ -206,9 +206,9 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
                   type="button" 
                   variant="outline" 
                   onClick={handleCancelEdit}
-                  className="sacred-button-secondary"
+                  className="sacred-button-secondary h-12 md:h-14 text-base md:text-lg px-6"
                 >
-                  <i className="fas fa-times mr-2 text-xs" />
+                  <i className="fas fa-times mr-3 text-sm md:text-base" />
                   Cancelar
                 </Button>
               )}
@@ -217,25 +217,25 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
 
           {/* Current Custom Prayers */}
           <div>
-            <h3 className="text-sacred-ivory font-inter text-base mb-3">
+            <h3 className="text-sacred-ivory font-inter text-lg md:text-xl mb-4">
               Orações Personalizadas{" "}
               <span className="text-byzantine-gold">({customPrayers.length})</span>
             </h3>
-            <div className="space-y-2 max-h-48 overflow-y-auto sacred-scroll">
+            <div className="space-y-3 max-h-60 md:max-h-72 overflow-y-auto sacred-scroll">
               {customPrayers.length === 0 ? (
-                <p className="text-sacred-ivory/60 text-base text-center py-4">
+                <p className="text-sacred-ivory/60 text-base md:text-lg text-center py-6">
                   Nenhuma oração personalizada adicionada ainda
                 </p>
               ) : (
                 customPrayers.map((prayer) => (
                   <div
                     key={prayer.id}
-                    className="flex items-start justify-between p-3 bg-[var(--cathedral-shadow)]/30 rounded-lg border border-[var(--ancient-gold-alpha)] hover:border-[var(--ancient-gold-glow)] transition-all duration-300 w-full"
+                    className="flex items-start justify-between p-4 md:p-5 bg-[var(--cathedral-shadow)]/30 rounded-lg border border-[var(--ancient-gold-alpha)] hover:border-[var(--ancient-gold-glow)] transition-all duration-300 w-full"
                   >
-                    <div className="flex-1 min-w-0 pr-2 overflow-hidden">
-                      <h4 className="text-parchment text-base font-crimson font-medium mb-1 break-words flex items-center">
+                    <div className="flex-1 min-w-0 pr-3 overflow-hidden">
+                      <h4 className="text-parchment text-base md:text-lg font-crimson font-medium mb-2 break-words flex items-center">
                         <svg 
-                          className="w-4 h-4 text-ancient-gold mr-2 flex-shrink-0" 
+                          className="w-5 h-5 md:w-6 md:h-6 text-ancient-gold mr-3 flex-shrink-0" 
                           viewBox="0 0 60 60" 
                           fill="currentColor" 
                           xmlns="http://www.w3.org/2000/svg"
@@ -244,31 +244,31 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
                         </svg>
                         {prayer.title}
                       </h4>
-                      <p className="text-parchment/70 text-sm font-crimson mb-1 break-words overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+                      <p className="text-parchment/70 text-sm md:text-base font-crimson mb-2 break-words overflow-hidden leading-relaxed" style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
                         {prayer.content}
                       </p>
-                      <p className="text-byzantine-gold text-sm font-inter">
+                      <p className="text-byzantine-gold text-sm md:text-base font-inter">
                         {prayer.section === 'initium' ? 'Prima Oratio' : 'Ultima Oratio'}
                       </p>
                     </div>
-                    <div className="flex gap-1 ml-2 flex-shrink-0">
+                    <div className="flex gap-2 ml-3 flex-shrink-0">
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => handleEdit(prayer)}
-                        className="text-parchment/50 hover:text-byzantine-gold hover:bg-byzantine-gold/10 rounded-lg"
+                        className="text-parchment/50 hover:text-byzantine-gold hover:bg-byzantine-gold/10 rounded-lg w-10 h-10 md:w-12 md:h-12"
                         disabled={isUpdatingCustomPrayer}
                       >
-                        <i className="fas fa-edit text-xs" />
+                        <i className="fas fa-edit text-sm md:text-base" />
                       </Button>
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => handleRemove(prayer.id)}
-                        className="text-parchment/50 hover:text-red-400 hover:bg-red-400/10 rounded-lg"
+                        className="text-parchment/50 hover:text-red-400 hover:bg-red-400/10 rounded-lg w-10 h-10 md:w-12 md:h-12"
                         disabled={isRemovingCustomPrayer}
                       >
-                        <i className="fas fa-trash text-xs" />
+                        <i className="fas fa-trash text-sm md:text-base" />
                       </Button>
                     </div>
                   </div>
