@@ -158,20 +158,21 @@ export default function MobileBottomNav({
   const getProgressDots = (sectionId: string) => {
     if (!['gaudiosa', 'dolorosa', 'gloriosa'].includes(sectionId)) return null;
     
-    const completed = progress[sectionId] || 0;
+    // Show current mystery being viewed (like sidebar does) - progress + 1, but cap at 5
+    const currentMystery = Math.min((progress[sectionId] || 0) + 1, 5);
     const dots = [];
     for (let i = 0; i < 5; i++) {
       dots.push(
         <div
           key={i}
           className={cn(
-            "w-1 h-1 rounded-full transition-colors duration-200",
-            i < completed ? "bg-[var(--ancient-gold-bright)]" : "bg-[var(--cathedral-stone-light)]/30"
+            "w-1.5 h-1.5 rounded-full transition-colors duration-200",
+            i < currentMystery ? "bg-[var(--ancient-gold-bright)]" : "bg-[var(--cathedral-stone-light)]/30"
           )}
         />
       );
     }
-    return <div className="flex space-x-0.5 mt-0.5">{dots}</div>;
+    return <div className="flex space-x-1 mt-0.5 justify-center">{dots}</div>;
   };
 
   return (
