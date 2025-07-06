@@ -33,22 +33,22 @@ export default function FontSizeModal({ open, onOpenChange }: FontSizeModalProps
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sacred-modal max-w-xl">
+      <DialogContent className="sacred-modal max-w-2xl md:max-w-3xl">
         <DialogHeader>
-          <DialogTitle className="font-cinzel text-2xl font-medium text-ancient-gold sacred-header-glow text-center">
-            <i className="fas fa-font mr-3" />
+          <DialogTitle className="font-cinzel text-3xl md:text-4xl font-medium text-ancient-gold sacred-header-glow text-center">
+            <i className="fas fa-font mr-4 text-3xl md:text-4xl" />
             Configurações de Fonte
           </DialogTitle>
-          <div className="w-20 h-0.5 bg-gradient-to-r from-transparent via-[var(--ancient-gold)] to-transparent mx-auto rounded-full mt-4"></div>
+          <div className="w-24 md:w-32 h-0.5 bg-gradient-to-r from-transparent via-[var(--ancient-gold)] to-transparent mx-auto rounded-full mt-6"></div>
         </DialogHeader>
 
-        <div className="space-y-8 mt-8">
-          <p className="text-parchment/80 font-crimson text-center">
+        <div className="space-y-8 mt-8 p-6 md:p-8">
+          <p className="text-parchment/80 font-crimson text-center text-base md:text-lg">
             Ajuste o tamanho da fonte para suas orações
           </p>
 
           {/* Font Size Preview */}
-          <div className="text-center p-6 rounded-xl bg-[var(--cathedral-shadow)]/30 border border-[var(--ancient-gold-alpha)]">
+          <div className="text-center p-8 md:p-10 rounded-xl bg-[var(--cathedral-shadow)]/30 border border-[var(--ancient-gold-alpha)]">
             <div 
               className={`prayer-latin transition-all duration-300 ${
                 fontSize === 'lg' ? 'text-xl leading-relaxed tracking-wide' :      
@@ -60,38 +60,38 @@ export default function FontSizeModal({ open, onOpenChange }: FontSizeModalProps
             >
               Ave Maria, gratia plena, Dominus tecum...
             </div>
-            <p className="font-cinzel text-ancient-gold mt-3 text-sm">
+            <p className="font-cinzel text-ancient-gold mt-4 text-base md:text-lg">
               {currentOption?.label || '20px'}
             </p>
           </div>
 
           {/* Font Size Slider */}
           <div className="space-y-6">
-            <div className="px-4">
+            <div className="px-6">
               <Slider
                 value={[currentIndex]}
                 onValueChange={handleSliderChange}
                 max={4}
                 min={0}
                 step={1}
-                className="w-full"
+                className="w-full h-2"
               />
             </div>
             
             {/* Size Labels */}
-            <div className="flex justify-between text-xs text-parchment/60 font-inter px-2">
+            <div className="flex justify-between text-sm md:text-base text-parchment/60 font-inter px-4">
               <span>20px</span>
               <span className="text-ancient-gold font-medium">30px</span>
               <span>48px</span>
             </div>
           </div>
 
-          <div className="flex justify-center pt-4">
+          <div className="flex justify-center pt-6">
             <Button
               onClick={() => onOpenChange(false)}
-              className="sacred-button px-8 py-3"
+              className="sacred-button px-10 py-4 text-base md:text-lg h-12 md:h-14"
             >
-              <i className="fas fa-check mr-2" />
+              <i className="fas fa-check mr-3 text-sm md:text-base" />
               Confirmar
             </Button>
           </div>
