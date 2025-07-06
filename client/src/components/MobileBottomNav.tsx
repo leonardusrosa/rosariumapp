@@ -131,6 +131,7 @@ export default function MobileBottomNav({
   onOpenIntentions,
   progress 
 }: MobileBottomNavProps) {
+  console.log('MobileBottomNav render - currentSection:', currentSection, 'progress:', progress);
   // Determine today's mystery based on day of week
   // Monday & Thursday: Gaudiosa (Joyful)
   // Tuesday & Friday: Dolorosa (Sorrowful) 
