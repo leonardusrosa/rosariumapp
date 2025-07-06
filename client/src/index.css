@@ -1569,8 +1569,8 @@
   -ms-overflow-style: none; /* IE and Edge */
   
   /* Responsive sizing with proper mobile popup appearance */
-  max-width: min(95vw, 900px);
-  max-height: min(90vh, 700px);
+  max-width: min(95vw, 1500px);
+  max-height: min(90vh, 1100px);
   width: 100%;
   
   /* Responsive padding */
@@ -1622,17 +1622,36 @@
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .sacred-modal {
-    max-width: min(80vw, 800px);
-    max-height: min(85vh, 650px);
+    max-width: min(90vw, 1200px);
+    max-height: min(90vh, 850px);
     padding: 2rem;
   }
 }
 
 @media (min-width: 1025px) {
   .sacred-modal {
-    max-width: min(75vw, 900px);
-    max-height: min(80vh, 700px);
+    max-width: min(85vw, 1500px) !important;
+    max-height: min(90vh, 1100px) !important;
     padding: 2.5rem;
+  }
+}
+
+/* Override base DialogContent sizing with higher specificity */
+[data-radix-dialog-content].sacred-modal,
+.sacred-modal[data-radix-dialog-content] {
+  /* Base sizing for all screens */
+  width: min(95vw, 1500px) !important;
+  max-width: min(95vw, 1500px) !important;
+  max-height: min(90vh, 1100px) !important;
+}
+
+/* Desktop-specific sizing overrides */
+@media (min-width: 1025px) {
+  [data-radix-dialog-content].sacred-modal,
+  .sacred-modal[data-radix-dialog-content] {
+    width: min(85vw, 1500px) !important;
+    max-width: min(85vw, 1500px) !important;
+    max-height: min(90vh, 1100px) !important;
   }
 }
 
