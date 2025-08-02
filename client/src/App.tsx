@@ -25,7 +25,7 @@ function App() {
         <AudioProvider>
           <FontSizeProvider>
             <TooltipProvider>
-              <div className="min-h-screen starfield-bg">
+              <div className="min-h-screen">
                 <Toaster />
                 <Router />
               </div>
