@@ -66,7 +66,7 @@ export default function RosarySidebar({
   const { day, mystery } = getCurrentDay();
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-96 glass-morphism border-r border-[var(--byzantine-gold-alpha)] animate-slide-in-left backdrop-blur-xl">
+    <aside className="fixed left-0 top-0 h-screen w-96 animate-slide-in-left">
       <ScrollArea className="h-full sacred-scroll">
         <div className="p-6 pt-44">
 
