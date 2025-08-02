@@ -438,8 +438,8 @@ export default function PrayerContent({
   return (
     <main 
       ref={mainContentRef}
-      className={`animate-fade-in relative px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24 ${
-        !isMobile ? 'ml-96' : 'pt-2'
+      className={`animate-fade-in relative px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24 main-content ${
+        !isMobile ? 'ml-96' : 'mobile-container pt-2'
       }`}>
       {/* Page Title - Centered above content */}
       <div className={`text-center ${isMobile ? 'mb-6 pt-2' : 'mb-12 pt-8'}`}>
