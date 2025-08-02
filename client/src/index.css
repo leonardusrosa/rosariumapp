@@ -279,8 +279,8 @@
 /* Enhanced Prayer Content Cards */
 .sacred-content-card {
   background: linear-gradient(145deg, 
-    var(--cathedral-glass) 0%, 
-    var(--stone-gray-alpha) 100%);
+    hsla(220, 15%, 15%, 0.25) 0%, 
+    hsla(220, 12%, 18%, 0.15) 100%);
   backdrop-filter: blur(20px) saturate(130%);
   border: 1px solid var(--ancient-gold-alpha-soft);
   box-shadow: 
