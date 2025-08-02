@@ -7,7 +7,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import StarfieldBackground from "@/components/StarfieldBackground";
+import GalaxyBackground from "@/components/GalaxyBackground";
 import RosarySidebar from "@/components/RosarySidebar";
 import PrayerContent from "@/components/PrayerContent";
 import IntentionsModal from "@/components/IntentionsModal";
@@ -95,7 +95,7 @@ export default function RosaryPage() {
 
   return (
     <>
-      <StarfieldBackground />
+      <GalaxyBackground />
       {/* Main Content Area - Responsive Layout */}
       <div className={isMobile ? "pb-32 pt-4" : ""}>
         {/* Desktop Sidebar - Hidden on Mobile */}
