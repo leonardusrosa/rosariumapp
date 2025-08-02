@@ -1008,22 +1008,86 @@
   }
 }
 
-/* Responsive Typography Scale */
-@media (max-width: 768px) {
+/* Mobile-First Responsive Design - Prioritize Mobile Styles */
+/* Default mobile styles */
+:root {
+  /* Mobile-specific spacing overrides */
+  --mobile-padding: 1rem;
+  --mobile-margin: 0.5rem;
+  --mobile-font-scale: 0.9;
+}
+
+/* Enhanced Mobile Typography - Default */
+.ornate-display {
+  font-size: var(--font-size-3xl);
+}
+
+.sacred-display {
+  font-size: var(--font-size-2xl);
+}
+
+.sacred-heading {
+  font-size: var(--font-size-xl);
+}
+
+/* Mobile-specific utility classes */
+@media (max-width: 1023px) {
+  /* Force mobile layout on all devices below 1024px */
+  body {
+    -webkit-text-size-adjust: 100%;
+    touch-action: manipulation;
+  }
+  
+  /* Override any desktop-specific styles */
+  .desktop-only {
+    display: none !important;
+  }
+  
+  /* Ensure mobile containers take full width */
+  .mobile-container {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding-left: var(--mobile-padding) !important;
+    padding-right: var(--mobile-padding) !important;
+  }
+  
+  /* Force mobile font sizes */
   .ornate-display {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-3xl) !important;
   }
   
   .sacred-display {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-2xl) !important;
   }
   
   .sacred-heading {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-xl) !important;
+  }
+  
+  /* Hide desktop navigation elements */
+  .desktop-nav {
+    display: none !important;
+  }
+  
+  /* Ensure mobile navigation is visible */
+  .mobile-nav {
+    display: flex !important;
+  }
+  
+  /* Mobile-specific content adjustments */
+  .prayer-content {
+    padding: var(--mobile-padding) !important;
+  }
+  
+  /* Force proper mobile margins */
+  .main-content {
+    margin-left: 0 !important;
+    padding-top: 1rem !important;
   }
 }
 
-@media (min-width: 769px) {
+/* Desktop styles only apply above 1024px */
+@media (min-width: 1024px) {
   .ornate-display {
     font-size: var(--font-size-5xl);
   }
@@ -1034,6 +1098,16 @@
   
   .sacred-heading {
     font-size: var(--font-size-2xl);
+  }
+  
+  /* Show desktop elements */
+  .desktop-only {
+    display: flex !important;
+  }
+  
+  /* Hide mobile navigation on desktop */
+  .mobile-nav {
+    display: none !important;
   }
 }
 
