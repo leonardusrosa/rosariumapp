@@ -1,0 +1,40 @@
+[00:49:08.275] Running build in Washington, D.C., USA (East) – iad1
+[00:49:08.276] Build machine configuration: 2 cores, 8 GB
+[00:49:08.299] Cloning github.com/leonardusrosa/rosariumapp (Branch: main, Commit: e421594)
+[00:49:09.023] Previous build caches not available
+[00:49:19.104] Cloning completed: 10.805s
+[00:49:19.545] Running "vercel build"
+[00:49:20.580] Vercel CLI 44.2.10
+[00:49:20.759] WARN! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+[00:49:21.210] Installing dependencies...
+[00:49:25.843] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[00:49:25.872] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[00:49:30.872] 
+[00:49:30.872] added 495 packages in 9s
+[00:49:30.873] 
+[00:49:30.874] 65 packages are looking for funding
+[00:49:30.874]   run `npm fund` for details
+[00:49:30.932] Running "npm run build"
+[00:49:31.043] 
+[00:49:31.044] > rest-express@1.0.0 build
+[00:49:31.044] > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+[00:49:31.044] 
+[00:49:31.305] [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+[00:49:31.355] transforming...
+[00:49:31.629] Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+[00:49:31.629]   npx update-browserslist-db@latest
+[00:49:31.630]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[00:49:33.152] [32m✓[39m 70 modules transformed.
+[00:49:33.161] [31mx[39m Build failed in 1.83s
+[00:49:33.162] [31merror during build:
+[00:49:33.162] [31m[vite:asset] Could not load /vercel/path0/attached_assets/—Pngtree—praying hands rosary beads golden_20795995 (1)_1751503637738.png (imported by client/src/pages/rosary.tsx): ENOENT: no such file or directory, open '/vercel/path0/attached_assets/—Pngtree—praying hands rosary beads golden_20795995 (1)_1751503637738.png'[31m
+[00:49:33.162]     at async open (node:internal/fs/promises:639:25)
+[00:49:33.162]     at async Object.readFile (node:internal/fs/promises:1243:14)
+[00:49:33.162]     at async fileToBuiltUrl (file:///vercel/path0/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:20428:19)
+[00:49:33.162]     at async Object.load (file:///vercel/path0/node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:20328:17)
+[00:49:33.162]     at async PluginDriver.hookFirstAndGetPlugin (file:///vercel/path0/node_modules/rollup/dist/es/shared/node-entry.js:20689:28)
+[00:49:33.163]     at async file:///vercel/path0/node_modules/rollup/dist/es/shared/node-entry.js:19809:33
+[00:49:33.163]     at async Queue.work (file:///vercel/path0/node_modules/rollup/dist/es/shared/node-entry.js:20899:32)[39m
+[00:49:33.185] Error: Command "npm run build" exited with 1
+[00:49:33.401] 
+[00:49:36.105] Exiting build container

@@ -74,9 +74,118 @@ export default function PrayerContent({
   const { customPrayers } = useCustomPrayers(user?.id || null);
   const mainContentRef = useRef<HTMLDivElement>(null);
 
+  // Mobile language selection state - track selected language for each prayer card
+  const [mobileLanguageSelection, setMobileLanguageSelection] = useState<Record<string, 'latin' | 'portuguese'>>({});
+  
+  // State for Angelus/Regina Coeli selection in Ultima section
+  const [angelusReginaSelection, setAngelusReginaSelection] = useState<'angelus' | 'regina'>('angelus');
+
+  // Helper function to get selected language for a prayer
+  const getSelectedLanguage = (prayerKey: string): 'latin' | 'portuguese' => {
+    if (!isMobile) return 'latin'; // Always show both on desktop
+    return mobileLanguageSelection[prayerKey] || 'portuguese'; // Default to Portuguese on mobile
+  };
+
+  // Helper function to set language for a prayer
+  const setSelectedLanguage = (prayerKey: string, language: 'latin' | 'portuguese') => {
+    if (isMobile) {
+      setMobileLanguageSelection(prev => ({
+        ...prev,
+        [prayerKey]: language
+      }));
+    }
+  };
+
+  // Component for language selection buttons
+  const LanguageSelector = ({ prayerKey }: { prayerKey: string }) => {
+    if (!isMobile) return null;
+
+    const selectedLanguage = getSelectedLanguage(prayerKey);
+    
+    return (
+      <div className="flex justify-center mb-4">
+        <div className="flex bg-cathedral-dark/30 rounded-lg p-1 border border-ancient-gold/20">
+          <button
+            onClick={() => setSelectedLanguage(prayerKey, 'portuguese')}
+            className={`px-3 py-1 text-sm rounded-md transition-all duration-200 ${
+              selectedLanguage === 'portuguese'
+                ? 'bg-ancient-gold/20 text-ancient-gold border border-ancient-gold/50 shadow-sm'
+                : 'text-parchment/70 hover:text-parchment hover:bg-ancient-gold/10'
+            }`}
+          >
+            Português
+          </button>
+          <button
+            onClick={() => setSelectedLanguage(prayerKey, 'latin')}
+            className={`px-3 py-1 text-sm rounded-md transition-all duration-200 ml-1 ${
+              selectedLanguage === 'latin'
+                ? 'bg-ancient-gold/20 text-ancient-gold border border-ancient-gold/50 shadow-sm'
+                : 'text-parchment/70 hover:text-parchment hover:bg-ancient-gold/10'
+            }`}
+          >
+            Latim
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  // Component for Angelus/Regina Coeli selection
+  const AngelusReginaSelector = () => {
+    if (section !== 'ultima') return null;
+    
+    return (
+      <div className="flex justify-center mb-8">
+        <div className="bg-cathedral-dark/30 rounded-lg p-2 border border-ancient-gold/20">
+          <div className="text-center mb-3">
+            <span className="text-ancient-gold/80 font-crimson text-sm">Tempo Litúrgico</span>
+          </div>
+          <div className="flex">
+            <button
+              onClick={() => setAngelusReginaSelection('angelus')}
+              className={`px-4 py-2 text-sm rounded-md transition-all duration-200 ${
+                angelusReginaSelection === 'angelus'
+                  ? 'bg-ancient-gold/20 text-ancient-gold border border-ancient-gold/50 shadow-sm'
+                  : 'text-parchment/70 hover:text-parchment hover:bg-ancient-gold/10'
+              }`}
+            >
+              Angelus
+              <div className="text-xs mt-1 text-parchment/60">Tempo Comum</div>
+            </button>
+            <button
+              onClick={() => setAngelusReginaSelection('regina')}
+              className={`px-4 py-2 text-sm rounded-md transition-all duration-200 ml-2 ${
+                angelusReginaSelection === 'regina'
+                  ? 'bg-ancient-gold/20 text-ancient-gold border border-ancient-gold/50 shadow-sm'
+                  : 'text-parchment/70 hover:text-parchment hover:bg-ancient-gold/10'
+              }`}
+            >
+              Regina Coeli
+              <div className="text-xs mt-1 text-parchment/60">Tempo Pascal</div>
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // Filter custom prayers by section
   const getCustomPrayersForSection = (sectionType: string) => {
     return customPrayers.filter(prayer => prayer.section === sectionType);
+  };
+
+  // Filter prayers to show only selected Angelus or Regina Coeli
+  const shouldShowPrayer = (prayerSection: any) => {
+    if (section !== 'ultima') return true;
+    
+    if (prayerSection.title === 'Angelus' && angelusReginaSelection !== 'angelus') {
+      return false;
+    }
+    if (prayerSection.title === 'Regina Coeli' && angelusReginaSelection !== 'regina') {
+      return false;
+    }
+    
+    return true;
   };
 
   // Render custom prayer card
@@ -530,26 +639,33 @@ export default function PrayerContent({
                         </CollapsibleTrigger>
 
                         <CollapsibleContent>
+                          {/* Language selector for mobile */}
+                          <LanguageSelector prayerKey={`mystery-section-${section}-${currentSubSection}`} />
+                          
                           <div className="prayer-grid">
-                            {/* Latin Column */}
-                            <div className="prayer-column">
-                              <div className="prayer-content">
-                                <div 
-                                  className={`prayer-latin ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
-                                  dangerouslySetInnerHTML={{ __html: (content.sections[currentSubSection] as any).offering?.latin || (content.sections[currentSubSection] as any).latin }}
-                                />
+                            {/* Show both columns on desktop, single column on mobile based on selection */}
+                            {(!isMobile || getSelectedLanguage(`mystery-section-${section}-${currentSubSection}`) === 'latin') && (
+                              <div className={`prayer-column ${isMobile ? 'col-span-2' : ''}`}>
+                                <div className="prayer-content">
+                                  <div 
+                                    className={`prayer-latin ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
+                                    dangerouslySetInnerHTML={{ __html: (content.sections[currentSubSection] as any).offering?.latin || (content.sections[currentSubSection] as any).latin }}
+                                  />
+                                </div>
                               </div>
-                            </div>
+                            )}
 
-                            {/* Portuguese Column */}
-                            <div className="prayer-column">
-                              <div className="prayer-content">
-                                <div 
-                                  className={`prayer-portuguese ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
-                                  dangerouslySetInnerHTML={{ __html: (content.sections[currentSubSection] as any).offering?.portuguese || (content.sections[currentSubSection] as any).portuguese }}
-                                />
+                            {/* Show both columns on desktop, single column on mobile based on selection */}
+                            {(!isMobile || getSelectedLanguage(`mystery-section-${section}-${currentSubSection}`) === 'portuguese') && (
+                              <div className={`prayer-column ${isMobile ? 'col-span-2' : ''}`}>
+                                <div className="prayer-content">
+                                  <div 
+                                    className={`prayer-portuguese ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
+                                    dangerouslySetInnerHTML={{ __html: (content.sections[currentSubSection] as any).offering?.portuguese || (content.sections[currentSubSection] as any).portuguese }}
+                                  />
+                                </div>
                               </div>
-                            </div>
+                            )}
                           </div>
                         </CollapsibleContent>
                       </CardContent>
@@ -573,26 +689,33 @@ export default function PrayerContent({
                           </CollapsibleTrigger>
 
                           <CollapsibleContent>
+                            {/* Language selector for mobile */}
+                            <LanguageSelector prayerKey={`mystery-prayer-${section}-${currentSubSection}-${prayerIndex}`} />
+                            
                             <div className="prayer-grid">
-                              {/* Latin Column */}
-                              <div className="prayer-column">
-                                <div className="prayer-content">
-                                  <div 
-                                    className={`prayer-latin ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
-                                    dangerouslySetInnerHTML={{ __html: prayer.latin }}
-                                  />
+                              {/* Show both columns on desktop, single column on mobile based on selection */}
+                              {(!isMobile || getSelectedLanguage(`mystery-prayer-${section}-${currentSubSection}-${prayerIndex}`) === 'latin') && (
+                                <div className={`prayer-column ${isMobile ? 'col-span-2' : ''}`}>
+                                  <div className="prayer-content">
+                                    <div 
+                                      className={`prayer-latin ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
+                                      dangerouslySetInnerHTML={{ __html: prayer.latin }}
+                                    />
+                                  </div>
                                 </div>
-                              </div>
+                              )}
 
-                              {/* Portuguese Column */}
-                              <div className="prayer-column">
-                                <div className="prayer-content">
-                                  <div 
-                                    className={`prayer-portuguese ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
-                                    dangerouslySetInnerHTML={{ __html: prayer.portuguese }}
-                                  />
+                              {/* Show both columns on desktop, single column on mobile based on selection */}
+                              {(!isMobile || getSelectedLanguage(`mystery-prayer-${section}-${currentSubSection}-${prayerIndex}`) === 'portuguese') && (
+                                <div className={`prayer-column ${isMobile ? 'col-span-2' : ''}`}>
+                                  <div className="prayer-content">
+                                    <div 
+                                      className={`prayer-portuguese ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
+                                      dangerouslySetInnerHTML={{ __html: prayer.portuguese }}
+                                    />
+                                  </div>
                                 </div>
-                              </div>
+                              )}
                             </div>
                           </CollapsibleContent>
                         </CardContent>
@@ -605,7 +728,7 @@ export default function PrayerContent({
           ) : (
             /* For non-mystery sections, show all sections */
             (<>
-              {content.sections.map((prayerSection: any, index: number) => (
+              {content.sections.filter(shouldShowPrayer).map((prayerSection: any, index: number) => (
                 <div key={index}>
                   {/* Insert custom prayers before Credo in Initium section */}
                   {section === 'initium' && prayerSection.title === 'Credo' && getCustomPrayersForSection('initium').length > 0 && (
@@ -614,11 +737,9 @@ export default function PrayerContent({
                     </div>
                   )}
                   
-                  {/* Insert custom prayers before Oratio Post Rosarium in Ultima section */}
-                  {section === 'ultima' && prayerSection.title === 'Oratio Post Rosarium' && getCustomPrayersForSection('ultima').length > 0 && (
-                    <div className="space-y-8 mb-8">
-                      {getCustomPrayersForSection('ultima').map(prayer => renderCustomPrayerCard(prayer))}
-                    </div>
+                  {/* Show Angelus/Regina Coeli selector before the selected prayer in Ultima section */}
+                  {section === 'ultima' && (prayerSection.title === 'Angelus' || prayerSection.title === 'Regina Coeli') && (
+                    <AngelusReginaSelector />
                   )}
                   
                   <Collapsible defaultOpen={true}>
@@ -636,26 +757,33 @@ export default function PrayerContent({
                         </CollapsibleTrigger>
 
                         <CollapsibleContent>
+                          {/* Language selector for mobile */}
+                          <LanguageSelector prayerKey={`section-prayer-${section}-${index}`} />
+                          
                           <div className="prayer-grid">
-                            {/* Latin Column */}
-                            <div className="prayer-column">
-                              <div className="prayer-content">
-                                <div 
-                                  className={`prayer-latin ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
-                                  dangerouslySetInnerHTML={{ __html: (prayerSection as any).latin }}
-                                />
+                            {/* Show both columns on desktop, single column on mobile based on selection */}
+                            {(!isMobile || getSelectedLanguage(`section-prayer-${section}-${index}`) === 'latin') && (
+                              <div className={`prayer-column ${isMobile ? 'col-span-2' : ''}`}>
+                                <div className="prayer-content">
+                                  <div 
+                                    className={`prayer-latin ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
+                                    dangerouslySetInnerHTML={{ __html: (prayerSection as any).latin }}
+                                  />
+                                </div>
                               </div>
-                            </div>
+                            )}
 
-                            {/* Portuguese Column */}
-                            <div className="prayer-column">
-                              <div className="prayer-content">
-                                <div 
-                                  className={`prayer-portuguese ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
-                                  dangerouslySetInnerHTML={{ __html: (prayerSection as any).portuguese }}
-                                />
+                            {/* Show both columns on desktop, single column on mobile based on selection */}
+                            {(!isMobile || getSelectedLanguage(`section-prayer-${section}-${index}`) === 'portuguese') && (
+                              <div className={`prayer-column ${isMobile ? 'col-span-2' : ''}`}>
+                                <div className="prayer-content">
+                                  <div 
+                                    className={`prayer-portuguese ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
+                                    dangerouslySetInnerHTML={{ __html: (prayerSection as any).portuguese }}
+                                  />
+                                </div>
                               </div>
-                            </div>
+                            )}
                           </div>
                         </CollapsibleContent>
                       </CardContent>
@@ -743,6 +871,13 @@ export default function PrayerContent({
                   )}
                 </div>
               ))}
+              
+              {/* Insert custom prayers after Signum Crucis in Ultima section */}
+              {section === 'ultima' && getCustomPrayersForSection('ultima').length > 0 && (
+                <div className="space-y-8 mt-8">
+                  {getCustomPrayersForSection('ultima').map(prayer => renderCustomPrayerCard(prayer))}
+                </div>
+              )}
             </>)
           )}
 

@@ -16,7 +16,7 @@ export default function GalaxyBackground({ className = "" }: GalaxyBackgroundPro
         hueShift={120}
         transparent={false}
         speed={0.5}
-        twinkleIntensity={0.5}
+        twinkleIntensity={0.6}
         rotationSpeed={0.05}
       />
     </div>

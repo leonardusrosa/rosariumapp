@@ -278,11 +278,11 @@
 
 /* Enhanced Prayer Content Cards */
 .sacred-content-card {
-  background: linear-gradient(145deg, 
-    hsla(220, 15%, 15%, 0.25) 0%, 
-    hsla(220, 12%, 18%, 0.15) 100%);
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, var(--cathedral-glass), var(--stone-gray-alpha)) padding-box,
+             linear-gradient(135deg, var(--ancient-gold-alpha), rgba(205, 154, 43, 0.1)) border-box;
+  border-radius: 0.5rem;
   backdrop-filter: blur(20px) saturate(130%);
-  border: 1px solid var(--ancient-gold-alpha-soft);
   box-shadow: 
     /* Outer shadows for depth */
     0 16px 40px rgba(0, 0, 0, 0.4),

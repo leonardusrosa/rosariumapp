@@ -1,0 +1,64 @@
+[00:15:13.653] Running build in Washington, D.C., USA (East) – iad1
+[00:15:13.654] Build machine configuration: 2 cores, 8 GB
+[00:15:13.668] Cloning github.com/leonardusrosa/rosariumapp (Branch: main, Commit: e18a929)
+[00:15:13.675] Skipping build cache, deployment was triggered without cache.
+[00:15:16.551] Cloning completed: 2.883s
+[00:15:19.107] Running "vercel build"
+[00:15:19.600] Vercel CLI 44.6.4
+[00:15:20.455] Running "install" command: `npm install`...
+[00:15:25.074] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[00:15:25.114] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[00:15:30.951] 
+[00:15:30.952] added 496 packages, and audited 497 packages in 10s
+[00:15:30.953] 
+[00:15:30.953] 65 packages are looking for funding
+[00:15:30.953]   run `npm fund` for details
+[00:15:30.985] 
+[00:15:30.985] 11 vulnerabilities (3 low, 8 moderate)
+[00:15:30.986] 
+[00:15:30.986] To address issues that do not require attention, run:
+[00:15:30.986]   npm audit fix
+[00:15:30.987] 
+[00:15:30.987] To address all issues (including breaking changes), run:
+[00:15:30.987]   npm audit fix --force
+[00:15:30.987] 
+[00:15:30.990] Run `npm audit` for details.
+[00:15:31.266] Building for Vercel...
+[00:15:31.267] Building application...
+[00:15:31.380] 
+[00:15:31.380] > rest-express@1.0.0 build
+[00:15:31.380] > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+[00:15:31.381] 
+[00:15:31.642] [36mvite v5.4.19 [32mbuilding for production...[36m[39m
+[00:15:31.694] transforming...
+[00:15:31.963] Browserslist: browsers data (caniuse-lite) is 10 months old. Please run:
+[00:15:31.964]   npx update-browserslist-db@latest
+[00:15:31.964]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+[00:15:34.092] [32m✓[39m 80 modules transformed.
+[00:15:34.095] [31mx[39m Build failed in 2.43s
+[00:15:34.096] [31merror during build:
+[00:15:34.096] [31mCould not resolve "./Galaxy" from "client/src/components/GalaxyBackground.tsx"[31m
+[00:15:34.096] file: [36m/vercel/path0/client/src/components/GalaxyBackground.tsx[31m
+[00:15:34.097]     at getRollupError (file:///vercel/path0/node_modules/rollup/dist/es/shared/parseAst.js:396:41)
+[00:15:34.097]     at error (file:///vercel/path0/node_modules/rollup/dist/es/shared/parseAst.js:392:42)
+[00:15:34.097]     at ModuleLoader.handleInvalidResolvedId (file:///vercel/path0/node_modules/rollup/dist/es/shared/node-entry.js:20065:24)
+[00:15:34.097]     at file:///vercel/path0/node_modules/rollup/dist/es/shared/node-entry.js:20025:26[39m
+[00:15:34.130] Build failed: Error: Command failed: npm run build
+[00:15:34.130]     at genericNodeError (node:internal/errors:983:15)
+[00:15:34.130]     at wrappedFn (node:internal/errors:537:14)
+[00:15:34.130]     at checkExecSyncError (node:child_process:883:11)
+[00:15:34.130]     at execSync (node:child_process:955:15)
+[00:15:34.130]     at buildForVercel (file:///vercel/path0/build-vercel.js:15:5)
+[00:15:34.130]     at file:///vercel/path0/build-vercel.js:34:1
+[00:15:34.130]     at ModuleJob.run (node:internal/modules/esm/module_job:329:25)
+[00:15:34.130]     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+[00:15:34.130]     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {
+[00:15:34.130]   status: 1,
+[00:15:34.130]   signal: null,
+[00:15:34.130]   output: [ null, null, null ],
+[00:15:34.130]   pid: 179,
+[00:15:34.130]   stdout: null,
+[00:15:34.130]   stderr: null
+[00:15:34.130] }
+[00:15:34.138] Error: Command "node build-vercel.js" exited with 1
+[00:15:37.304] Exiting build container

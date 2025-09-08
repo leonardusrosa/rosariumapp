@@ -1,0 +1,135 @@
+Rosarium Virginis Marie - Enhanced Catholic Web Application
+For content, take the attached images as reference
+Project Vision
+Create a premium, reverent digital sanctuary for praying the traditional Catholic Rosary (Montfort method) that rivals the beauty of illuminated manuscripts and sacred art. This bilingual (Latin & Portuguese) web application should evoke the spiritual atmosphere of classical Catholic devotional materials while providing modern usability.
+Sacred Art & Design Inspiration
+Primary References:
+Fra Angelico's Annunciation (soft blues, golds, ethereal lighting)
+Raphael's Sistine Madonna (heavenly clouds, divine light)
+Medieval illuminated manuscripts (ornate borders, gold leaf details)
+Gothic cathedral windows (deep blues, purples, sacred geometry)
+Byzantine icons (rich golds, deep magentas, sacred proportions)
+Enhanced Visual Design Philosophy
+Color Palette (Sacred Art Inspired)
+Primary Background: Deep Midnight Blue (#0f1419) with subtle texture
+Secondary Background: Rich Ecclesiastical Purple (#2d1b3d)
+Sacred Gold: Warm Byzantine Gold (#d4af37) for accents and highlights
+Divine Light: Soft Ivory (#f7f3e9) for primary text
+Marian Blue: Deep Marian Blue (#003366) for special elements
+Rose Accent: Soft Rose (#d4a574) for Rosary-specific elements
+Typography Hierarchy
+Display Font: "Cinzel" (classical Roman inscriptions) for main headings
+Body Font: "Crimson Text" (academic serif) for prayers and content
+Accent Font: "Cormorant Garamond" (elegant serif) for Latin text
+UI Font: "Inter" (modern sans-serif) for navigation and interface elements
+Advanced Layout & Components
+Sacred Geometry Layout
+Golden Ratio proportions throughout the design
+Circular prayer counter inspired by rose windows
+Ornate border frames around content sections
+Sacred symbols (roses, crosses, stars) as decorative elements
+Enhanced Navigation
+Illuminated manuscript-style sticky left sidebar with ornate borders that allow to navigate directly to the main sections of the Rosary: Initium, the three sets of Mysteries (Gaudiosa, Dolorosa, Gloriosa), and the Ultima Oratio.
+Interactive prayer beads as navigation elements
+Sacred timeline showing current mystery with beautiful transitions
+Floating prayer intentions panel with parchment texture
+
+Immersive Background Elements
+Layered celestial animation:
+Slow-moving starfield with varying brightness
+Subtle aurora borealis effect in deep blues and purples
+Gentle floating rose petals during mystery transitions
+Soft divine light rays emanating from top center
+
+Content Presentation
+Manuscript-style content cards with:
+Subtle parchment texture overlay
+Ornate corner decorations
+Drop shadows with warm golden glow
+Elegant typography with proper spacing
+
+Bilingual Content: All prayers and mysteries are presented side-by-side in Latin (primary) and Portuguese.
+
+Prayer text formatting:
+Latin text in italic
+Portuguese translation in regular weight
+Proper liturgical formatting with verse breaks
+Sacred pause indicators between prayers
+
+Personal Intentions Modal
+Translucent overlay design matching the attached image reference
+Dark modal background with purple accent border
+Smooth fade-in/out animations for modal open/close
+Click outside to close functionality
+Mobile-responsive modal sizing
+Illuminated manuscript-style sidebar with ornate borders
+Interactive prayer beads as navigation elements
+Floating prayer intentions panel with parchment texture
+
+Enhanced Core Features
+1. Spiritual Atmosphere
+Ambient sound integration (Gregorian chant background like regina Caeli, pange lingua and veni creator)
+Dynamic lighting effects that subtly change with prayer progression
+Gentle animations that don't distract from prayer
+
+2. Advanced Prayer Tracking
+Visual rosary beads that illuminate as prayers are completed
+Mystery meditation cards with beautiful sacred art thumbnails
+Prayer progress indicators with elegant animations
+Completion celebrations with subtle, reverent effects
+
+3. Authentication & Personalization Features
+Supabase Authentication with username/password for cross-device synchronization
+Personal Intentions System:
+Display inputed intentions in the "Initium" section after "Offertorium Rosarii" subchapter
+"Intentiones Orationes" button opens translucent modal popup (similar to attached image)
+Modal stays over current page without navigation changes
+Persistent storage across devices and browsers via Supabase
+
+Prayer history with beautiful calendar view
+Personal notes for spiritual reflections
+
+4. Enhanced Responsive Design
+Mobile-first approach with touch-friendly prayer beads
+Tablet landscape mode optimized for prayer groups
+Large screen displays with expanded sacred art integration
+Accessibility features for visually impaired users
+
+Performance & Accessibility
+Smooth 60fps animations without impacting prayer focus
+Keyboard navigation for all interactive elements
+Screen reader compatibility with proper ARIA labels
+Offline functionality for uninterrupted prayer
+Fast loading with optimized sacred art assets
+
+Modern Web Standards
+Progressive Web App capabilities
+Responsive images with proper sacred art attribution
+Clean, semantic HTML structure
+Modern CSS Grid/Flexbox for perfect layouts
+
+User Experience Flow
+Prayer Journey
+Welcoming entrance with soft fade-in and sacred greeting
+Intuitive mystery selection with today's mystery highlighted in sidebar
+Guided prayer progression with elegant transitions
+Contemplative pauses between mystery sets
+
+Sacred Interactions
+Hover effects that feel reverent, not flashy
+Click feedback with subtle golden ripples
+Smooth scrolling with momentum that feels natural
+Gesture support for mobile prayer navigation
+
+Content Enhancements
+Sacred art integration for each mystery
+Liturgical calendar integration for seasonal prayers
+
+Quality Standards
+Pixel-perfect implementation of the sacred design
+Cross-browser compatibility (Chrome, Firefox, Safari, Edge)
+Performance optimization for smooth prayer experience
+User testing validation with Catholic community feedback
+Accessibility compliance (WCAG 2.1 AA standards)
+
+Create this application as a masterpiece of Catholic digital art that serves both as a functional prayer aid and a beautiful expression of faith, worthy of the sacred traditions it represents.

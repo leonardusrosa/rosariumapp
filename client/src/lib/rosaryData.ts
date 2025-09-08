@@ -692,7 +692,7 @@ e que estejamos sempre em união com Deus. Amém.`
       {
         title: "Salve Regina",
         icon: "custom-gloriosa",
-        latin: `Salve, Regina, Mater misericordiae; vita, dulcedo, et spes nostra, salve. Ad te clamamus, exsules filii Hevae. Ad te suspiramus, gementes et flentes in hac lacrimarum valle. Eia ergo, Advocata nostra, illos tuos misericordes oculos ad nos converte; et Iesum, benedictum fructum ventris tui, nobis, post hoc exsilium ostende. O Clemente, o Pia, o Dulcis Virgo Maria. Ora pro nobis, Sancta Dei Genetrix. Ut digni efficiamur promissionibus Christi. Ámen.`,
+        latin: `Salve, Regina, Mater misericordiae; vita, dulcedo, et spes nostra, salve. Ad te clamamus, exsules filii Hevae. Ad te suspiramus, gementes et flentes in hac lacrimarum valle. Eia ergo, Advocata nostra, illos tuos misericordes oculos ad nos converte; et Iesum, benedictum fructum ventris tui, nobis, post hoc exsilium ostende. O Clemens, o Pia, o Dulcis Virgo Maria. Ora pro nobis, Sancta Dei Genetrix. Ut digni efficiamur promissionibus Christi. Ámen.`,
         portuguese: `Salve Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva; a vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei; e depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre. Ó clemente, ó piedosa, ó doce sempre Virgem Maria! Rogai por nós, Santa Mãe de Deus, para que sejamos dignos das promessas de Cristo. Amém.`
       },
       {

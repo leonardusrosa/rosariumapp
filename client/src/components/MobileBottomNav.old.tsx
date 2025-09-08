@@ -134,18 +134,17 @@ export default function MobileBottomNav({
   // Determine today's mystery based on day of week
   // Monday & Thursday: Gaudiosa (Joyful)
   // Tuesday & Friday: Dolorosa (Sorrowful) 
-  // Wednesday & Saturday: Gloriosa (Glorious)
-  // Sunday: Gaudiosa (Joyful)
+  // Sunday, Wednesday & Saturday: Gloriosa (Glorious)
   const getTodaysMystery = () => {
     const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, etc.
     switch (today) {
       case 1: // Monday
       case 4: // Thursday
-      case 0: // Sunday
         return 'gaudiosa';
       case 2: // Tuesday
       case 5: // Friday
         return 'dolorosa';
+      case 0: // Sunday
       case 3: // Wednesday
       case 6: // Saturday
         return 'gloriosa';

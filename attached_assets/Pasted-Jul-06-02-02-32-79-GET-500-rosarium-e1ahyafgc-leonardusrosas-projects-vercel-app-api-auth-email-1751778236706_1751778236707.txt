@@ -1,0 +1,42 @@
+Jul 06 02:02:32.79
+GET
+500
+rosarium-e1ahyafgc-leonardusrosas-projects.vercel.app
+/api/auth/email-by-username/cabrita
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/dist/server/storage.js' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:281:11) at moduleResolve (node:internal/modules/esm/resolve:866:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14) at defaultResolve (node:internal/modules/esm/resolve:1033:79) at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12) at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25) at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38) at ModuleJob._link (node:internal/modules/esm/module_job:137:49) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/dist/server/storage.js' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jul 06 02:01:15.60
+POST
+500
+rosarium-seven.vercel.app
+/api/intentions
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/dist/server/storage.js' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:281:11) at moduleResolve (node:internal/modules/esm/resolve:866:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14) at defaultResolve (node:internal/modules/esm/resolve:1033:79) at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12) at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25) at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38) at ModuleJob._link (node:internal/modules/esm/module_job:137:49) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/dist/server/storage.js' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jul 06 02:01:03.34
+POST
+500
+rosarium-seven.vercel.app
+/api/custom-prayers
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/dist/server/storage.js' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:281:11) at moduleResolve (node:internal/modules/esm/resolve:866:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14) at defaultResolve (node:internal/modules/esm/resolve:1033:79) at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12) at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25) at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38) at ModuleJob._link (node:internal/modules/esm/module_job:137:49) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/dist/server/storage.js' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jul 06 02:00:13.15
+GET
+500
+rosarium-seven.vercel.app
+/api/intentions/98758dcc-1b58-49de-ac2d-b6c1de247c6b
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/dist/server/storage.js' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:281:11) at moduleResolve (node:internal/modules/esm/resolve:866:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14) at defaultResolve (node:internal/modules/esm/resolve:1033:79) at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12) at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25) at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38) at ModuleJob._link (node:internal/modules/esm/module_job:137:49) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/dist/server/storage.js' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jul 06 02:00:13.14
+GET
+500
+rosarium-seven.vercel.app
+/api/custom-prayers/98758dcc-1b58-49de-ac2d-b6c1de247c6b
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/dist/server/storage.js' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:281:11) at moduleResolve (node:internal/modules/esm/resolve:866:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14) at defaultResolve (node:internal/modules/esm/resolve:1033:79) at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12) at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25) at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38) at ModuleJob._link (node:internal/modules/esm/module_job:137:49) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/dist/server/storage.js' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jul 06 02:00:07.38
+GET
+500
+rosarium-seven.vercel.app
+/api/auth/email-by-username/cabrita
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/dist/server/storage.js' imported from /var/task/api/index.js at finalizeResolution (node:internal/modules/esm/resolve:281:11) at moduleResolve (node:internal/modules/esm/resolve:866:10) at moduleResolveWithNodePath (node:internal/modules/esm/resolve:990:14) at defaultResolve (node:internal/modules/esm/resolve:1033:79) at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:780:12) at #cachedDefaultResolve (node:internal/modules/esm/loader:704:25) at ModuleLoader.resolve (node:internal/modules/esm/loader:687:38) at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:305:38) at ModuleJob._link (node:internal/modules/esm/module_job:137:49) { code: 'ERR_MODULE_NOT_FOUND', url: 'file:///var/task/dist/server/storage.js' } Node.js process exited with exit status: 1. The logs above can help with debugging the issue.
+Jul 06 01:58:44.43
+GET
+500
+rosarium-seven.vercel.app
+/api/auth/email-by-username/cabrita
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/var/task/dist/server/storage.js' imported fro
