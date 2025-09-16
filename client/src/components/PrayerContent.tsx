@@ -833,7 +833,7 @@ export default function PrayerContent({
                           <CollapsibleContent>
                             <div className="bg-[var(--cathedral-shadow)]/40 p-6 rounded-xl border border-[var(--ancient-gold-alpha)]">
                               {intentions.map((intention) => (
-                                <p key={intention.id} className="text-parchment font-crimson text-base mb-3 last:mb-0 flex items-start">
+                                <p key={intention.id} className={`text-parchment font-crimson ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()} mb-3 last:mb-0 flex items-start`}>
                                   <svg 
                                     className="w-4 h-4 flex-shrink-0 text-ancient-gold mr-3 mt-0.5" 
                                     viewBox="0 0 25.708 25.708" 
