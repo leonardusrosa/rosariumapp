@@ -83,7 +83,7 @@ export default function PrayerContent({
   // Helper function to get selected language for a prayer
   const getSelectedLanguage = (prayerKey: string): 'latin' | 'portuguese' => {
     if (!isMobile) return 'latin'; // Always show both on desktop
-    return mobileLanguageSelection[prayerKey] || 'portuguese'; // Default to Portuguese on mobile
+    return mobileLanguageSelection[prayerKey] || 'latin'; // Default to Latin on mobile
   };
 
   // Helper function to set language for a prayer
@@ -106,24 +106,24 @@ export default function PrayerContent({
       <div className="flex justify-center mb-4">
         <div className="flex bg-cathedral-dark/30 rounded-lg p-1 border border-ancient-gold/20">
           <button
-            onClick={() => setSelectedLanguage(prayerKey, 'portuguese')}
-            className={`px-3 py-1 text-sm rounded-md transition-all duration-200 ${
-              selectedLanguage === 'portuguese'
-                ? 'bg-ancient-gold/20 text-ancient-gold border border-ancient-gold/50 shadow-sm'
-                : 'text-parchment/70 hover:text-parchment hover:bg-ancient-gold/10'
-            }`}
-          >
-            Português
-          </button>
-          <button
             onClick={() => setSelectedLanguage(prayerKey, 'latin')}
-            className={`px-3 py-1 text-sm rounded-md transition-all duration-200 ml-1 ${
+            className={`px-3 py-1 text-sm rounded-md transition-all duration-200 ${
               selectedLanguage === 'latin'
                 ? 'bg-ancient-gold/20 text-ancient-gold border border-ancient-gold/50 shadow-sm'
                 : 'text-parchment/70 hover:text-parchment hover:bg-ancient-gold/10'
             }`}
           >
             Latim
+          </button>
+          <button
+            onClick={() => setSelectedLanguage(prayerKey, 'portuguese')}
+            className={`px-3 py-1 text-sm rounded-md transition-all duration-200 ml-1 ${
+              selectedLanguage === 'portuguese'
+                ? 'bg-ancient-gold/20 text-ancient-gold border border-ancient-gold/50 shadow-sm'
+                : 'text-parchment/70 hover:text-parchment hover:bg-ancient-gold/10'
+            }`}
+          >
+            Português
           </button>
         </div>
       </div>
