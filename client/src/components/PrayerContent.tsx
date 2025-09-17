@@ -10,6 +10,21 @@ import { useSwipeGesture } from "@/hooks/useSwipeGesture";
 import RosaryBeads from "./RosaryBeads";
 import { useEffect, useState, useRef } from "react";
 import { ChevronDown } from "lucide-react";
+import annuntiatioImage from "@assets/Annuntiatio_1758062913765.webp";
+import visitatioImage from "@assets/Visitatio_1758067461554.webp";
+import nativitasImage from "@assets/Nativitas_1758067461553.webp";
+import praesentatioImage from "@assets/Praesentatio_1758067461554.webp";
+import inventioImage from "@assets/Inventio in Templo_1758067461553.webp";
+import agoniaImage from "@assets/Agonia in Horto_1758067461551.webp";
+import flagellatioImage from "@assets/Flagellatio_1758067461553.webp";
+import coronatioSpinisImage from "@assets/Coronatio Spinis_1758067461552.webp";
+import bajulatioImage from "@assets/Bajulatio Crucis_1758067461552.webp";
+import crucifixioImage from "@assets/Crucifixio_1758067461553.webp";
+import resurrectioImage from "@assets/Resurrectio_1758067461554.webp";
+import ascensioImage from "@assets/Ascensio_1758067461552.webp";
+import pentecostesImage from "@assets/Descensus Spiritus Sancti_1758067461553.webp";
+import assumptioImage from "@assets/Assumptio_1758067461552.webp";
+import coronatioImage from "@assets/Coronatio_1758067461552.webp";
 
 interface PrayerContentProps {
   section: string;
@@ -230,6 +245,36 @@ export default function PrayerContent({
       </Card>
     </Collapsible>
   );
+
+  // Helper function to get background image for mystery sections
+  const getMysteryBackgroundImage = (mysterySection: string, subSectionIndex: number) => {
+    // Map mystery sections and indices to image paths
+    const imageMap: Record<string, Record<number, string>> = {
+      gaudiosa: {
+        0: annuntiatioImage, // I. Annuntiatio
+        1: visitatioImage,   // II. Visitatio
+        2: nativitasImage,   // III. Nativitas
+        3: praesentatioImage, // IV. Praesentatio
+        4: inventioImage,    // V. Inventio in Templo
+      },
+      dolorosa: {
+        0: agoniaImage,         // I. Agonia in Horto
+        1: flagellatioImage,    // II. Flagellatio
+        2: coronatioSpinisImage, // III. Coronatio Spinis
+        3: bajulatioImage,      // IV. Bajulatio Crucis
+        4: crucifixioImage,     // V. Crucifixio
+      },
+      gloriosa: {
+        0: resurrectioImage,     // I. Resurrectio
+        1: ascensioImage,        // II. Ascensio
+        2: pentecostesImage,     // III. Descensus Spiritus Sancti (Pentecostes)
+        3: assumptioImage,       // IV. Assumptio
+        4: coronatioImage,       // V. Coronatio
+      }
+    };
+
+    return imageMap[mysterySection]?.[subSectionIndex] || null;
+  };
 
   // Helper function to render custom icons
   const renderIcon = (iconClass: string, className: string = "") => {
@@ -625,7 +670,8 @@ export default function PrayerContent({
                 <>
                   {/* Mystery Offering Card */}
                   <Collapsible defaultOpen={true}>
-                    <Card className="sacred-content-card rounded-2xl sacred-border animate-fade-in-up transition-all duration-700 ease-in-out">
+                    <Card 
+                      className="sacred-content-card rounded-2xl sacred-border animate-fade-in-up transition-all duration-700 ease-in-out">
                       <CardContent className="p-8">
                         <CollapsibleTrigger asChild>
                           <div className="text-center mb-8 cursor-pointer group">
@@ -667,6 +713,18 @@ export default function PrayerContent({
                               </div>
                             )}
                           </div>
+                          
+                          {/* Image at bottom of card for current submystery */}
+                          {getMysteryBackgroundImage(section, currentSubSection) && (
+                            <div className="mt-6 mb-4 flex justify-center items-center">
+                              <img 
+                                src={getMysteryBackgroundImage(section, currentSubSection)!}
+                                alt={content.sections[currentSubSection].title}
+                                className="max-w-full h-auto rounded-lg shadow-lg"
+                                style={{ maxHeight: '400px' }}
+                              />
+                            </div>
+                          )}
                         </CollapsibleContent>
                       </CardContent>
                     </Card>
@@ -675,7 +733,8 @@ export default function PrayerContent({
                   {/* Individual Prayer Cards for mystery sections */}
                   {isMysterySection && (content.sections[currentSubSection] as any).prayers && (content.sections[currentSubSection] as any).prayers.map((prayer: any, prayerIndex: number) => (
                     <Collapsible key={prayerIndex} defaultOpen={true}>
-                      <Card className="sacred-content-card rounded-2xl sacred-border animate-fade-in-up transition-all duration-700 ease-in-out">
+                      <Card 
+                        className="sacred-content-card rounded-2xl sacred-border animate-fade-in-up transition-all duration-700 ease-in-out">
                         <CardContent className="p-8">
                           <CollapsibleTrigger asChild>
                             <div className="text-center mb-8 cursor-pointer group">
