@@ -3,6 +3,7 @@ export interface PrayerSection {
   icon: string;
   latin: string;
   portuguese: string;
+  onlyWednesdays?: boolean;
 }
 
 export interface MysterySubSection {
@@ -749,14 +750,71 @@ e que estejamos sempre em união com Deus. Amém.`
         portuguese: `Ó Deus, cujo Filho Unigénito, por Sua vida, morte e ressurreição, nos obteve as recompensas da vida eterna, concedei-nos, nós vos suplicamos, que, meditando estes mistérios do Santíssimo Rosário da Bem-Aventurada Virgem Maria, imitemos o que eles contêm e obtenhamos o que prometem, pelo mesmo Cristo Nosso Senhor. Amém.`
       },
       {
+        title: "O Domina Nostra de Monte Carmelo",
+        icon: "custom-gloriosa",
+        latin: `O Domina Nostra de Monte Carmelo, sacro tuo Scapulari indutus, te rogo ut illud mihi sit signum materni praesidii tui in omnibus necessitatibus, periculis atque tribulationibus vitae.<br><br>
+Intercessione tua me comitare, ut in fide, spe et caritate crescere possim, Iesum sequens eiusque Verbum servans.<br><br>
+Adiuva me, o Mater dilecta, ut, sanctum Scapulare tuum devote gerens, merear cum eo pie in gratia Dei mori atque ita vitam aeternam consequi. Amen.<br><br>
+Concede mihi gratias tuas, Virgo Carmeli, Maria, quia sanctum Scapulare fide gero nocte dieque.<br><br>
+Beata Maria Virgo de Monte Carmelo, ora pro nobis.`,
+        portuguese: `Ó Senhora do Carmo, revestido de vosso escapulário, eu vos peço que ele seja para mim sinal de vossa maternal proteção, em todas as necessidades, nos perigos e nas aflições da vida.<br><br>
+Acompanhai-me com vossa intercessão, para que eu possa crescer na Fé, Esperança e Caridade, seguindo a Jesus e praticando Sua Palavra.<br><br>
+Ajudai-me, ó mãe querida, para que, levando com devoção vosso santo Escapulário, mereça a felicidade de morrer piedosamente com ele, na graça de Deus, e assim, alcançar a vida eterna. Amém.<br><br>
+Concedei-me vossas graças, Virgem do Carmo, Maria, pois o santo escapulário levo com fé noite e dia.<br><br>
+Nossa Senhora do Carmo, rogai por nós.`
+      },
+      {
+        title: "Ad te Beate Ioseph",
+        icon: "fas fa-hands-praying",
+        latin: `Ad te beate Ioseph, in tribulatione nostra confugimus, atque, implorato Sponsae tuae sanctissimae auxilio, patrocinium quoque tuum fidenter exposcimus. Per eam, quaesumus quae te cum immaculata Virgine Dei Genetrice coniunxit, caritatem, perque paternum, quo Puerum Iesum amplexus es, amorem, supplices deprecamur, ut ad hereditatem, quam Iesus Christus acquisivit Sanguine suo, benignus respicias, ac necessitatibus nostris tua virtute et ope succurras.<br><br>
+Tuere, o Custos providentissime divinae Familiae, Iesu Christi subolem electam; prohibe a nobis, amantissime Pater, omnem errorum ac corruptelarum luem; propitius nobis, sospitator noster fortissime, in hoc cum potestate tenebrarum certamine e caelo adesto; et sicut olim Puerum Iesum e summo eripuisti vitae discrimine, ita nunc Ecclesiam sanctam Dei ab hostilibus insidiis atque ab omni adversitate defende: nosque singulos perpetuo tege patrocinio, ut ad tui exemplar et ope tua suffulti, sancte vivere, pie emori, sempiternamque in caelis beatitudinem assequi possimus. Amen.`,
+        portuguese: `A vós, São José, recorremos em nossa tribulação e, depois de ter implorado o auxílio de vossa santíssima esposa, cheios de confiança solicitamos também o vosso patrocínio. Por esse laço sagrado de caridade que vos uniu à Virgem Imaculada, Mãe de Deus, e pelo amor paternal que tivestes ao Menino Jesus, ardentemente Vos suplicamos que lanceis um olhar benigno sobre a herança que Jesus Cristo conquistou com Seu sangue, e nos socorrais em nossas necessidades com o vosso auxilio e poder. Protegei, ó guarda providente da divina família, a raça eleita de Jesus Cristo. Afastai para longe de nós, ó pai amantíssimo, a peste do erro e do vício. Assisti-nos do alto do céu, nosso fortíssimo sustentáculo, na luta contra o poder das trevas e assim como outrora salvastes da morte a vida ameaçada do Menino Jesus, assim também defendei agora a Santa Igreja de Deus contra as ciladas de seus inimigos e contra toda a adversidade. Amparai a cada um de nós com o vosso constante patrocínio, a fim de que, a vosso exemplo e sustentados com o vosso auxilio, possamos viver virtuosamente, morrer piedosamente, e obter no céu a eterna bem aventurança. Assim seja.`
+      },
+      {
+        title: "Memorare",
+        icon: "fas fa-pray",
+        onlyWednesdays: true,
+        latin: `Memorare, o purissime Sponse Virginis Mariae, o dulcis Protector mi, sancte Ioseph, non esse auditum a saeculo quemquam ad tua implorantem auxilia, tua petentem suffragia, esse derelictum.<br><br>
+Ego tali animatus confidentia ad te venio, tibique fervide me commendo.<br><br>
+Noli, quaeso, o Pater putative Redemptoris, verba mea despicere, sed audi propitius. Amen.`,
+        portuguese: `Lembrai-vos, ó puríssimo Esposo da Virgem Maria, meu doce protetor São José, que jamais se ouviu dizer que alguém tivesse invocado a vossa proteção, implorado vosso socorro, e não fosse por vós atendido.<br><br>
+Com esta confiança, venho à vossa presença e a vós fervorosamente me recomendo.<br><br>
+Não desprezeis a minha súplica, ó Pai adotivo do Redentor, mas dignai-vos acolhê-la piedosamente. Amém.`
+      },
+      {
+        title: "Preces iaculatoriae",
+        icon: "fas fa-heart",
+        latin: `Domine, da nobis sacerdotes.<br>
+Domine, da nobis sanctos sacerdotes.<br>
+Domine, da nobis multos sanctos sacerdotes.<br>
+Domine, da nobis multas sanctas vocationes religiosas.<br>
+Domine, da nobis familias catholicas.<br><br>
+Dulce Cor Mariae, esto salus nostra.<br><br>
+℣. Iesu, mitis et humilis corde,<br>
+℟. Fac cor nostrum secundum Cor tuum.`,
+        portuguese: `Senhor, daí-nos sacerdotes.<br>
+Senhor, daí-nos santos sacerdotes.<br>
+Senhor, daí-nos muitos santos sacerdotes.<br>
+Senhor, daí-nos muitas santas vocações religiosas.<br>
+Senhor, daí-nos famílias católicas.<br><br>
+Ó doce coração de Maria, sede nossa salvação.<br>
+Jesus Manso e Humilde de coração, fazei nosso coração semelhante ao vosso.`
+      },
+      {
+        title: "Sancte Michael Archangele",
+        icon: "fas fa-shield-halved",
+        latin: `Sancte Michael Archangele, defende nos in praelio, contra nequitiam et insidias diaboli esto praesidium. Imperet illi Deus, supplices deprecamur: tuque, Princeps militiae caelestis, Satanam aliosque spiritus malignos, qui ad perditionem animarum pervagantur in mundo, divina virtute in infernum detrude.<br><br>
+Amen.`,
+        portuguese: `São Miguel Arcanjo, defendei-nos no combate, sede nosso refúgio contra a maldade e as ciladas do demônio! Ordene-lhe Deus, instantemente o pedimos: e vós, príncipe da milícia celeste, pela virtude divina, precipitai ao inferno a Satanás e a todos os espíritos malignos, que andam pelo mundo para perder as almas.<br><br>
+Amém.`
+      },
+      {
         title: "Signum Crucis",
         icon: "custom-signum-crucis",
-        latin: `Per signum crucis, de inimicis nostris libera-nos Deus noster.<br>
-                In nómine Pátris, et Fílii, et Spíritus Sáncti.<br>
-                Amen.`,
-        portuguese: `Pelo sinal da Santa Cruz, livrai-nos, Deus, Nosso Senhor, dos nossos inimigos.<br>
-                     Em nome do Pai e do Filho e do Espírito Santo.<br>
-                     Amém.`
+        latin: `In nómine Patris et Fílii et Spíritus Sancti.<br><br>
+Amen.`,
+        portuguese: `Em nome do Pai e do Filho e do Espírito Santo.<br><br>
+Amém.`
       }
     ]
   }

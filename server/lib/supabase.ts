@@ -1,19 +1,25 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.VITE_SUPABASE_URL
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+// Load .env variables
+try { process.loadEnvFile(); } catch {}
 
-if (!supabaseUrl || !supabaseServiceKey) {
-  throw new Error('Missing required Supabase environment variables: VITE_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY')
+const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY
+
+export const isSupabaseAvailable = () => !!(supabaseUrl && supabaseKey);
+
+if (!isSupabaseAvailable()) {
+  console.warn('⚠️ Supabase environment variables missing. Falling back to memory storage for preview.');
+} else {
+  console.log('✅ Supabase environment variables loaded successfully.');
 }
 
-// Always create supabase client for server
-export const supabase = createClient(supabaseUrl, supabaseServiceKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false
-  }
-})
-
-// Function to check if Supabase is available - always true now
-export const isSupabaseAvailable = () => true
+export const supabase = isSupabaseAvailable()
+  ? createClient(supabaseUrl!, supabaseKey!, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    })
+  : null;
+

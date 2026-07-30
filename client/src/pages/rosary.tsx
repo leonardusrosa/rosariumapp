@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,20 +7,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import GalaxyBackground from "@/components/GalaxyBackground";
 import RosarySidebar from "@/components/RosarySidebar";
 import PrayerContent from "@/components/PrayerContent";
-import IntentionsModal from "@/components/IntentionsModal";
-import CustomPrayersModal from "@/components/CustomPrayersModal";
-import FontSizeModal from "@/components/FontSizeModal";
-import LoginDialog from "@/components/LoginDialog";
-import MusicModal from "@/components/MusicModal";
 import MiniMusicPlayer from "@/components/MiniMusicPlayer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { Toaster } from "@/components/ui/toaster";
 import { useAuth } from "@/hooks/useAuth";
 import { useIntentions } from "@/hooks/useIntentions";
 import { useIsMobile } from "@/hooks/use-mobile";
+
+// Lazy-loaded heavy components (Modals & WebGL canvas) for code splitting & initial load speed
+const GalaxyBackground = lazy(() => import("@/components/GalaxyBackground"));
+const IntentionsModal = lazy(() => import("@/components/IntentionsModal"));
+const CustomPrayersModal = lazy(() => import("@/components/CustomPrayersModal"));
+const FontSizeModal = lazy(() => import("@/components/FontSizeModal"));
+const LoginDialog = lazy(() => import("@/components/LoginDialog"));
+const MusicModal = lazy(() => import("@/components/MusicModal"));
+
 // Image now served from public/assets directory
 const prayingHandsImage = "/assets/praying-hands-rosary.png";
 
@@ -95,7 +98,9 @@ export default function RosaryPage() {
 
   return (
     <>
-      <GalaxyBackground />
+      <Suspense fallback={<div className="fixed inset-0 -z-10 bg-[var(--cathedral-void)]" />}>
+        <GalaxyBackground />
+      </Suspense>
       {/* Main Content Area - Responsive Layout */}
       <div className={isMobile ? "pb-32 pt-4 mobile-container" : "desktop-only"}>
         {/* Desktop Sidebar - Hidden on Mobile */}
@@ -300,30 +305,32 @@ export default function RosaryPage() {
           />
         )}
       </div>
-      <IntentionsModal 
-       open={intentionsModalOpen}
-       onOpenChange={setIntentionsModalOpen}
-       intentions={intentions}
-       onAddIntention={addIntention}
-       onRemoveIntention={removeIntention}
-       onSave={handleSaveIntentions}
-     />
-      <CustomPrayersModal 
-        isOpen={customPrayersModalOpen}
-        onClose={() => setCustomPrayersModalOpen(false)}
-      />
-      <FontSizeModal 
-        open={fontSizeModalOpen}
-        onOpenChange={setFontSizeModalOpen}
-      />
-      <MusicModal
-        open={musicModalOpen}
-        onOpenChange={setMusicModalOpen}
-      />
-      <LoginDialog 
-        open={loginDialogOpen}
-        onOpenChange={setLoginDialogOpen}
-      />
+      <Suspense fallback={null}>
+        <IntentionsModal 
+          open={intentionsModalOpen}
+          onOpenChange={setIntentionsModalOpen}
+          intentions={intentions}
+          onAddIntention={addIntention}
+          onRemoveIntention={removeIntention}
+          onSave={handleSaveIntentions}
+        />
+        <CustomPrayersModal 
+          isOpen={customPrayersModalOpen}
+          onClose={() => setCustomPrayersModalOpen(false)}
+        />
+        <FontSizeModal 
+          open={fontSizeModalOpen}
+          onOpenChange={setFontSizeModalOpen}
+        />
+        <MusicModal
+          open={musicModalOpen}
+          onOpenChange={setMusicModalOpen}
+        />
+        <LoginDialog 
+          open={loginDialogOpen}
+          onOpenChange={setLoginDialogOpen}
+        />
+      </Suspense>
       <Toaster />
     </>
   );

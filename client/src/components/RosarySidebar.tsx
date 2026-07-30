@@ -77,6 +77,8 @@ export default function RosarySidebar({
               <img 
                 src={prayingHandsImage} 
                 alt="Sacred Rosary" 
+                loading="lazy"
+                decoding="async"
                 className="floating-sacred-logo w-64 h-64 object-contain mx-auto"
               />
             </div>

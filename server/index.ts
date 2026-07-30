@@ -1,4 +1,8 @@
 import express, { type Request, Response, NextFunction } from "express";
+
+// Load .env variables if present
+try { process.loadEnvFile(); } catch {}
+
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -72,7 +76,6 @@ app.use((req, res, next) => {
   server.listen({
     port,
     host: "0.0.0.0",
-    reusePort: true,
   }, () => {
     log(`serving on port ${port}`);
   });

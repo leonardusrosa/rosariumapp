@@ -326,6 +326,7 @@ export class PostgreSQLStorage implements IStorage {
 }
 
 import { SupabaseStorage } from './supabase-storage';
+import { isSupabaseAvailable } from './lib/supabase';
 
-// Always use Supabase storage - guest mode removed
-export const storage = new SupabaseStorage();
+// Use Supabase storage when env vars present, else fallback to MemStorage for preview
+export const storage = isSupabaseAvailable() ? new SupabaseStorage() : new MemStorage();

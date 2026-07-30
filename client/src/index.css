@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile Touch & Tap Latency Optimization */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+button, a, [role="button"] {
+  touch-action: manipulation;
+}
+
 /* Enhanced Medieval Cathedral Color Palette - Gothic Stone & Starlight */
 :root {
   /* Cathedral Stone Background Colors - Enhanced Depth */
@@ -72,11 +80,11 @@
   --radius: 0.75rem;
   
   /* Sacred Typography Enhanced */
-  --font-cinzel: 'Cinzel', serif;
-  --font-cormorant: 'Cormorant Garamond', serif;
-  --font-crimson: 'Crimson Text', serif;
-  --font-inter: 'Inter', sans-serif;
-  --font-playfair: 'Playfair Display', serif;
+  --font-cinzel: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-crimson: 'Cormorant Garamond', Georgia, serif;
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-playfair: 'Cinzel', Georgia, serif;
   
   /* Enhanced Typography Scale - Refined Hierarchy */
   --font-size-xs: 0.75rem;      /* 12px */

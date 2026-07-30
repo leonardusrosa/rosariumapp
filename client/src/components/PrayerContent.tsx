@@ -189,8 +189,13 @@ export default function PrayerContent({
     return customPrayers.filter(prayer => prayer.section === sectionType);
   };
 
-  // Filter prayers to show only selected Angelus or Regina Coeli
+  // Filter prayers by day of week conditions and selected Angelus/Regina Coeli
   const shouldShowPrayer = (prayerSection: any) => {
+    if (prayerSection.onlyWednesdays) {
+      const todayIsWednesday = new Date().getDay() === 3;
+      if (!todayIsWednesday) return false;
+    }
+
     if (section !== 'ultima') return true;
     
     if (prayerSection.title === 'Angelus' && angelusReginaSelection !== 'angelus') {
@@ -720,6 +725,8 @@ export default function PrayerContent({
                               <img 
                                 src={getMysteryBackgroundImage(section, currentSubSection)!}
                                 alt={content.sections[currentSubSection].title}
+                                loading="lazy"
+                                decoding="async"
                                 className="max-w-full h-auto rounded-lg shadow-lg"
                                 style={{ maxHeight: '400px' }}
                               />
