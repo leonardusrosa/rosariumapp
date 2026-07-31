@@ -2,6 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 
 // Load .env variables if present
 try { process.loadEnvFile(); } catch {}
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
