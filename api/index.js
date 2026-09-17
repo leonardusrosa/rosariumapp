@@ -1,5 +1,6 @@
 // Vercel serverless function for all API routes
 import { storage } from './storage.js';
+import { fetchDailyLiturgy } from './liturgyHandler.js';
 import { z } from 'zod';
 
 // Define schemas directly for Vercel
@@ -46,6 +47,15 @@ export default async function handler(req, res) {
   console.log(`[Vercel API] ${method} ${url}`);
   
   try {
+    // Liturgy route
+    if (url.startsWith('/api/liturgy') && method === 'GET') {
+      const parsedUrl = new URL(url, `http://${req.headers.host || 'localhost'}`);
+      const dateParam = parsedUrl.searchParams.get('date') || new Date().toISOString().split('T')[0];
+      const liturgy = await fetchDailyLiturgy(dateParam);
+      res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=43200');
+      return res.json(liturgy);
+    }
+
     // Prayer routes
     if (url.match(/\/api\/prayers\/[^\/]+$/) && method === 'GET') {
       const userId = url.split('/').pop();

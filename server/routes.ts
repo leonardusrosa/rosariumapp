@@ -2,9 +2,22 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertPrayerSchema, insertIntentionSchema, insertUserProfileSchema, insertCustomPrayerSchema } from "@shared/schema";
+import { fetchDailyLiturgy } from "./lib/liturgyParser";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Liturgy of the Day (Missale Romanum 1962 / Irmandade do Carmo)
+  app.get("/api/liturgy", async (req, res) => {
+    try {
+      const dateParam = (req.query.date as string) || new Date().toISOString().split('T')[0];
+      const data = await fetchDailyLiturgy(dateParam);
+      res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400, stale-while-revalidate=43200');
+      res.json(data);
+    } catch (error) {
+      console.error("Failed to fetch daily liturgy:", error);
+      res.status(500).json({ message: "Failed to fetch daily liturgy" });
+    }
+  });
   // Prayer routes
   app.get("/api/prayers/:userId", async (req, res) => {
     try {
