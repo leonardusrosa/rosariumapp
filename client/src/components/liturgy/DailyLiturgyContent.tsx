@@ -100,7 +100,7 @@ export default function DailyLiturgyContent() {
               <div className="text-center mb-6">
                 <h3 className="font-cinzel text-xl sm:text-2xl font-medium text-ancient-gold sacred-header-glow mb-2 flex items-center justify-center gap-2">
                   <span className="text-ancient-gold text-lg">✠</span>
-                  <span>Meditação Litúrgica</span>
+                  <span>Meditatio Liturgica</span>
                   <span className="text-ancient-gold text-lg">✠</span>
                 </h3>
                 <p className="text-xs text-ancient-gold/70 font-inter">

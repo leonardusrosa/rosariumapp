@@ -23,6 +23,18 @@ const colorDots: Record<VestmentColor, string> = {
   black: "bg-neutral-600 shadow-[0_0_8px_rgba(115,115,115,0.6)]"
 };
 
+function cleanLiturgicalClass(raw?: string): string {
+  if (!raw) return '';
+  const rubricMatch = raw.match(/^(?:F(?:esta|éria|eria)\s+de\s+[1234]ª\s+Classe[^\n.]*)/i)
+    || raw.match(/^(?:Missa\s+[^\n.]*)/i)
+    || raw.match(/^(?:Comemora[^\n.]*)/i);
+  const text = rubricMatch ? rubricMatch[0] : raw;
+  return text
+    .replace(/\s*(?:Italiano|Santa Missa rezada|PRÓPRIO DO DIA|Introito|Coleta|Epístola|Páginas\s+\d).*$/i, '')
+    .trim()
+    .slice(0, 100);
+}
+
 export default function LiturgyHeader({
   selectedDate,
   title,
@@ -36,6 +48,7 @@ export default function LiturgyHeader({
   onDateSelect
 }: LiturgyHeaderProps) {
   const isMobile = useIsMobile();
+  const displayClass = cleanLiturgicalClass(liturgicalClass);
   const [year, month, day] = selectedDate.split('-').map(Number);
   const dateObj = new Date(year, month - 1, day);
   
@@ -117,9 +130,9 @@ export default function LiturgyHeader({
         </h2>
         <div className="w-32 h-1 bg-gradient-to-r from-transparent via-[var(--ancient-gold)] to-transparent mx-auto mb-4 rounded-full"></div>
         
-        {liturgicalClass && (
+        {displayClass && (
           <p className="text-parchment font-inter text-sm sm:text-base max-w-2xl mx-auto mb-3">
-            {liturgicalClass}
+            {displayClass}
           </p>
         )}
 

@@ -36,7 +36,7 @@ export function useDailyLiturgy(initialDate?: string) {
   const [languageMode, setLanguageMode] = useState<LanguageMode>('bilingual');
 
   const { data, isLoading, isError, error, refetch } = useQuery<DailyLiturgyData>({
-    queryKey: ['daily-liturgy', selectedDate],
+    queryKey: ['daily-liturgy-v2', selectedDate],
     queryFn: () => fetchLiturgy(selectedDate),
     staleTime: 1000 * 60 * 60 * 24, // 24 hours: liturgy for a date never changes
     gcTime: 1000 * 60 * 60 * 24 * 7, // 7 days in memory
@@ -51,13 +51,13 @@ export function useDailyLiturgy(initialDate?: string) {
     const nextDate = offsetDate(selectedDate, 1);
 
     queryClient.prefetchQuery({
-      queryKey: ['daily-liturgy', prevDate],
+      queryKey: ['daily-liturgy-v2', prevDate],
       queryFn: () => fetchLiturgy(prevDate),
       staleTime: 1000 * 60 * 60 * 24
     });
 
     queryClient.prefetchQuery({
-      queryKey: ['daily-liturgy', nextDate],
+      queryKey: ['daily-liturgy-v2', nextDate],
       queryFn: () => fetchLiturgy(nextDate),
       staleTime: 1000 * 60 * 60 * 24
     });
