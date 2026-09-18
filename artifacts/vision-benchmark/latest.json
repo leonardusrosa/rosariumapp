@@ -1,0 +1,244 @@
+{
+  "timestamp": "2026-09-18T21:40:02.438Z",
+  "isPrivate": false,
+  "models": [
+    {
+      "id": "mock/deterministic-vision",
+      "label": "Mock Deterministic Vision Engine",
+      "gateway": "mock",
+      "model": "deterministic-vision-v1",
+      "enabled": true,
+      "capabilities": {
+        "vision": true,
+        "structuredOutput": "json_schema",
+        "usageReporting": true
+      },
+      "privacy": {
+        "provider": "local-mock",
+        "dataCollection": "deny",
+        "zeroDataRetention": true
+      },
+      "pricing": {
+        "inputPerMillion": 0,
+        "outputPerMillion": 0,
+        "currency": "USD",
+        "capturedAt": "2026-09-18",
+        "source": "local-execution"
+      }
+    }
+  ],
+  "runs": [
+    {
+      "caseId": "smoke-cover-001",
+      "caseType": "cover",
+      "modelId": "mock/deterministic-vision",
+      "runIndex": 1,
+      "timestamp": "2026-09-18T21:40:02.435Z",
+      "meta": {
+        "gateway": "mock",
+        "model": "deterministic-vision-v1",
+        "servingProvider": "mock-engine",
+        "promptVersion": "cover-recognition-v1",
+        "latencyMs": 145,
+        "tokensUsed": {
+          "prompt": 820,
+          "completion": 120,
+          "total": 940
+        },
+        "estimatedCostUsd": 0.00015,
+        "structuredOutputCompliance": "valid"
+      },
+      "coverScore": {
+        "titleMatched": true,
+        "titleScore": 1,
+        "authorMatched": true,
+        "authorScore": 1,
+        "isbnMatched": true,
+        "publisherMatched": true,
+        "yearMatched": true,
+        "workIdentified": true,
+        "falseCandidatesCount": 0,
+        "highConfidenceWrongCount": 0,
+        "confidenceWeightedScore": 3,
+        "invalidOutput": false
+      },
+      "rawResult": {
+        "candidates": [
+          {
+            "title": "Crime and Punishment",
+            "author": "Fyodor Dostoyevsky",
+            "isbn13": "9780140449136",
+            "publisher": "Penguin Classics",
+            "publicationYear": 2003,
+            "confidence": "high",
+            "evidence": [
+              "Clearly legible serif title on front cover",
+              "Penguin logo bottom left"
+            ]
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "caseId": "smoke-shelf-001",
+      "caseType": "shelf",
+      "modelId": "mock/deterministic-vision",
+      "runIndex": 1,
+      "timestamp": "2026-09-18T21:40:02.436Z",
+      "meta": {
+        "gateway": "mock",
+        "model": "deterministic-vision-v1",
+        "servingProvider": "mock-engine",
+        "promptVersion": "shelf-recognition-v1",
+        "latencyMs": 310,
+        "tokensUsed": {
+          "prompt": 1450,
+          "completion": 280,
+          "total": 1730
+        },
+        "estimatedCostUsd": 0.00035,
+        "structuredOutputCompliance": "valid"
+      },
+      "shelfScore": {
+        "expectedCount": 5,
+        "detectedCount": 5,
+        "truePositives": 5,
+        "falsePositives": 0,
+        "falseNegatives": 0,
+        "partialMatches": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1Score": 1,
+        "highConfidenceWrongCount": 0,
+        "confidenceWeightedScore": 13,
+        "invalidOutput": false,
+        "matchedPairs": [
+          {
+            "detectedTitle": "O Senhor dos Anéis",
+            "expectedTitle": "O Senhor dos Anéis",
+            "weight": 10,
+            "isPartial": false
+          },
+          {
+            "detectedTitle": "Middlemarch",
+            "expectedTitle": "Middlemarch",
+            "weight": 10,
+            "isPartial": false
+          },
+          {
+            "detectedTitle": "Moby Dick",
+            "expectedTitle": "Moby Dick",
+            "weight": 10,
+            "isPartial": false
+          },
+          {
+            "detectedTitle": "O Nome da Rosa",
+            "expectedTitle": "O Nome da Rosa",
+            "weight": 10,
+            "isPartial": false
+          },
+          {
+            "detectedTitle": "Ensaio sobre a Cegueira",
+            "expectedTitle": "Ensaio sobre a Cegueira",
+            "weight": 10,
+            "isPartial": false
+          }
+        ]
+      },
+      "rawResult": {
+        "books": [
+          {
+            "position": 1,
+            "title": "O Senhor dos Anéis",
+            "author": "J.R.R. Tolkien",
+            "confidence": "high",
+            "needsReview": false
+          },
+          {
+            "position": 2,
+            "title": "Middlemarch",
+            "author": "George Eliot",
+            "confidence": "high",
+            "needsReview": false
+          },
+          {
+            "position": 3,
+            "title": "Moby Dick",
+            "author": "Herman Melville",
+            "confidence": "high",
+            "needsReview": false
+          },
+          {
+            "position": 4,
+            "title": "O Nome da Rosa",
+            "author": "Umberto Eco",
+            "confidence": "medium",
+            "needsReview": true
+          },
+          {
+            "position": 5,
+            "title": "Ensaio sobre a Cegueira",
+            "author": "José Saramago",
+            "confidence": "medium",
+            "needsReview": true
+          }
+        ],
+        "unreadableRegions": 1,
+        "warnings": [
+          "One thin spine on far right was partially shadowed"
+        ]
+      }
+    }
+  ],
+  "coverSummary": {
+    "mock/deterministic-vision": {
+      "modelId": "mock/deterministic-vision",
+      "label": "Mock Deterministic Vision Engine",
+      "gateway": "mock",
+      "servingProvider": "mock-engine",
+      "task": "cover",
+      "totalRuns": 1,
+      "successfulRuns": 1,
+      "rateLimitedRuns": 0,
+      "invalidOutputRuns": 0,
+      "failedRuns": 0,
+      "avgLatencyMs": 145,
+      "p95LatencyMs": 145,
+      "totalTokensUsed": 940,
+      "totalEstimatedCostUsd": 0.00015,
+      "totalHighConfidenceErrors": 0,
+      "avgConfidenceScore": 3,
+      "workIdentificationRate": 1,
+      "titleMatchRate": 1,
+      "authorMatchRate": 1,
+      "isbnMatchRate": 1
+    }
+  },
+  "shelfSummary": {
+    "mock/deterministic-vision": {
+      "modelId": "mock/deterministic-vision",
+      "label": "Mock Deterministic Vision Engine",
+      "gateway": "mock",
+      "servingProvider": "mock-engine",
+      "task": "shelf",
+      "totalRuns": 1,
+      "successfulRuns": 1,
+      "rateLimitedRuns": 0,
+      "invalidOutputRuns": 0,
+      "failedRuns": 0,
+      "avgLatencyMs": 310,
+      "p95LatencyMs": 310,
+      "totalTokensUsed": 1730,
+      "totalEstimatedCostUsd": 0.00035,
+      "totalHighConfidenceErrors": 0,
+      "avgConfidenceScore": 13,
+      "precision": 1,
+      "recall": 1,
+      "f1Score": 1,
+      "totalTruePositives": 5,
+      "totalFalsePositives": 0,
+      "totalFalseNegatives": 0
+    }
+  }
+}

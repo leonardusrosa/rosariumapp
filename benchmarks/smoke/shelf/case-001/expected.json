@@ -1,0 +1,38 @@
+{
+  "type": "shelf",
+  "id": "smoke-shelf-001",
+  "label": "Smoke Test: 5 Classical Books",
+  "books": [
+    {
+      "position": 1,
+      "title": "O Senhor dos Anéis",
+      "acceptedTitles": ["The Lord of the Rings"],
+      "author": "J.R.R. Tolkien"
+    },
+    {
+      "position": 2,
+      "title": "Middlemarch",
+      "author": "George Eliot"
+    },
+    {
+      "position": 3,
+      "title": "Moby Dick",
+      "acceptedTitles": ["Moby-Dick"],
+      "author": "Herman Melville"
+    },
+    {
+      "position": 4,
+      "title": "O Nome da Rosa",
+      "acceptedTitles": ["The Name of the Rose", "Il Nome della Rosa"],
+      "author": "Umberto Eco"
+    },
+    {
+      "position": 5,
+      "title": "Ensaio sobre a Cegueira",
+      "acceptedTitles": ["Blindness"],
+      "author": "José Saramago"
+    }
+  ],
+  "unreadableCount": 1,
+  "notes": "Synthetic deterministic smoke fixture for CI runner verification only"
+}

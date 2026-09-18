@@ -1,6 +1,7 @@
 // Vercel serverless function for all API routes
 import { storage } from './storage.js';
 import { fetchDailyLiturgy } from './liturgyHandler.js';
+import { handleIsbnLookup } from './bookMetadataHandler.js';
 import { z } from 'zod';
 
 // Define schemas directly for Vercel
@@ -187,6 +188,17 @@ export default async function handler(req, res) {
       return res.json({ email: profile.email });
     }
     
+    // Bibliotheca: Real ISBN Book Metadata Lookup
+    if (url.includes('/api/bibliotheca/isbn/') && method === 'GET') {
+      const urlParts = url.split('?')[0].split('/');
+      const isbn = urlParts[urlParts.length - 1];
+      const result = await handleIsbnLookup(isbn);
+      if (result && result.error === 'provider_unavailable') {
+        return res.status(503).json(result);
+      }
+      return res.json(result);
+    }
+
     // Default response for unmatched routes
     console.log(`[Vercel API] Route not found: ${method} ${url}`);
     return res.status(404).json({ message: 'Not Found', url, method });

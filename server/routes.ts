@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertPrayerSchema, insertIntentionSchema, insertUserProfileSchema, insertCustomPrayerSchema } from "@shared/schema";
 import { fetchDailyLiturgy } from "./lib/liturgyParser";
+import { bookMetadataResolver } from "./lib/bookMetadata/BookMetadataResolver";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -210,6 +211,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Username lookup error:", error);
       res.status(400).json({ message: "Failed to lookup email", error: String(error) });
+    }
+  });
+
+  // Bibliotheca: Real ISBN Book Metadata Lookup
+  app.get("/api/bibliotheca/isbn/:isbn", async (req, res) => {
+    try {
+      const isbn = req.params.isbn;
+      const result = await bookMetadataResolver.resolve(isbn);
+      if ("error" in result && result.error === "provider_unavailable") {
+        return res.status(503).json(result);
+      }
+      return res.json(result);
+    } catch (error) {
+      console.error("[ISBN Lookup Error]:", error);
+      return res.status(503).json({ error: "provider_unavailable" });
+    }
+  });
+
+  // Bibliotheca: Dev-only Vision Benchmark Latest Report
+  app.get("/api/dev/vision-benchmark/latest", async (_req, res) => {
+    try {
+      const fs = await import("fs");
+      const path = await import("path");
+      const reportPath = path.join(process.cwd(), "artifacts", "vision-benchmark", "latest.json");
+      if (!fs.existsSync(reportPath)) {
+        return res.status(404).json({ message: "No benchmark report found. Run npm run benchmark:vision first." });
+      }
+      const data = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
+      return res.json(data);
+    } catch (err: any) {
+      return res.status(500).json({ error: err.message });
     }
   });
 

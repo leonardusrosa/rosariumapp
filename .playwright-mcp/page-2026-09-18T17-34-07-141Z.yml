@@ -1,0 +1,90 @@
+- generic [ref=f7e3]:
+  - region "Notifications (F8)":
+    - list
+  - generic [ref=f7e4]:
+    - complementary "Navegação da Biblioteca" [ref=f7e5]:
+      - link "BIBLIOTHECA Bibliotheca Mea" [ref=f7e7] [cursor=pointer]:
+        - /url: /library
+        - generic [ref=f7e12]:
+          - generic [ref=f7e13]: BIBLIOTHECA
+          - generic [ref=f7e14]: Bibliotheca Mea
+      - navigation "Seções" [ref=f7e18]:
+        - link "Bibliotheca Minha biblioteca" [ref=f7e19] [cursor=pointer]:
+          - /url: /library
+          - generic [ref=f7e25]:
+            - generic [ref=f7e26]: Bibliotheca
+            - generic [ref=f7e28]: Minha biblioteca
+        - link "Lectio Lendo agora" [ref=f7e29] [cursor=pointer]:
+          - /url: /reading
+          - generic [ref=f7e32]:
+            - generic [ref=f7e33]: Lectio
+            - generic [ref=f7e35]: Lendo agora
+        - link "Proxima Próximas leituras" [ref=f7e36] [cursor=pointer]:
+          - /url: /next
+          - generic [ref=f7e39]:
+            - generic [ref=f7e40]: Proxima
+            - generic [ref=f7e42]: Próximas leituras
+        - link "Lecta Histórico de leitura" [ref=f7e43] [cursor=pointer]:
+          - /url: /read
+          - generic [ref=f7e47]:
+            - generic [ref=f7e48]: Lecta
+            - generic [ref=f7e50]: Histórico de leitura
+        - link "Desiderata Lista de desejos" [ref=f7e51] [cursor=pointer]:
+          - /url: /wishlist
+          - generic [ref=f7e54]:
+            - generic [ref=f7e55]: Desiderata
+            - generic [ref=f7e57]: Lista de desejos
+        - link "Collectiones Coleções" [ref=f7e58] [cursor=pointer]:
+          - /url: /collections
+          - generic [ref=f7e63]:
+            - generic [ref=f7e64]: Collectiones
+            - generic [ref=f7e66]: Coleções
+        - link "Notae Notas" [ref=f7e67] [cursor=pointer]:
+          - /url: /notes
+          - generic [ref=f7e71]:
+            - generic [ref=f7e72]: Notae
+            - generic [ref=f7e74]: Notas
+        - link "Sapientia Explorar com IA" [ref=f7e75] [cursor=pointer]:
+          - /url: /ai
+          - generic [ref=f7e78]:
+            - generic [ref=f7e79]: Sapientia
+            - generic [ref=f7e81]: Explorar com IA
+      - generic [ref=f7e82]:
+        - generic [ref=f7e84]:
+          - generic [ref=f7e85]: Modo local (dispositivo)
+          - paragraph [ref=f7e91]: Sincronize sua biblioteca em nuvem e acesse em qualquer aparelho.
+          - generic [ref=f7e92]:
+            - button "Entrar" [ref=f7e93] [cursor=pointer]
+            - button "Cadastrar" [ref=f7e98] [cursor=pointer]
+        - generic [ref=f7e99]:
+          - generic [ref=f7e100]: Estúdio Privado
+          - generic [ref=f7e101]: v0.5
+    - main [ref=f7e103]:
+      - generic [ref=f7e105]:
+        - generic [ref=f7e106]:
+          - heading "Bibliotheca" [level=1] [ref=f7e107]
+          - generic [ref=f7e108]: 0 livros
+        - paragraph [ref=f7e109]: Minha biblioteca
+      - generic [ref=f7e110]:
+        - generic [ref=f7e111]:
+          - textbox "Buscar por título, autor..." [ref=f7e113]
+          - button "Adicionar livro" [ref=f7e114] [cursor=pointer]
+        - tablist [ref=f7e117]:
+          - tab "Todos" [selected] [ref=f7e118] [cursor=pointer]
+          - tab "Não lidos" [ref=f7e119] [cursor=pointer]
+          - tab "Lendo" [ref=f7e120] [cursor=pointer]
+          - tab "Lidos" [ref=f7e121] [cursor=pointer]
+      - generic [ref=f7e122]:
+        - paragraph [ref=f7e123]: Nenhum livro cadastrado nesta seção.
+        - button "Adicionar Livro" [ref=f7e124] [cursor=pointer]
+      - dialog [ref=f7e125]:
+        - generic [ref=f7e127]:
+          - button "Fechar" [ref=f7e128] [cursor=pointer]
+          - generic [ref=f7e239]:
+            - generic [ref=f7e240]:
+              - heading "Escanear ISBN" [level=2] [ref=f7e241]
+              - paragraph [ref=f7e242]: Posicione o código de barras dentro da área indicada.
+            - paragraph [ref=f7e249]: Iniciando câmera…
+            - generic [ref=f7e250]:
+              - button "Cancelar" [ref=f7e251] [cursor=pointer]
+              - button "Digitar ISBN" [ref=f7e253] [cursor=pointer]

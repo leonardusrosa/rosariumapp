@@ -1,0 +1,16 @@
+{
+  "type": "cover",
+  "id": "smoke-cover-001",
+  "label": "Smoke Test: Crime and Punishment (Penguin Classics)",
+  "work": {
+    "title": "Crime and Punishment",
+    "acceptedTitles": ["Crime e Castigo", "Prestuplyeniye i nakazaniye"],
+    "author": "Fyodor Dostoyevsky"
+  },
+  "edition": {
+    "isbn13": "9780140449136",
+    "publisher": "Penguin Classics",
+    "publicationYear": 2003
+  },
+  "notes": "Synthetic deterministic smoke fixture for CI runner verification only"
+}

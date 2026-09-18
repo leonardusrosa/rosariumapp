@@ -1,0 +1,79 @@
+- generic [ref=e3]:
+  - region "Notifications (F8)":
+    - list
+  - generic [ref=e4]:
+    - complementary "Navegação da Biblioteca" [ref=e5]:
+      - link "BIBLIOTHECA Bibliotheca Mea" [ref=e7] [cursor=pointer]:
+        - /url: /library
+        - generic [ref=e12]:
+          - generic [ref=e13]: BIBLIOTHECA
+          - generic [ref=e14]: Bibliotheca Mea
+      - navigation "Seções" [ref=e18]:
+        - link "Bibliotheca Minha biblioteca" [ref=e19] [cursor=pointer]:
+          - /url: /library
+          - generic [ref=e25]:
+            - generic [ref=e26]: Bibliotheca
+            - generic [ref=e28]: Minha biblioteca
+        - link "Lectio Lendo agora" [ref=e29] [cursor=pointer]:
+          - /url: /reading
+          - generic [ref=e32]:
+            - generic [ref=e33]: Lectio
+            - generic [ref=e35]: Lendo agora
+        - link "Proxima Próximas leituras" [ref=e36] [cursor=pointer]:
+          - /url: /next
+          - generic [ref=e39]:
+            - generic [ref=e40]: Proxima
+            - generic [ref=e42]: Próximas leituras
+        - link "Lecta Histórico de leitura" [ref=e43] [cursor=pointer]:
+          - /url: /read
+          - generic [ref=e47]:
+            - generic [ref=e48]: Lecta
+            - generic [ref=e50]: Histórico de leitura
+        - link "Desiderata Lista de desejos" [ref=e51] [cursor=pointer]:
+          - /url: /wishlist
+          - generic [ref=e54]:
+            - generic [ref=e55]: Desiderata
+            - generic [ref=e57]: Lista de desejos
+        - link "Collectiones Coleções" [ref=e58] [cursor=pointer]:
+          - /url: /collections
+          - generic [ref=e63]:
+            - generic [ref=e64]: Collectiones
+            - generic [ref=e66]: Coleções
+        - link "Notae Notas" [ref=e67] [cursor=pointer]:
+          - /url: /notes
+          - generic [ref=e71]:
+            - generic [ref=e72]: Notae
+            - generic [ref=e74]: Notas
+        - link "Sapientia Explorar com IA" [ref=e75] [cursor=pointer]:
+          - /url: /ai
+          - generic [ref=e78]:
+            - generic [ref=e79]: Sapientia
+            - generic [ref=e81]: Explorar com IA
+      - generic [ref=e82]:
+        - generic [ref=e84]:
+          - generic [ref=e85]: Modo local (dispositivo)
+          - paragraph [ref=e91]: Sincronize sua biblioteca em nuvem e acesse em qualquer aparelho.
+          - generic [ref=e92]:
+            - button "Entrar" [ref=e93] [cursor=pointer]
+            - button "Cadastrar" [ref=e98] [cursor=pointer]
+        - generic [ref=e99]:
+          - generic [ref=e100]: Estúdio Privado
+          - generic [ref=e101]: v0.5
+    - main [ref=e103]:
+      - generic [ref=e105]:
+        - generic [ref=e106]:
+          - heading "Bibliotheca" [level=1] [ref=e107]
+          - generic [ref=e108]: 0 livros
+        - paragraph [ref=e109]: Minha biblioteca
+      - generic [ref=e110]:
+        - generic [ref=e111]:
+          - textbox "Buscar por título, autor..." [ref=e113]
+          - button "Adicionar livro" [ref=e114] [cursor=pointer]
+        - tablist [ref=e117]:
+          - tab "Todos" [selected] [ref=e118] [cursor=pointer]
+          - tab "Não lidos" [ref=e119] [cursor=pointer]
+          - tab "Lendo" [ref=e120] [cursor=pointer]
+          - tab "Lidos" [ref=e121] [cursor=pointer]
+      - generic [ref=e122]:
+        - paragraph [ref=e123]: Nenhum livro cadastrado nesta seção.
+        - button "Adicionar Livro" [ref=e124] [cursor=pointer]

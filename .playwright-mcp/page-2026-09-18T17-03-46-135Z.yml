@@ -1,0 +1,92 @@
+- generic [ref=f2e3]:
+  - region "Notifications (F8)":
+    - list
+  - generic [ref=f2e4]:
+    - complementary "Navegação da Biblioteca" [ref=f2e5]:
+      - link "BIBLIOTHECA Bibliotheca Mea" [ref=f2e7] [cursor=pointer]:
+        - /url: /library
+        - generic [ref=f2e12]:
+          - generic [ref=f2e13]: BIBLIOTHECA
+          - generic [ref=f2e14]: Bibliotheca Mea
+      - navigation "Seções" [ref=f2e18]:
+        - link "Bibliotheca 1 Minha biblioteca" [ref=f2e312] [cursor=pointer]:
+          - /url: /library
+          - generic [ref=f2e25]:
+            - generic [ref=f2e26]:
+              - generic [ref=f2e27]: Bibliotheca
+              - generic [ref=f2e313]: "1"
+            - generic [ref=f2e28]: Minha biblioteca
+        - link "Lectio Lendo agora" [ref=f2e29] [cursor=pointer]:
+          - /url: /reading
+          - generic [ref=f2e32]:
+            - generic [ref=f2e33]: Lectio
+            - generic [ref=f2e35]: Lendo agora
+        - link "Proxima Próximas leituras" [ref=f2e36] [cursor=pointer]:
+          - /url: /next
+          - generic [ref=f2e39]:
+            - generic [ref=f2e40]: Proxima
+            - generic [ref=f2e42]: Próximas leituras
+        - link "Lecta Histórico de leitura" [ref=f2e43] [cursor=pointer]:
+          - /url: /read
+          - generic [ref=f2e47]:
+            - generic [ref=f2e48]: Lecta
+            - generic [ref=f2e50]: Histórico de leitura
+        - link "Desiderata Lista de desejos" [ref=f2e51] [cursor=pointer]:
+          - /url: /wishlist
+          - generic [ref=f2e54]:
+            - generic [ref=f2e55]: Desiderata
+            - generic [ref=f2e57]: Lista de desejos
+        - link "Collectiones Coleções" [ref=f2e58] [cursor=pointer]:
+          - /url: /collections
+          - generic [ref=f2e63]:
+            - generic [ref=f2e64]: Collectiones
+            - generic [ref=f2e66]: Coleções
+        - link "Notae Notas" [ref=f2e67] [cursor=pointer]:
+          - /url: /notes
+          - generic [ref=f2e71]:
+            - generic [ref=f2e72]: Notae
+            - generic [ref=f2e74]: Notas
+        - link "Sapientia Explorar com IA" [ref=f2e75] [cursor=pointer]:
+          - /url: /ai
+          - generic [ref=f2e78]:
+            - generic [ref=f2e79]: Sapientia
+            - generic [ref=f2e81]: Explorar com IA
+      - generic [ref=f2e82]:
+        - generic [ref=f2e84]:
+          - generic [ref=f2e85]: Modo local (dispositivo)
+          - paragraph [ref=f2e353]: Sincronize sua biblioteca em nuvem e acesse em qualquer aparelho.
+          - generic [ref=f2e354]:
+            - button "Entrar" [ref=f2e355] [cursor=pointer]
+            - button "Cadastrar" [ref=f2e360] [cursor=pointer]
+        - generic [ref=f2e99]:
+          - generic [ref=f2e100]: Estúdio Privado
+          - generic [ref=f2e101]: v0.5
+    - main [ref=f2e103]:
+      - generic [ref=f2e105]:
+        - generic [ref=f2e106]:
+          - heading "Bibliotheca" [level=1] [ref=f2e107]
+          - generic [ref=f2e108]: 1 livro
+        - paragraph [ref=f2e109]: Minha biblioteca
+      - generic [ref=f2e110]:
+        - generic [ref=f2e111]:
+          - textbox "Buscar por título, autor..." [ref=f2e113]
+          - button "Adicionar livro" [ref=f2e114] [cursor=pointer]
+        - tablist [ref=f2e117]:
+          - tab "Todos" [selected] [ref=f2e118] [cursor=pointer]
+          - tab "Não lidos" [ref=f2e119] [cursor=pointer]
+          - tab "Lendo" [ref=f2e120] [cursor=pointer]
+          - tab "Lidos" [ref=f2e121] [cursor=pointer]
+      - generic "Grade de livros da biblioteca" [ref=f2e314]:
+        - article [ref=f2e315]:
+          - link "A Cidade de Deus, por Santo Agostinho" [ref=f2e316] [cursor=pointer]:
+            - /url: /book/w-new-1789750913021-4vxr
+            - generic [ref=f2e318]:
+              - paragraph [ref=f2e320]: Santo Agostinho
+              - heading "A Cidade de Deus" [level=3] [ref=f2e322]
+              - generic [ref=f2e323]: Ed. Bibliotheca
+          - generic [ref=f2e326]:
+            - link [ref=f2e327] [cursor=pointer]:
+              - /url: /book/w-new-1789750913021-4vxr
+              - heading "A Cidade de Deus" [level=4] [ref=f2e328]
+            - paragraph [ref=f2e329]: Santo Agostinho
+            - generic [ref=f2e330]: Não lido
