@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import type { VestmentColor } from "@/types/liturgy";
-import type { LanguageMode } from "@/hooks/useDailyLiturgy";
 
 interface LiturgyHeaderProps {
   selectedDate: string;
@@ -10,8 +9,6 @@ interface LiturgyHeaderProps {
   vestmentColor: VestmentColor;
   colorLabel: string;
   isToday: boolean;
-  languageMode: LanguageMode;
-  onLanguageModeChange: (mode: LanguageMode) => void;
   onPreviousDay: () => void;
   onNextDay: () => void;
   onToday: () => void;
@@ -33,8 +30,6 @@ export default function LiturgyHeader({
   vestmentColor,
   colorLabel,
   isToday,
-  languageMode,
-  onLanguageModeChange,
   onPreviousDay,
   onNextDay,
   onToday,
@@ -134,47 +129,6 @@ export default function LiturgyHeader({
             Paramento {colorLabel}
           </span>
         </div>
-
-        {/* Mobile Language Mode Switcher */}
-        {isMobile && (
-          <div className="flex justify-center mt-6">
-            <div className="inline-flex bg-cathedral-dark/50 rounded-lg p-1 border border-ancient-gold/20">
-              <button
-                type="button"
-                onClick={() => onLanguageModeChange('latin')}
-                className={`px-3 py-1 text-xs font-cinzel rounded-md transition-all ${
-                  languageMode === 'latin'
-                    ? 'bg-ancient-gold/20 text-ancient-gold border border-ancient-gold/50 shadow-sm'
-                    : 'text-parchment/70 hover:text-parchment'
-                }`}
-              >
-                Latim
-              </button>
-              <button
-                type="button"
-                onClick={() => onLanguageModeChange('bilingual')}
-                className={`px-3 py-1 text-xs font-cinzel rounded-md transition-all ml-1 ${
-                  languageMode === 'bilingual'
-                    ? 'bg-ancient-gold/20 text-ancient-gold border border-ancient-gold/50 shadow-sm'
-                    : 'text-parchment/70 hover:text-parchment'
-                }`}
-              >
-                Ambos
-              </button>
-              <button
-                type="button"
-                onClick={() => onLanguageModeChange('portuguese')}
-                className={`px-3 py-1 text-xs font-cinzel rounded-md transition-all ml-1 ${
-                  languageMode === 'portuguese'
-                    ? 'bg-ancient-gold/20 text-ancient-gold border border-ancient-gold/50 shadow-sm'
-                    : 'text-parchment/70 hover:text-parchment'
-                }`}
-              >
-                Português
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

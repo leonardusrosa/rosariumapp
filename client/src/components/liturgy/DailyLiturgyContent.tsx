@@ -18,8 +18,6 @@ export default function DailyLiturgyContent() {
     isError,
     error,
     refetch,
-    languageMode,
-    setLanguageMode,
     isToday
   } = useDailyLiturgy();
 
@@ -89,8 +87,6 @@ export default function DailyLiturgyContent() {
           vestmentColor={data.vestmentColor}
           colorLabel={data.colorLabel}
           isToday={isToday}
-          languageMode={languageMode}
-          onLanguageModeChange={setLanguageMode}
           onPreviousDay={goToPreviousDay}
           onNextDay={goToNextDay}
           onToday={goToToday}
@@ -134,7 +130,6 @@ export default function DailyLiturgyContent() {
             <LiturgySectionCard
               key={section.id}
               item={section}
-              languageMode={languageMode}
             />
           ))}
         </div>
