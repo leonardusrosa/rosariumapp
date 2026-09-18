@@ -3,7 +3,7 @@
 const cache = new Map();
 const SUCCESS_TTL_MS = 60 * 60 * 1000;
 const NOT_FOUND_TTL_MS = 5 * 60 * 1000;
-const TIMEOUT_MS = 8000;
+const TIMEOUT_MS = 12000;
 
 function normalizeIsbn(raw) {
   return String(raw || "").replace(/[\s\-]/g, "").toUpperCase();

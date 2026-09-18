@@ -1,0 +1,5 @@
+.env*
+benchmarks-private/
+benchmarks/
+artifacts/
+.playwright-mcp/

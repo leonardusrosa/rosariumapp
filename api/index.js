@@ -190,8 +190,8 @@ export default async function handler(req, res) {
     
     // Bibliotheca: Real ISBN Book Metadata Lookup
     if (url.includes('/api/bibliotheca/isbn/') && method === 'GET') {
-      const urlParts = url.split('?')[0].split('/');
-      const isbn = urlParts[urlParts.length - 1];
+      const cleanUrl = url.split('?')[0].replace(/\/+$/, '');
+      const isbn = cleanUrl.split('/').pop();
       const result = await handleIsbnLookup(isbn);
       if (result && result.error === 'provider_unavailable') {
         return res.status(503).json(result);

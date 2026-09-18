@@ -64,3 +64,12 @@ Thumbs.db
 
 # Private Vision Benchmarks (Real user library photographs)
 benchmarks-private/
+
+# Vercel CLI
+.vercel/
+
+# Local MCP and test artifacts
+.playwright-mcp/
+artifacts/
+.vercel
+.env*
