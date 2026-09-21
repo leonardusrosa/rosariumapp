@@ -104,6 +104,22 @@ export function NovenaDaySelector({
         </div>
       </div>
 
+      {/* Progress Bar in Novena Mode */}
+      {viewMode === "novena" && (
+        <div className="space-y-1 px-1">
+          <div className="flex justify-between items-center text-[10px] font-cinzel text-ancient-gold/70">
+            <span>Progresso da Novena</span>
+            <span>{Math.round((selectedDay / totalDays) * 100)}%</span>
+          </div>
+          <div className="w-full h-1 bg-cathedral-dark/60 rounded-full overflow-hidden border border-ancient-gold/20">
+            <div
+              className="h-full bg-gradient-to-r from-ancient-gold/60 to-ancient-gold transition-all duration-300 rounded-full shadow-[0_0_8px_rgba(201,163,94,0.6)]"
+              style={{ width: `${(selectedDay / totalDays) * 100}%` }}
+            />
+          </div>
+        </div>
+      )}
+
       {/* Numbered Day Pills (Visible in Novena mode) */}
       {viewMode === "novena" && (
         <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
