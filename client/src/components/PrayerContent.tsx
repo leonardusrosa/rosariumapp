@@ -7,9 +7,11 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useAuth } from "@/hooks/useAuth";
 import { useCustomPrayers } from "@/hooks/useCustomPrayers";
 import { useSwipeGesture } from "@/hooks/useSwipeGesture";
-import RosaryBeads from "./RosaryBeads";
 import { useEffect, useState, useRef } from "react";
+import RosaryBeads from "./RosaryBeads";
 import { ChevronDown } from "lucide-react";
+import { parseNovena } from "@/lib/novenaParser";
+import { NovenaPrayerCard } from "@/components/prayers/NovenaPrayerCard";
 import annuntiatioImage from "@assets/Annuntiatio_1758062913765.webp";
 import visitatioImage from "@assets/Visitatio_1758067461554.webp";
 import nativitasImage from "@assets/Nativitas_1758067461553.webp";
@@ -208,10 +210,22 @@ export default function PrayerContent({
     return true;
   };
 
-  // Render custom prayer card
-  const renderCustomPrayerCard = (prayer: { id: number; title: string; content: string; section: string }) => (
-    <Collapsible key={`custom-${prayer.id}`} defaultOpen={true}>
-      <Card className="sacred-content-card rounded-2xl sacred-border animate-fade-in-up transition-all duration-700 ease-in-out">
+  // Render custom prayer card (with automatic Novena detection)
+  const renderCustomPrayerCard = (prayer: { id: number; title: string; content: string; section: string }) => {
+    const novenaData = parseNovena(prayer.content);
+    if (novenaData) {
+      return (
+        <NovenaPrayerCard
+          key={`custom-novena-${prayer.id}`}
+          prayer={prayer}
+          novenaData={novenaData}
+        />
+      );
+    }
+
+    return (
+      <Collapsible key={`custom-${prayer.id}`} defaultOpen={true}>
+        <Card className="sacred-content-card rounded-2xl sacred-border animate-fade-in-up transition-all duration-700 ease-in-out">
         <CardContent className="p-8">
           <CollapsibleTrigger asChild>
             <div className="text-center mb-8 cursor-pointer group">
@@ -249,7 +263,8 @@ export default function PrayerContent({
         </CardContent>
       </Card>
     </Collapsible>
-  );
+    );
+  };
 
   // Helper function to get background image for mystery sections
   const getMysteryBackgroundImage = (mysterySection: string, subSectionIndex: number) => {
