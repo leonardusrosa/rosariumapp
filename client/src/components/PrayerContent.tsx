@@ -1,3 +1,4 @@
+import { unpackPrayerContent } from "@/lib/prayerImage";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -212,12 +213,14 @@ export default function PrayerContent({
 
   // Render custom prayer card (with automatic Novena detection)
   const renderCustomPrayerCard = (prayer: { id: number; title: string; content: string; section: string }) => {
-    const novenaData = parseNovena(prayer.content);
+    const { text, image } = unpackPrayerContent(prayer.content);
+    const novenaData = parseNovena(text);
     if (novenaData) {
       return (
         <NovenaPrayerCard
           key={`custom-novena-${prayer.id}`}
-          prayer={prayer}
+          prayer={{ ...prayer, content: text }}
+          image={image}
           novenaData={novenaData}
         />
       );
@@ -246,6 +249,11 @@ export default function PrayerContent({
           </CollapsibleTrigger>
 
           <CollapsibleContent>
+            {image && (
+              <img src={image} alt={`Imagem de ${prayer.title}`} loading="lazy"
+                referrerPolicy="no-referrer"
+                className="block mx-auto max-w-full max-h-[420px] w-auto rounded-lg object-contain mb-6" />
+            )}
             <div className="prayer-grid">
               {/* Single Column for Custom Prayer */}
               <div className="prayer-column col-span-2">
@@ -254,7 +262,7 @@ export default function PrayerContent({
                     className={`prayer-portuguese ${getFontSizeClass()} ${getLineHeightClass()} ${getLetterSpacingClass()}`}
                     style={{ whiteSpace: 'pre-wrap' }}
                   >
-                    {prayer.content}
+                    {text}
                   </div>
                 </div>
               </div>
