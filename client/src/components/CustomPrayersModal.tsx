@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/dialog";
 import { useCustomPrayers } from "@/hooks/useCustomPrayers";
 import { useAuth } from "@/hooks/useAuth";
+import { PrayerImagePicker } from "@/components/prayers/PrayerImagePicker";
+import { packPrayerContent, unpackPrayerContent } from "@/lib/prayerImage";
 
 interface CustomPrayersModalProps {
   isOpen: boolean;
@@ -32,6 +34,9 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
   });
   
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [prayerImage, setPrayerImage] = useState<string | null>(null);
+  const [isProcessingImage, setIsProcessingImage] = useState(false);
+  const [saveError, setSaveError] = useState("");
 
   // Auto-resize textarea function
   const adjustTextareaHeight = () => {
@@ -60,44 +65,45 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!newPrayerData.title.trim() || !newPrayerData.content.trim() || !newPrayerData.section) {
-      return;
-    }
+    if (!newPrayerData.title.trim() || !newPrayerData.content.trim() || !newPrayerData.section || isProcessingImage) return;
 
-    if (isEditing && editingId) {
-      await updateCustomPrayer({
-        id: editingId,
-        title: newPrayerData.title,
-        content: newPrayerData.content,
-        section: newPrayerData.section
-      });
-      setIsEditing(false);
-      setEditingId(null);
-    } else {
-      await addCustomPrayer(newPrayerData);
+    setSaveError("");
+    try {
+      const data = {
+        ...newPrayerData,
+        title: newPrayerData.title.trim(),
+        content: packPrayerContent(newPrayerData.content.trim(), prayerImage),
+      };
+      if (isEditing && editingId !== null) {
+        await updateCustomPrayer({ id: editingId, ...data });
+        setIsEditing(false);
+        setEditingId(null);
+      } else {
+        await addCustomPrayer(data);
+      }
+      setNewPrayerData({ title: "", content: "", section: "" });
+      setPrayerImage(null);
+      setTimeout(adjustTextareaHeight, 0);
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : "Não foi possível salvar a oração.");
     }
-
-    setNewPrayerData({ title: "", content: "", section: "" });
-    // Reset textarea height
-    setTimeout(adjustTextareaHeight, 0);
   };
 
   const handleEdit = (prayer: { id: number; title: string; content: string; section: string }) => {
+    const { text, image } = unpackPrayerContent(prayer.content);
     setIsEditing(true);
     setEditingId(prayer.id);
-    setNewPrayerData({
-      title: prayer.title,
-      content: prayer.content,
-      section: prayer.section
-    });
+    setNewPrayerData({ title: prayer.title, content: text, section: prayer.section });
+    setPrayerImage(image);
+    setSaveError("");
   };
 
   const handleCancelEdit = () => {
     setIsEditing(false);
     setEditingId(null);
     setNewPrayerData({ title: "", content: "", section: "" });
-    // Reset textarea height
+    setPrayerImage(null);
+    setSaveError("");
     setTimeout(adjustTextareaHeight, 0);
   };
 
@@ -166,6 +172,13 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
               />
             </div>
 
+            <PrayerImagePicker
+              value={prayerImage}
+              onChange={setPrayerImage}
+              onProcessingChange={setIsProcessingImage}
+              disabled={isAddingCustomPrayer || isUpdatingCustomPrayer}
+            />
+
             <div>
               <Label className="text-byzantine-gold font-inter text-sm sm:text-base md:text-lg lg:text-xl mb-2 sm:mb-3 block">
                 <i className="fas fa-map-marker-alt mr-2 sm:mr-3 text-xs sm:text-sm md:text-base" />
@@ -225,11 +238,12 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
               </div>
             </div>
 
+            {saveError && <p className="text-sm text-red-300" role="alert">{saveError}</p>}
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <Button 
                 type="submit" 
                 className="sacred-button flex-1 h-10 sm:h-12 md:h-14 text-sm sm:text-base md:text-lg font-bold"
-                disabled={isAddingCustomPrayer || isUpdatingCustomPrayer}
+                disabled={isAddingCustomPrayer || isUpdatingCustomPrayer || isProcessingImage}
               >
                 {isEditing ? (
                   <>
@@ -287,8 +301,17 @@ export default function CustomPrayersModal({ isOpen, onClose }: CustomPrayersMod
                         {prayer.title}
                       </h4>
                       <p className="text-parchment/70 text-xs sm:text-sm md:text-base font-crimson mb-1 sm:mb-2 break-words overflow-hidden leading-relaxed" style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>
-                        {prayer.content}
+                        {unpackPrayerContent(prayer.content).text}
                       </p>
+                      {unpackPrayerContent(prayer.content).image && (
+                        <img
+                          src={unpackPrayerContent(prayer.content).image!}
+                          alt={`Imagem de ${prayer.title}`}
+                          referrerPolicy="no-referrer"
+                          loading="lazy"
+                          className="max-h-24 max-w-full rounded-md object-contain mb-2"
+                        />
+                      )}
                       <p className="text-byzantine-gold text-xs sm:text-sm md:text-base font-inter">
                         {prayer.section === 'initium' ? 'Prima Oratio' : 'Ultima Oratio'}
                       </p>
