@@ -817,12 +817,24 @@ export default function PrayerContent({
           ) : (
             /* For non-mystery sections, show all sections */
             (<>
-              {content.sections.filter(shouldShowPrayer).map((prayerSection: any, index: number) => (
+              {content.sections
+                .filter(shouldShowPrayer)
+                .sort((a: any, b: any) => section === 'ultima'
+                  ? Number(a.title === 'Signum Crucis') - Number(b.title === 'Signum Crucis')
+                  : 0)
+                .map((prayerSection: any, index: number) => (
                 <div key={index}>
                   {/* Insert custom prayers before Credo in Initium section */}
                   {section === 'initium' && prayerSection.title === 'Credo' && getCustomPrayersForSection('initium').length > 0 && (
                     <div className="space-y-8 mb-8">
                       {getCustomPrayersForSection('initium').map(prayer => renderCustomPrayerCard(prayer))}
+                    </div>
+                  )}
+                  
+                  {/* Additional Ultima prayers must precede the concluding Signum Crucis. */}
+                  {section === 'ultima' && prayerSection.title === 'Signum Crucis' && getCustomPrayersForSection('ultima').length > 0 && (
+                    <div className="space-y-8 mb-8">
+                      {getCustomPrayersForSection('ultima').map(prayer => renderCustomPrayerCard(prayer))}
                     </div>
                   )}
                   
@@ -961,12 +973,6 @@ export default function PrayerContent({
                 </div>
               ))}
               
-              {/* Insert custom prayers after Signum Crucis in Ultima section */}
-              {section === 'ultima' && getCustomPrayersForSection('ultima').length > 0 && (
-                <div className="space-y-8 mt-8">
-                  {getCustomPrayersForSection('ultima').map(prayer => renderCustomPrayerCard(prayer))}
-                </div>
-              )}
             </>)
           )}
 
