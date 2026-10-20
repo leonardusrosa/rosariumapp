@@ -20,9 +20,10 @@ interface NovenaPrayerCardProps {
     section: string;
   };
   novenaData: NovenaData;
+  image?: string | null;
 }
 
-export function NovenaPrayerCard({ prayer, novenaData }: NovenaPrayerCardProps) {
+export function NovenaPrayerCard({ prayer, novenaData, image }: NovenaPrayerCardProps) {
   const [isOpen, setIsOpen] = useState(true);
   const [isInitialPrayersOpen, setIsInitialPrayersOpen] = useState(true);
   const { getFontSizeClass, getLineHeightClass, getLetterSpacingClass } = useFontSize();
@@ -72,6 +73,11 @@ export function NovenaPrayerCard({ prayer, novenaData }: NovenaPrayerCardProps) 
           </CollapsibleTrigger>
 
           <CollapsibleContent>
+            {image && (
+              <img src={image} alt={`Imagem de ${prayer.title}`} loading="lazy"
+                referrerPolicy="no-referrer"
+                className="block mx-auto max-w-full max-h-[420px] w-auto rounded-lg object-contain mb-6" />
+            )}
             {/* View Mode: Raw full text */}
             {viewMode === "full" ? (
               <div className="space-y-4">
