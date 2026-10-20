@@ -24,8 +24,9 @@ export function useCustomPrayers(userId: string | null) {
           content: prayerData.content,
           section: prayerData.section,
         };
-        setLocalCustomPrayers(prev => [...prev, newCustomPrayer]);
-        localStorage.setItem('rosary_custom_prayers', JSON.stringify([...localCustomPrayers, newCustomPrayer]));
+        const updated = [...localCustomPrayers, newCustomPrayer];
+        localStorage.setItem('rosary_custom_prayers', JSON.stringify(updated));
+        setLocalCustomPrayers(updated);
         return newCustomPrayer;
       } else {
         const response = await apiRequest('POST', '/api/custom-prayers', {
@@ -53,8 +54,8 @@ export function useCustomPrayers(userId: string | null) {
         const updated = localCustomPrayers.map(p => 
           p.id === data.id ? { ...p, title: data.title, content: data.content, section: data.section } : p
         );
-        setLocalCustomPrayers(updated);
         localStorage.setItem('rosary_custom_prayers', JSON.stringify(updated));
+        setLocalCustomPrayers(updated);
         return;
       } else {
         await apiRequest('PATCH', `/api/custom-prayers/${data.id}`, {
@@ -119,9 +120,9 @@ export function useCustomPrayers(userId: string | null) {
     customPrayers,
     isLoading: userId ? isLoading : false,
     addCustomPrayer: (prayerData: { title: string; content: string; section: string }) => 
-      createCustomPrayerMutation.mutate(prayerData),
+      createCustomPrayerMutation.mutateAsync(prayerData),
     updateCustomPrayer: (data: { id: number; title: string; content: string; section: string }) => 
-      updateCustomPrayerMutation.mutate(data),
+      updateCustomPrayerMutation.mutateAsync(data),
     removeCustomPrayer: (id: number) => deleteCustomPrayerMutation.mutate(id),
     isAddingCustomPrayer: createCustomPrayerMutation.isPending,
     isUpdatingCustomPrayer: updateCustomPrayerMutation.isPending,
