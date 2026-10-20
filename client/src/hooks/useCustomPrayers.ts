@@ -27,6 +27,7 @@ export function useCustomPrayers(userId: string | null) {
         const updated = [...localCustomPrayers, newCustomPrayer];
         localStorage.setItem('rosary_custom_prayers', JSON.stringify(updated));
         setLocalCustomPrayers(updated);
+        window.dispatchEvent(new Event('rosarium:custom-prayers-changed'));
         return newCustomPrayer;
       } else {
         const response = await apiRequest('POST', '/api/custom-prayers', {
@@ -56,6 +57,7 @@ export function useCustomPrayers(userId: string | null) {
         );
         localStorage.setItem('rosary_custom_prayers', JSON.stringify(updated));
         setLocalCustomPrayers(updated);
+        window.dispatchEvent(new Event('rosarium:custom-prayers-changed'));
         return;
       } else {
         await apiRequest('PATCH', `/api/custom-prayers/${data.id}`, {
@@ -80,6 +82,7 @@ export function useCustomPrayers(userId: string | null) {
         // Handle local storage for guest users
         const updated = localCustomPrayers.filter(p => p.id !== prayerId);
         setLocalCustomPrayers(updated);
+        window.dispatchEvent(new Event('rosarium:custom-prayers-changed'));
         localStorage.setItem('rosary_custom_prayers', JSON.stringify(updated));
         return;
       } else {
@@ -93,18 +96,29 @@ export function useCustomPrayers(userId: string | null) {
     },
   });
 
-  // Load local custom prayers on mount for guest users
+  // Keep multiple mounted consumers (modal and reading view), plus tabs, in sync.
   useEffect(() => {
-    if (!userId) {
+    if (userId) return;
+    const reload = () => {
       const stored = localStorage.getItem('rosary_custom_prayers');
-      if (stored) {
-        try {
-          setLocalCustomPrayers(JSON.parse(stored));
-        } catch (error) {
-          localStorage.removeItem('rosary_custom_prayers');
-        }
+      if (!stored) {
+        setLocalCustomPrayers([]);
+        return;
       }
-    }
+      try {
+        const parsed = JSON.parse(stored);
+        setLocalCustomPrayers(Array.isArray(parsed) ? parsed : []);
+      } catch {
+        setLocalCustomPrayers([]);
+      }
+    };
+    reload();
+    window.addEventListener('rosarium:custom-prayers-changed', reload);
+    window.addEventListener('storage', reload);
+    return () => {
+      window.removeEventListener('rosarium:custom-prayers-changed', reload);
+      window.removeEventListener('storage', reload);
+    };
   }, [userId]);
 
   const customPrayers = userId 
