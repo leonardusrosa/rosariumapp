@@ -81,9 +81,9 @@ export function useCustomPrayers(userId: string | null) {
       if (!userId) {
         // Handle local storage for guest users
         const updated = localCustomPrayers.filter(p => p.id !== prayerId);
+        localStorage.setItem('rosary_custom_prayers', JSON.stringify(updated));
         setLocalCustomPrayers(updated);
         window.dispatchEvent(new Event('rosarium:custom-prayers-changed'));
-        localStorage.setItem('rosary_custom_prayers', JSON.stringify(updated));
         return;
       } else {
         await apiRequest('DELETE', `/api/custom-prayers/${prayerId}`, { userId });
