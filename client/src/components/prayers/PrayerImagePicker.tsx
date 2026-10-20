@@ -8,6 +8,7 @@ interface PrayerImagePickerProps {
   value: string | null;
   onChange: (value: string | null) => void;
   disabled?: boolean;
+  onProcessingChange?: (processing: boolean) => void;
 }
 
 const MAX_FILE_SIZE = 12 * 1024 * 1024;
@@ -59,7 +60,7 @@ function readImage(file: File): Promise<string> {
   });
 }
 
-export function PrayerImagePicker({ value, onChange, disabled = false }: PrayerImagePickerProps) {
+export function PrayerImagePicker({ value, onChange, disabled = false, onProcessingChange }: PrayerImagePickerProps) {
   const fileRef = useRef<HTMLInputElement>(null);
   const zoneRef = useRef<HTMLDivElement>(null);
   const [url, setUrl] = useState("");
@@ -71,6 +72,7 @@ export function PrayerImagePicker({ value, onChange, disabled = false }: PrayerI
     if (disabled) return;
     setError("");
     setLoading(true);
+    onProcessingChange?.(true);
     try {
       const data = await readImage(file);
       onChange(data);
@@ -80,6 +82,7 @@ export function PrayerImagePicker({ value, onChange, disabled = false }: PrayerI
       setError(err instanceof Error ? err.message : "Não foi possível adicionar a imagem.");
     } finally {
       setLoading(false);
+      onProcessingChange?.(false);
     }
   };
 
