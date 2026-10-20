@@ -68,6 +68,11 @@ export function PrayerImagePicker({ value, onChange, disabled = false, onProcess
   const [loading, setLoading] = useState(false);
   const [previewFailed, setPreviewFailed] = useState(false);
 
+  useEffect(() => {
+    setUrl(value?.startsWith("https://") ? value : "");
+    if (!value) setPreviewFailed(false);
+  }, [value]);
+
   const applyFile = async (file: File) => {
     if (disabled) return;
     setError("");
