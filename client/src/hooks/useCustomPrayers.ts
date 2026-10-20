@@ -24,8 +24,10 @@ export function useCustomPrayers(userId: string | null) {
           content: prayerData.content,
           section: prayerData.section,
         };
-        setLocalCustomPrayers(prev => [...prev, newCustomPrayer]);
-        localStorage.setItem('rosary_custom_prayers', JSON.stringify([...localCustomPrayers, newCustomPrayer]));
+        const updated = [...localCustomPrayers, newCustomPrayer];
+        localStorage.setItem('rosary_custom_prayers', JSON.stringify(updated));
+        setLocalCustomPrayers(updated);
+        window.dispatchEvent(new Event('rosarium:custom-prayers-changed'));
         return newCustomPrayer;
       } else {
         const response = await apiRequest('POST', '/api/custom-prayers', {
@@ -53,8 +55,9 @@ export function useCustomPrayers(userId: string | null) {
         const updated = localCustomPrayers.map(p => 
           p.id === data.id ? { ...p, title: data.title, content: data.content, section: data.section } : p
         );
-        setLocalCustomPrayers(updated);
         localStorage.setItem('rosary_custom_prayers', JSON.stringify(updated));
+        setLocalCustomPrayers(updated);
+        window.dispatchEvent(new Event('rosarium:custom-prayers-changed'));
         return;
       } else {
         await apiRequest('PATCH', `/api/custom-prayers/${data.id}`, {
@@ -78,8 +81,9 @@ export function useCustomPrayers(userId: string | null) {
       if (!userId) {
         // Handle local storage for guest users
         const updated = localCustomPrayers.filter(p => p.id !== prayerId);
-        setLocalCustomPrayers(updated);
         localStorage.setItem('rosary_custom_prayers', JSON.stringify(updated));
+        setLocalCustomPrayers(updated);
+        window.dispatchEvent(new Event('rosarium:custom-prayers-changed'));
         return;
       } else {
         await apiRequest('DELETE', `/api/custom-prayers/${prayerId}`, { userId });
@@ -92,18 +96,29 @@ export function useCustomPrayers(userId: string | null) {
     },
   });
 
-  // Load local custom prayers on mount for guest users
+  // Keep multiple mounted consumers (modal and reading view), plus tabs, in sync.
   useEffect(() => {
-    if (!userId) {
+    if (userId) return;
+    const reload = () => {
       const stored = localStorage.getItem('rosary_custom_prayers');
-      if (stored) {
-        try {
-          setLocalCustomPrayers(JSON.parse(stored));
-        } catch (error) {
-          localStorage.removeItem('rosary_custom_prayers');
-        }
+      if (!stored) {
+        setLocalCustomPrayers([]);
+        return;
       }
-    }
+      try {
+        const parsed = JSON.parse(stored);
+        setLocalCustomPrayers(Array.isArray(parsed) ? parsed : []);
+      } catch {
+        setLocalCustomPrayers([]);
+      }
+    };
+    reload();
+    window.addEventListener('rosarium:custom-prayers-changed', reload);
+    window.addEventListener('storage', reload);
+    return () => {
+      window.removeEventListener('rosarium:custom-prayers-changed', reload);
+      window.removeEventListener('storage', reload);
+    };
   }, [userId]);
 
   const customPrayers = userId 
@@ -119,9 +134,9 @@ export function useCustomPrayers(userId: string | null) {
     customPrayers,
     isLoading: userId ? isLoading : false,
     addCustomPrayer: (prayerData: { title: string; content: string; section: string }) => 
-      createCustomPrayerMutation.mutate(prayerData),
+      createCustomPrayerMutation.mutateAsync(prayerData),
     updateCustomPrayer: (data: { id: number; title: string; content: string; section: string }) => 
-      updateCustomPrayerMutation.mutate(data),
+      updateCustomPrayerMutation.mutateAsync(data),
     removeCustomPrayer: (id: number) => deleteCustomPrayerMutation.mutate(id),
     isAddingCustomPrayer: createCustomPrayerMutation.isPending,
     isUpdatingCustomPrayer: updateCustomPrayerMutation.isPending,
