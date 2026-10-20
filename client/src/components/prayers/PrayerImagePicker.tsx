@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent, ClipboardEvent, DragEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -116,6 +116,22 @@ export function PrayerImagePicker({ value, onChange, disabled = false, onProcess
       applyUrl(pastedText);
     }
   };
+
+  // An image copied from another app can also be pasted while the title or
+  // prayer text field has focus, without having to target the drop zone.
+  useEffect(() => {
+    const handleWindowPaste = (event: globalThis.ClipboardEvent) => {
+      if (disabled || event.defaultPrevented) return;
+      const item = Array.from(event.clipboardData?.items ?? []).find(item => item.type.startsWith("image/"));
+      if (!item) return;
+      const file = item.getAsFile();
+      if (!file) return;
+      event.preventDefault();
+      void applyFile(file);
+    };
+    document.addEventListener("paste", handleWindowPaste);
+    return () => document.removeEventListener("paste", handleWindowPaste);
+  });
 
   const pasteFromClipboard = async () => {
     if (disabled) return;
