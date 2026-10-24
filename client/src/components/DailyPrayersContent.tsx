@@ -1,6 +1,13 @@
 import { useState, type ReactNode } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useFontSize } from "@/hooks/useFontSize";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -155,19 +162,34 @@ export default function DailyPrayersContent() {
         </div>
 
         <Card className="sacred-content-card rounded-xl sacred-border">
-          <CardContent className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
-            <label htmlFor="daily-prayer-season" className="font-cinzel text-sm text-ancient-gold shrink-0">
+          <CardContent className="grid grid-cols-1 gap-3 p-4 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:gap-x-5 sm:gap-y-3 sm:p-5 lg:grid-cols-[auto_minmax(220px,1fr)_minmax(220px,0.9fr)]">
+            <label htmlFor="daily-prayer-season" className="font-cinzel text-sm uppercase tracking-wide text-ancient-gold sm:whitespace-nowrap">
               Tempo litúrgico
             </label>
-            <select
-              id="daily-prayer-season"
+            <Select
               value={season}
-              onChange={(event) => setSeason(event.target.value as LiturgicalSeason)}
-              className="w-full rounded-lg border border-ancient-gold/30 bg-cathedral-dark px-3 py-2 text-sm text-parchment focus:outline-none focus:ring-2 focus:ring-ancient-gold/40"
+              onValueChange={(value) => setSeason(value as LiturgicalSeason)}
             >
-              {seasons.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
-            </select>
-            <p className="text-xs text-parchment/55 font-inter leading-relaxed">
+              <SelectTrigger
+                id="daily-prayer-season"
+                aria-label="Tempo litúrgico"
+                className="h-11 w-full rounded-xl border border-ancient-gold/35 bg-cathedral-dark text-sm text-parchment shadow-inner shadow-black/20 transition-colors hover:border-ancient-gold/60 focus:ring-2 focus:ring-ancient-gold/40 focus:ring-offset-0 focus:ring-offset-transparent [&>span]:text-parchment"
+              >
+                <SelectValue placeholder="Escolha o tempo litúrgico" />
+              </SelectTrigger>
+              <SelectContent className="z-[100] rounded-xl border border-ancient-gold/35 bg-cathedral-dark text-parchment shadow-xl shadow-black/40">
+                {seasons.map((item) => (
+                  <SelectItem
+                    key={item.value}
+                    value={item.value}
+                    className="cursor-pointer rounded-lg py-2.5 text-sm text-parchment focus:bg-ancient-gold/15 focus:text-ancient-gold data-[highlighted]:bg-ancient-gold/15 data-[highlighted]:text-ancient-gold"
+                  >
+                    {item.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <p className="font-inter text-xs leading-relaxed text-parchment/60 sm:col-span-2 lg:col-span-1">
               A seleção ajusta a lição breve da Prima e escolhe a antífona mariana pascal. Defina conforme o calendário litúrgico tradicional.
             </p>
           </CardContent>
