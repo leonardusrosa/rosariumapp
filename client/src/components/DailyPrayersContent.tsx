@@ -249,7 +249,7 @@ export default function DailyPrayersContent() {
               <Response kind="R.">Amém.</Response>
             </PrayerBlock>
 
-            <PrayerBlock title="Salmo 129 — De profundis" textClassName={textClassName} note="O trecho transcrito no exemplar remete ao Salmo 129, indicado à página 190.">
+            <PrayerBlock title="Salmo 129 — De profundis" textClassName={textClassName} note="A transcrição fornecida remete à página 190. O texto do salmo exibido aqui é uma versão tradicional em português e ainda precisa ser conferido palavra por palavra com essa página do exemplar.">
               <p>Do profundo abismo clamo a Vós, Senhor; Senhor, ouvi a minha voz. Estejam atentos os vossos ouvidos à voz da minha súplica.</p>
               <p>Se observardes, Senhor, as iniquidades, Senhor, quem subsistirá? Mas em Vós está a propiciação, e por causa da vossa lei esperei em Vós, Senhor.</p>
               <p>Minha alma esperou na sua palavra; minha alma esperou no Senhor. Desde a vigília da manhã até à noite, espere Israel no Senhor.</p>
