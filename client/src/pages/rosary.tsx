@@ -29,7 +29,7 @@ const DailyPrayersContent = lazy(() => import("@/components/DailyPrayersContent"
 // Image now served from public/assets directory
 const prayingHandsImage = "/assets/praying-hands-rosary.png";
 
-const sections = ['initium', 'gaudiosa', 'dolorosa', 'gloriosa', 'ultima', 'orationes_cotidianae', 'proprium_missae'];
+const sections = ['initium', 'gaudiosa', 'dolorosa', 'gloriosa', 'ultima', 'proprium_missae', 'orationes_cotidianae'];
 
 export default function RosaryPage() {
   const [currentSection, setCurrentSection] = useState('initium');
