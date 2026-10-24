@@ -267,20 +267,8 @@ export default function DailyPrayersContent() {
               <Response kind="R.">Que fez o céu e a terra.</Response>
               <Response kind="V.">Abençoai-nos.</Response>
               <Response kind="R.">Ó Deus.</Response>
-              <p><span className="font-semibold text-ancient-gold">Bênção.</span> O Senhor nos abençoe (faz-se o sinal da Cruz), nos preserve de todo o mal e nos conduza à vida eterna. E as almas dos fiéis defuntos, pela misericórdia de Deus, descansem em paz.</p>
-              <Response kind="R.">Amém.</Response>
-            </PrayerBlock>
-
-            <PrayerBlock title="Salmo 129 — De profundis" textClassName={textClassName} note="A transcrição fornecida remete à página 190. O texto do salmo exibido aqui é uma versão tradicional em português e ainda precisa ser conferido palavra por palavra com essa página do exemplar.">
-              <p>Do profundo abismo clamo a Vós, Senhor; Senhor, ouvi a minha voz. Estejam atentos os vossos ouvidos à voz da minha súplica.</p>
-              <p>Se observardes, Senhor, as iniquidades, Senhor, quem subsistirá? Mas em Vós está a propiciação, e por causa da vossa lei esperei em Vós, Senhor.</p>
-              <p>Minha alma esperou na sua palavra; minha alma esperou no Senhor. Desde a vigília da manhã até à noite, espere Israel no Senhor.</p>
-              <p>Porque no Senhor há misericórdia, e nele há copiosa redenção. E Ele mesmo remirá Israel de todas as suas iniquidades.</p>
-              <Response kind="V.">Descanso eterno, dai-lhes, Senhor.</Response>
-              <Response kind="R.">E a luz perpétua os ilumine.</Response>
-              <p>Descansem em paz.</p>
-              <Response kind="R.">Amém.</Response>
-              <p><span className="font-semibold text-ancient-gold">Oremos.</span> Ó Deus, que perdoais aos pecadores e desejais a salvação dos homens, nós imploramos a vossa clemência, por intercessão da Bem-aventurada sempre Virgem Maria e de todos os vossos Santos, em favor dos nossos irmãos, parentes e benfeitores que saíram deste mundo, a fim de que alcancem a bem-aventurança eterna. Por Nosso Senhor Jesus Cristo.</p>
+              <p><span className="font-semibold text-ancient-gold">Bênção.</span> O Senhor nos abençoe (faz-se o sinal da Cruz), nos preserve de todo o mal e nos conduza à vida eterna.</p>
+              <p>E as almas dos fiéis defuntos, pela misericórdia de Deus, descansem em paz.</p>
               <Response kind="R.">Amém.</Response>
             </PrayerBlock>
 
