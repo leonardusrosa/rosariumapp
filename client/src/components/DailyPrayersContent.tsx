@@ -173,16 +173,16 @@ export default function DailyPrayersContent() {
               <SelectTrigger
                 id="daily-prayer-season"
                 aria-label="Tempo litúrgico"
-                className="h-11 w-full rounded-xl border border-ancient-gold/35 bg-cathedral-dark text-sm text-parchment shadow-inner shadow-black/20 transition-colors hover:border-ancient-gold/60 focus:ring-2 focus:ring-ancient-gold/40 focus:ring-offset-0 focus:ring-offset-transparent [&>span]:text-parchment"
+                className="h-11 w-full rounded-xl border border-ancient-gold/30 !bg-cathedral-stone text-sm text-parchment shadow-inner shadow-black/35 transition-colors hover:border-ancient-gold/55 hover:!bg-cathedral-stone focus:ring-2 focus:ring-ancient-gold/35 focus:ring-offset-0 focus:ring-offset-transparent [&>span]:text-parchment"
               >
                 <SelectValue placeholder="Escolha o tempo litúrgico" />
               </SelectTrigger>
-              <SelectContent className="z-[100] rounded-xl border border-ancient-gold/35 bg-cathedral-dark text-parchment shadow-xl shadow-black/40">
+              <SelectContent className="z-[100] rounded-xl border border-ancient-gold/30 !bg-cathedral-stone text-parchment shadow-2xl shadow-black/70">
                 {seasons.map((item) => (
                   <SelectItem
                     key={item.value}
                     value={item.value}
-                    className="cursor-pointer rounded-lg py-2.5 text-sm text-parchment focus:bg-ancient-gold/15 focus:text-ancient-gold data-[highlighted]:bg-ancient-gold/15 data-[highlighted]:text-ancient-gold"
+                    className="cursor-pointer rounded-lg py-2.5 text-sm text-parchment focus:bg-cathedral-shadow focus:text-ancient-gold-bright data-[highlighted]:bg-cathedral-shadow data-[highlighted]:text-ancient-gold-bright"
                   >
                     {item.label}
                   </SelectItem>
