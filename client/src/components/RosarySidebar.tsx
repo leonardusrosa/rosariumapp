@@ -52,16 +52,16 @@ const sections = [
     icon: 'ultima'
   },
   {
-    id: 'orationes_cotidianae',
-    title: 'Orações Cotidianas',
-    subtitle: 'Prima e Completas',
-    icon: 'daily'
-  },
-  {
     id: 'proprium_missae',
     title: 'Proprium Missae',
     subtitle: 'Liturgia Diária (1962)',
     icon: 'proprium'
+  },
+  {
+    id: 'orationes_cotidianae',
+    title: 'Orações Cotidianas',
+    subtitle: 'Prima e Completas',
+    icon: 'daily'
   }
 ];
 
