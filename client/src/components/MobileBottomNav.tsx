@@ -26,6 +26,7 @@ const topSections = [
 
 const bottomSections = [
   { id: 'ultima', title: 'Ultima', icon: 'ultima' },
+  { id: 'orationes_cotidianae', title: 'Orações', icon: 'daily' },
   { id: 'proprium_missae', title: 'Proprium', icon: 'proprium' }
 ];
 
@@ -38,6 +39,7 @@ const renderNavIcon = (iconName: string) => {
     case 'gloriosa': return <GloriosaIcon className={cls} />;
     case 'ultima': return <UltimaIcon className={cls} />;
     case 'proprium': return <PropriumIcon className={cls} />;
+    case 'daily': return <i className="fas fa-clock" aria-hidden="true" />;
     default: return <span className="text-sm">✠</span>;
   }
 };
@@ -129,7 +131,7 @@ export default function MobileBottomNav({
           {topSections.map(renderNavButton)}
         </div>
 
-        {/* Bottom Row: Ultima, Proprium, Intenções */}
+        {/* Bottom Row: Ultima, Orações Cotidianas, Proprium, Intenções */}
         <div className="flex items-stretch space-x-1">
           {bottomSections.map(renderNavButton)}
 
