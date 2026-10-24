@@ -52,6 +52,12 @@ const sections = [
     icon: 'ultima'
   },
   {
+    id: 'orationes_cotidianae',
+    title: 'Orações Cotidianas',
+    subtitle: 'Prima e Completas',
+    icon: 'daily'
+  },
+  {
     id: 'proprium_missae',
     title: 'Proprium Missae',
     subtitle: 'Liturgia Diária (1962)',
@@ -67,6 +73,7 @@ const renderSectionIcon = (icon: string, className: string = "w-5 h-5 flex-shrin
     case 'gloriosa': return <GloriosaIcon className={className} />;
     case 'ultima': return <UltimaIcon className={className} />;
     case 'proprium': return <PropriumIcon className={className} />;
+    case 'daily': return <i className={`fas fa-clock ${className}`} aria-hidden="true" />;
     default: return null;
   }
 };

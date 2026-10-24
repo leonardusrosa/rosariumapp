@@ -24,11 +24,12 @@ const FontSizeModal = lazy(() => import("@/components/FontSizeModal"));
 const LoginDialog = lazy(() => import("@/components/LoginDialog"));
 const MusicModal = lazy(() => import("@/components/MusicModal"));
 const DailyLiturgyContent = lazy(() => import("@/components/liturgy/DailyLiturgyContent"));
+const DailyPrayersContent = lazy(() => import("@/components/DailyPrayersContent"));
 
 // Image now served from public/assets directory
 const prayingHandsImage = "/assets/praying-hands-rosary.png";
 
-const sections = ['initium', 'gaudiosa', 'dolorosa', 'gloriosa', 'ultima', 'proprium_missae'];
+const sections = ['initium', 'gaudiosa', 'dolorosa', 'gloriosa', 'ultima', 'orationes_cotidianae', 'proprium_missae'];
 
 export default function RosaryPage() {
   const [currentSection, setCurrentSection] = useState('initium');
@@ -284,7 +285,11 @@ export default function RosaryPage() {
 
         {/* Content Area - Prayer Content or Daily Liturgy */}
         <div className={!isMobile ? "" : ""}>
-          {currentSection === 'proprium_missae' ? (
+          {currentSection === 'orationes_cotidianae' ? (
+            <Suspense fallback={<div className="p-12 text-center text-[var(--byzantine-gold)] font-cinzel text-lg animate-pulse">Oremus...</div>}>
+              <DailyPrayersContent />
+            </Suspense>
+          ) : currentSection === 'proprium_missae' ? (
             <Suspense fallback={<div className="p-12 text-center text-[var(--byzantine-gold)] font-cinzel text-lg animate-pulse">Oremus...</div>}>
               <DailyLiturgyContent />
             </Suspense>
