@@ -26,8 +26,8 @@ const topSections = [
 
 const bottomSections = [
   { id: 'ultima', title: 'Ultima', icon: 'ultima' },
-  { id: 'orationes_cotidianae', title: 'Orações', icon: 'daily' },
-  { id: 'proprium_missae', title: 'Proprium', icon: 'proprium' }
+  { id: 'proprium_missae', title: 'Proprium', icon: 'proprium' },
+  { id: 'orationes_cotidianae', title: 'Orações', icon: 'daily' }
 ];
 
 const renderNavIcon = (iconName: string) => {
